@@ -8,7 +8,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Root from './routes/login/login'
+import Login from './routes/login/login'
 import Waiter from './routes/waiter/orders'
 /* ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,7 +20,7 @@ import Waiter from './routes/waiter/orders'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Login />,
   },
   {
     path: "/waiter",

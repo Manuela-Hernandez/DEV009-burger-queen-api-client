@@ -20,6 +20,10 @@ import Waiter from './routes/waiter/orders'
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Waiter />,
+  },
+  {
+    path: "/login",
     element: <Login />,
   },
   {

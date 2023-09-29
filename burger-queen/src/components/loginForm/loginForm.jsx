@@ -1,14 +1,48 @@
+import peticion from './request'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export default function LoginForm() {
-    return (
-      <>
-        <section>
-            <h2>Inicio de sesión</h2>
-            <form action="login">
-                <input type="email" name="" id="" placeholder="Correo electrónico" />
-                <input type="password" name="" id="" placeholder="Contraseña"/>
-                <button type="submit">INGRESAR</button>
-            </form>
-        </section>
-      </>
-    );
-  }
+  const [email, setEmail] = useState(''); // Estado para el correo electrónico
+  const [password, setPassword] = useState(''); // Estado para la contraseña
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const navigateTo = useNavigate();
+ function userLogin () {
+  return peticion(email, password)
+  .then(function (response) {
+    console.log('response data ', response.data.accessToken);
+    console.log('response data role ', response.data.user.role);
+    switch (response.data.user.role) {
+      case 'waiter': navigateTo('/waiter');
+      break;
+      case 'admin': console.log('Eres administrador');
+      break;
+    }
+  })
+  .catch(function (error) {
+    alert(error.response.data);
+  });
+ }
+  return (
+    <>
+      <section>
+        <h2>Inicio de sesión</h2>
+        <form action="login">
+          <input type="email" name="email" id="email" placeholder="Correo electrónico" value={email}
+
+            onChange={handleEmailChange} />
+          <input type="password" name="password" id="password" placeholder="Contraseña" value={password}
+
+            onChange={handlePasswordChange} />
+          <button type="button" onClick={userLogin}>INGRESAR</button>
+        </form>
+      </section>
+    </>
+  );
+}

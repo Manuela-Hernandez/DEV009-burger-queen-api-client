@@ -1,4 +1,5 @@
 import peticion from './request'
+import './loginForm.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,21 +29,20 @@ export default function LoginForm() {
   .catch(function (error) {
     const message = document.querySelector('#message');
     message.textContent = error.response.data;
+    message.display = 'block';
   });
  }
   return (
     <>
-      <section>
-        <h2>Inicio de sesión</h2>
-        <form action="login">
-          <input type="email" name="email" id="email" placeholder="Correo electrónico" value={email}
-
+      <section id='login-form'>
+        <h2>LOGIN</h2>
+        <form action="login" id='login'>
+          <input type="email" name="email" id="email" placeholder="Email" value={email}
             onChange={handleEmailChange} />
-          <input type="password" name="password" id="password" placeholder="Contraseña" value={password}
-
+          <input type="password" name="password" id="password" placeholder="Password" value={password}
             onChange={handlePasswordChange} />
-          <button type="button" onClick={userLogin}>INGRESAR</button>
           <p id='message'></p>
+          <button type="button" onClick={userLogin} id='login-btn'>Login</button>
         </form>
       </section>
     </>

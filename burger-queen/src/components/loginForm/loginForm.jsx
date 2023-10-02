@@ -16,8 +16,8 @@ export default function LoginForm() {
  function userLogin () {
   return peticion(email, password)
   .then(function (response) {
-    console.log('response data ', response.data.accessToken);
-    console.log('response data role ', response.data.user.role);
+    localStorage.setItem('token', response.data.accessToken);
+    localStorage.setItem('role', response.data.user.role);
     switch (response.data.user.role) {
       case 'waiter': navigateTo('/waiter');
       break;
@@ -26,7 +26,8 @@ export default function LoginForm() {
     }
   })
   .catch(function (error) {
-    alert(error.response.data);
+    const message = document.querySelector('#message');
+    message.textContent = error.response.data;
   });
  }
   return (
@@ -41,6 +42,7 @@ export default function LoginForm() {
 
             onChange={handlePasswordChange} />
           <button type="button" onClick={userLogin}>INGRESAR</button>
+          <p id='message'></p>
         </form>
       </section>
     </>

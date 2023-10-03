@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export default function LoginForm() {
   const [email, setEmail] = useState(''); // Estado para el correo electrónico
   const [password, setPassword] = useState(''); // Estado para la contraseña
+  const navigateTo = useNavigate();
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -13,16 +14,18 @@ export default function LoginForm() {
     setPassword(e.target.value);
   };
 
-  const navigateTo = useNavigate();
+  
  function userLogin () {
   return peticion(email, password)
   .then(function (response) {
+    console.log('response: ', response)
     localStorage.setItem('token', response.data.accessToken);
     localStorage.setItem('role', response.data.user.role);
+    localStorage.setItem('name', response.data.user.name);
     switch (response.data.user.role) {
       case 'waiter': navigateTo('/waiter');
       break;
-      case 'admin': console.log('Eres administrador');
+      case 'admin': navigateTo('/admin');
       break;
     }
   })

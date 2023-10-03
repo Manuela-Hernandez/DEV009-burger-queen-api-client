@@ -19,6 +19,7 @@ export default function LoginForm() {
   .then(function (response) {
     localStorage.setItem('token', response.data.accessToken);
     localStorage.setItem('role', response.data.user.role);
+    localStorage.setItem('name', response.data.user.name);
     switch (response.data.user.role) {
       case 'waiter': navigateTo('/waiter');
       break;

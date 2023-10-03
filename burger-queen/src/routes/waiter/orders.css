@@ -1,0 +1,53 @@
+#menu-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Esto es lo que hace que los elementos se muestren al principio y al final */
+    width: 100%; /* Cambiado de 200% a 100% para que se ajuste al ancho de la ventana */
+    height: 6rem;
+    background-color: #E4C485;
+  }
+  
+  #menu-bar > img {
+    height: 6rem;
+  }
+  
+  #menu-bar > #exit-icon {
+    height: 4rem;
+    cursor: pointer;
+    padding: 1rem;
+  }
+  
+  #menu-bar > ul {
+    list-style: none;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  #menu-bar > ul > li {
+    text-align: center;
+    height: inherit;
+    width: 16rem;
+    cursor: pointer;
+    color: #781B14;
+    display: inline;
+    text-align: center;
+    margin: 0 4rem 0 0;
+  }
+  
+  #menu-bar ul li:hover {
+    background: #781B14;
+    color: white;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem; /* Espacio entre el nombre y el icono de salida */
+  }
+  
+  p {
+    color: #781B14;
+    font-size: 1.8rem;
+    margin: 0 1rem; /* Ajuste los márgenes para el nombre */
+  }
+  

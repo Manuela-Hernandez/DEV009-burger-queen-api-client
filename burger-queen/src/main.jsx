@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import Login from './routes/login/login'
 import Waiter from './routes/waiter/orders'
+import Admin from './routes/admin/admin'
+import {ProtectedRoute} from './components/loginForm/ProtectedRoute'
 /* ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
@@ -20,7 +22,7 @@ import Waiter from './routes/waiter/orders'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Waiter />,
+    element: <Login />,
   },
   {
     path: "/login",
@@ -28,7 +30,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/waiter",
-    element: <Waiter />,
+    element: 
+    <ProtectedRoute requiredRole="waiter">
+      <Waiter />,
+    </ProtectedRoute> 
+  },
+  {
+    path: "/admin",
+    element: 
+    <ProtectedRoute requiredRole="admin">
+      <Admin />,
+    </ProtectedRoute> 
   },
 ]);
 

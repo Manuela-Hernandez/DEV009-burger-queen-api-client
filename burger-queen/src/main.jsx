@@ -11,6 +11,7 @@ import {
 import Login from './routes/login/login'
 import Waiter from './routes/waiter/orders'
 import Admin from './routes/admin/admin'
+import DeniedAccess from './routes/deniedAccess/deniedAccess'
 import {ProtectedRoute} from './components/loginForm/ProtectedRoute'
 /* ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     <ProtectedRoute requiredRole="admin">
       <Admin />,
     </ProtectedRoute> 
+  },
+  {
+    path: "/denied",
+    element: <DeniedAccess/>, 
   },
 ]);
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1696455203882" clover="3.2.0">
+  <project timestamp="1696455203882" name="All files">
+    <metrics statements="32" coveredstatements="15" conditionals="2" coveredconditionals="0" methods="8" coveredmethods="2" elements="42" coveredelements="17" complexity="0" loc="32" ncloc="32" packages="2" files="3" classes="3"/>
+    <package name="components.loginForm">
+      <metrics statements="29" coveredstatements="12" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="1"/>
+      <file name="loginForm.jsx" path="/Users/manuelahernandez/Desarrollo/DEV009-burger-queen-api-client/burger-queen/src/components/loginForm/loginForm.jsx">
+        <metrics statements="25" coveredstatements="10" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+      </file>
+      <file name="request.jsx" path="/Users/manuelahernandez/Desarrollo/DEV009-burger-queen-api-client/burger-queen/src/components/loginForm/request.jsx">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="routes.login">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="login.jsx" path="/Users/manuelahernandez/Desarrollo/DEV009-burger-queen-api-client/burger-queen/src/routes/login/login.jsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

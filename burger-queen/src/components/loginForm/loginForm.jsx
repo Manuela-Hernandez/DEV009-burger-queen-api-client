@@ -15,8 +15,8 @@ export default function LoginForm() {
   };
 
   
- function userLogin () {
-  return peticion(email, password)
+ async function userLogin () {
+  return await peticion(email, password)
   .then(function (response) {
     console.log('response: ', response)
     localStorage.setItem('token', response.data.accessToken);

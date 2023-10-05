@@ -1,5 +1,12 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import Login from "./login.jsx";
+// import peticion from "../../components/loginForm/request"
+import axios   from 'axios';
+
+
+jest.mock('axios');
+
+
 
 const mockedUseNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -17,6 +24,7 @@ describe("Login", () => {
   });
 
   it("Debería mostrar mensaje de error cuando no se introducen datos en los campos de email y contraseña", async () => {
+    axios.post.mockRejectedValue({ response: {data : 'Email and password are required'} });
     const { getByText } = render(<Login />);
     const btnLogin = getByText('Login')
     const messageError = document.querySelector('#message');
@@ -27,6 +35,8 @@ describe("Login", () => {
     });
   });
   it("Debería navegar a /waiter al introducir las credenciales de un mesero", async () => {
+    axios.post.mockResolvedValueOnce({ data: {user : { role: 'waiter'}} });
+    
     const { getByPlaceholderText, getByText } = render(<Login />);
     const email = getByPlaceholderText('Email');
     const password = getByPlaceholderText('Password');
@@ -42,6 +52,7 @@ describe("Login", () => {
     });
   });
   it("Debería navegar a /admin al introducir las credenciales de un administrador", async () => {
+    axios.post.mockResolvedValueOnce({ data: {user : { role: 'admin'}} });
     const { getByPlaceholderText, getByText } = render(<Login />);
 
     const email = getByPlaceholderText('Email');

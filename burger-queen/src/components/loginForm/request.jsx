@@ -13,3 +13,10 @@ export default function peticion(email, password) {
   //   console.log(error);
   // });
 }
+export function getProducts(token) {
+  return axios.get(baseUrl + '/products', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+}

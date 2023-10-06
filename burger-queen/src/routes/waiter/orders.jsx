@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import AddProductToOrder from '../../components/AddProductsToOrder/AddProductsToOrder';
 
 export default function Root() {
   const navigateTo = useNavigate();
@@ -19,6 +20,7 @@ export default function Root() {
           className="h-1/2 justify-self-end"
           onClick={logOut} />
       </nav>
+      <AddProductToOrder />
     </>
   );
 }

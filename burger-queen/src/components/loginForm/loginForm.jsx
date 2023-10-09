@@ -1,5 +1,4 @@
-import peticion from './request'
-// import './loginForm.css'
+import { auth } from '../../services/request'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,11 +13,10 @@ export default function LoginForm() {
     setPassword(e.target.value);
   };
 
-  
  async function userLogin () {
-  return await peticion(email, password)
+  return await auth(email, password)
   .then(function (response) {
-    console.log('response: ', response)
+    //console.log('response: ', response)
     localStorage.setItem('token', response.data.accessToken);
     localStorage.setItem('role', response.data.user.role);
     localStorage.setItem('name', response.data.user.name);
@@ -37,17 +35,6 @@ export default function LoginForm() {
  }
   return (
     <>
-      {/* <section id='login-form'>
-        <h2>LOGIN</h2>
-        <form action="login" id='login'>
-          <input type="email" name="email" id="email" placeholder="Email" value={email}
-            onChange={handleEmailChange} />
-          <input type="password" name="password" id="password" placeholder="Password" value={password}
-            onChange={handlePasswordChange} />
-          <p id='message'></p>
-          <button type="button" onClick={userLogin} id='login-btn'>Login</button>
-        </form>
-      </section> */}
       <section id="login-form" className="h-full bg-bgqueen-secondary rounded-lg p-5 lg:w-11/12 md:mx-8">
         <h2 className="text-4xl text-bgqueen-primary text-center font-bold">LOGIN</h2>
         <form action="login" id='login' className="mt-5 flex flex-col gap-y-4 items-center">

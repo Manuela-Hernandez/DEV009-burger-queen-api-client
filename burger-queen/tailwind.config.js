@@ -10,6 +10,7 @@ export default {
     colors: {
       "bgqueen-primary": "#781B14",
       "bgqueen-secondary": "#E4C485",
+      "bgqueen-gray": "#D9D9D9",
       transparent: 'transparent',
       current: 'currentColor',
       black: colors.black,

@@ -9,7 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from './routes/login/login'
-import Waiter from './routes/waiter/orders'
+import Waiter from './routes/waiter/NewOrder'
 import Admin from './routes/admin/admin'
 import DeniedAccess from './routes/deniedAccess/deniedAccess'
 import {ProtectedRoute} from './components/loginForm/ProtectedRoute'

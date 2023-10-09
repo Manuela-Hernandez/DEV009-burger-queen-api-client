@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import AddProductToOrder from '../../components/AddProductsToOrder/AddProductsToOrder';
-
+import ResumenPedidos from '../../components/ResumenPedidos/Resumen'
 export default function Root() {
   const navigateTo = useNavigate();
   function logOut() {
@@ -20,11 +20,10 @@ export default function Root() {
           className="h-1/2 justify-self-end"
           onClick={logOut} />
       </nav>
+      <div className="grid grid-cols-2 grid-rows-1">
       <AddProductToOrder />
+      <ResumenPedidos />
+      </div>
     </>
   );
 }
-/*<ul>
-            <li>RESTAURANTE</li>
-            <li>PEDIDOS</li>
-          </ul>*/

@@ -2,11 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { addProducto, deleteProductQuantity, deleteProduct } from "../../redux/reducers/orderSlice";
 import { useState } from "react";
 
-export default function ProductSumary() {
+export default function ProductSumary({customerName}) {
   const productos = useSelector((state) => state.order.productos);
   const dispatch = useDispatch()
   let total = 0;
-  //const [total, setTotal] = useState(0);
+  
   return (
     <>
       <section className="grid  bg-bgqueen-secondary border-solid border-2 border-bgqueen-secondary w-3/4 md: w-full">

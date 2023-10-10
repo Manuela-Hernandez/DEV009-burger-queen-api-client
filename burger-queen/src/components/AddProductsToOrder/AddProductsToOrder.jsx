@@ -6,9 +6,8 @@ import { addProducto } from "../../redux/reducers/orderSlice";
 
 export default function AddProductToOrder({selectedProductType}) {
   const dispatch = useDispatch()
-  
   const [products, setProducts] = useState([]);
- 
+  
   function addProduct(product) {
     
     dispatch(addProducto({product, quantity: 1, subtotal: product.price}))

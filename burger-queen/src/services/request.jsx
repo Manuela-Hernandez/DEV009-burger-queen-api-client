@@ -14,3 +14,19 @@ export function getProducts(token) {
     }
   })
 }
+
+export function addOrder(token, customerName, order) {
+  return axios.post(baseUrl+ '/orders', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    {
+      userId: hola,
+      client: customerName,
+      products: order, 
+      status: "pending",
+      dataEntry: "2022-03-05 15:00",
+    }
+  }
+  )
+}

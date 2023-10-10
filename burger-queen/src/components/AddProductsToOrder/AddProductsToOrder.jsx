@@ -1,6 +1,8 @@
 import { getProducts } from "../../services/request";
 import React, { useState, useEffect } from 'react';
 import addIcon from '../../assets/icon-add.png';
+import { useDispatch } from "react-redux";
+import { addProducto } from "../../redux/reducers/orderSlice";
 
 export default function AddProductToOrder({selectedProductType}) {
   const [products, setProducts] = useState([]);

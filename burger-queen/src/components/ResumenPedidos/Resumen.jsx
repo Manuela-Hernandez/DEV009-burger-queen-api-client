@@ -1,12 +1,21 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addProducto, deleteProductQuantity, deleteProduct } from "../../redux/reducers/orderSlice";
 import { useState } from "react";
+import { addOrder } from "../../services/request";
 
 export default function ProductSumary({customerName}) {
   const productos = useSelector((state) => state.order.productos);
   const dispatch = useDispatch()
   let total = 0;
-  
+  function createOrder(){
+    addOrder(localStorage.getItem('token'),customerName, productos)
+    .then((response)=>{
+        console.log('Orden creada ', response);
+    })
+    .catch((error)=> {
+        console.log(error);
+    });
+  }
   return (
     <>
       <section className="grid  bg-bgqueen-secondary border-solid border-2 border-bgqueen-secondary w-3/4 md: w-full">
@@ -41,7 +50,7 @@ export default function ProductSumary({customerName}) {
           <span className="justify-self-end" >{total}</span>
         </div>
 
-        <button className="justify-self-center bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-m"> CONFIRMAR PEDIDO</button>
+        <button className="justify-self-center bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-m" onClick={() => createOrder()}> CONFIRMAR PEDIDO</button>
 
       </section>
     </>

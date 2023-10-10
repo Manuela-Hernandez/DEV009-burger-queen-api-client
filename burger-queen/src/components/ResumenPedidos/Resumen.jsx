@@ -1,7 +1,9 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
+import { addProducto, deleteProductQuantity, deleteProduct } from "../../redux/reducers/orderSlice";
 
 export default function ProductSumary() {
   const productos = useSelector((state) => state.order.productos);
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -15,10 +17,11 @@ export default function ProductSumary() {
                   {product.product.name}
                 </p>
                 <div className="justify-self-end">
-                  <i className="fa-solid fa-minus text-bgqueen-primary "></i>
+                  <i className="fa-solid fa-minus text-bgqueen-primary " onClick={() => dispatch(deleteProductQuantity(product))}></i>
                   <span className="col-end mx-2 text-center">{product.quantity}</span>
-                  <i className="fa-solid fa-plus text-bgqueen-primary"></i>
+                  <i className="fa-solid fa-plus text-bgqueen-primary" onClick={() => dispatch(addProducto(product))}></i>
                 </div>
+                <p onClick={() => dispatch(deleteProduct(product))}>Eliminar</p>
               </div>
             </li>
           ))}

@@ -7,19 +7,11 @@ export const orderSlice = createSlice({
     },
     reducers: {
         addProducto: (state, action) => {
-            console.log("action", action);
-            console.log("state", state.productos);
-            
             const productExist = state.productos.find((product) => {
-                console.log("product parametro", product)
-                product.id === action.payload.product.id
-                console.log("product id en find", product.id)
-                console.log("action en find", action.payload.product.id)
-            })
-            console.log("productExist antes del if", productExist)
+                return product.product.id === action.payload.product.id    
+            });
             if (productExist) {
-                console.log("productExist en if", productExist)
-                productExist.quantity += 1;
+                state.productos[state.productos.indexOf(productExist)].quantity += 1;
             } else {
                 state.productos.push(action.payload)
             }

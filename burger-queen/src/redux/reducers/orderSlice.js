@@ -11,7 +11,9 @@ export const orderSlice = createSlice({
                 return product.product.id === action.payload.product.id    
             });
             if (productExist) {
-                state.productos[state.productos.indexOf(productExist)].quantity += 1;
+                const productIndex = state.productos.indexOf(productExist);
+                state.productos[productIndex].quantity += 1;
+                state.productos[productIndex].subtotal += state.productos[productIndex].product.price;
             } else {
                 state.productos.push(action.payload)
             }
@@ -22,6 +24,7 @@ export const orderSlice = createSlice({
             });
             if(productExist.quantity>1){
                 state.productos[state.productos.indexOf(productExist)].quantity -= 1;
+                state.productos[state.productos.indexOf(productExist)].subtotal -= state.productos[state.productos.indexOf(productExist)].product.price;
             }else{
                 state.productos = state.productos.filter((product)=> !(product.product.id === action.payload.product.id))
             }

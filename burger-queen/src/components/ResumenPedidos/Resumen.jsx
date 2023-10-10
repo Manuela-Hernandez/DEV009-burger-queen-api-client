@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addProducto, deleteProductQuantity, deleteProduct } from "../../redux/reducers/orderSlice";
+import { useState } from "react";
 
 export default function ProductSumary() {
   const productos = useSelector((state) => state.order.productos);
   const dispatch = useDispatch()
-
+  let total = 0;
+  //const [total, setTotal] = useState(0);
   return (
     <>
       <section className="grid  bg-bgqueen-secondary border-solid border-2 border-bgqueen-secondary w-3/4 md: w-full">
@@ -22,14 +24,21 @@ export default function ProductSumary() {
                   <i className="fa-solid fa-plus text-bgqueen-primary" onClick={() => dispatch(addProducto(product))}></i>
                 </div>
                 <p onClick={() => dispatch(deleteProduct(product))}>Eliminar</p>
+                <h3>{product.subtotal}</h3>
               </div>
             </li>
           ))}
         </ol>
 
         <div className=" grid grid-cols-2 grid-rows-1 border-t-2 border-bgqueen-cafe p-2">
-          <h2> Tolal</h2>
-          <span className="justify-self-end" ></span>
+            
+          <h2> Total </h2>
+            {
+                productos.map((product) => {
+                    total += product.subtotal;
+                })
+            }
+          <span className="justify-self-end" >{total}</span>
         </div>
 
         <button className="justify-self-center bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-m"> CONFIRMAR PEDIDO</button>

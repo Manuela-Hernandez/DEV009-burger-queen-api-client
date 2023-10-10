@@ -11,7 +11,7 @@ export default function AddProductToOrder({selectedProductType}) {
  
   function addProduct(product) {
     
-    dispatch(addProducto({product, quantity: 1}))
+    dispatch(addProducto({product, quantity: 1, subtotal: product.price}))
    
   }
   useEffect(() => {

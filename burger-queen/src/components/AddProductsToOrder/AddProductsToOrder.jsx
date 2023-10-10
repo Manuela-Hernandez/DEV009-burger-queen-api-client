@@ -10,7 +10,8 @@ export default function AddProductToOrder() {
   const [products, setProducts] = useState([]);
   // const orderSummary = [];
   function addProduct(product) {
-    dispatch(addProducto(product))
+    
+    dispatch(addProducto({product, quantity: 1}))
    
   }
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function AddProductToOrder() {
       });
   }, []); // El segundo argumento, [], asegura que se ejecute una sola vez cuando el componente se monta
   return (
-    <div className="container bg-bgqueen-secondary lg:w-1/2 md:w-full">
+    <div className="container bg-bgqueen-secondary w-2/4 md:w-full">
       <h1 className="text-3xl font-semibold mb-4">Lista de Productos</h1>
       <ul className="w-11/12 mx-auto grid grid-cols-1 gap-4">
         {products.map((product) => (

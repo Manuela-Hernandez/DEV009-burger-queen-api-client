@@ -8,9 +8,8 @@ export default function Root() {
       <NavigationBar />
       <br />
       <section>
-        br
       </section>
-      <div className="grid grid-cols-2 grid-rows-1">
+      <div className="grid grid-cols-2 grid-rows-1 mx-2 md:h-1/2 gap-4 ">
       <AddProductToOrder />
       <ResumenPedidos />
       </div>

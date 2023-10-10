@@ -11,6 +11,7 @@ export default {
       "bgqueen-primary": "#781B14",
       "bgqueen-secondary": "#E4C485",
       "bgqueen-gray": "#D9D9D9",
+      "bgqueen-cafe": "#A8755B",
       transparent: 'transparent',
       current: 'currentColor',
       black: colors.black,

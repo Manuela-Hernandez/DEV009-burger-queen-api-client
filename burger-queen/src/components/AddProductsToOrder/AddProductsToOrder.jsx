@@ -5,11 +5,14 @@ import { useDispatch } from "react-redux";
 import { addProducto } from "../../redux/reducers/orderSlice";
 
 export default function AddProductToOrder({selectedProductType}) {
+  const dispatch = useDispatch()
+  
   const [products, setProducts] = useState([]);
-  const orderSummary = [];
-  function addProduct(product){
-    orderSummary.push(product);
-    console.log('Se ha añadido', orderSummary)
+ 
+  function addProduct(product) {
+    
+    dispatch(addProducto({product, quantity: 1}))
+   
   }
   useEffect(() => {
     getProducts(localStorage.getItem('token'))
@@ -37,7 +40,7 @@ export default function AddProductToOrder({selectedProductType}) {
                 <h3 className="text-lg font-semibold">{product.name}</h3>
                 <p className="text-600">${product.price}</p>
               </section>
-              <img src={addIcon} alt="add" className="w-1/3 col-span-1 cursor-pointer" onClick={() => addProduct(product.id)}/>
+              <img src={addIcon} alt="add" className="w-1/3 col-span-1 cursor-pointer" onClick={() => addProduct(product)}/>
             </li>
           ))}
         </ul>

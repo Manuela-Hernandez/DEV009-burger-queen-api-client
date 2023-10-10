@@ -23,6 +23,10 @@ export default function NewOrder() {
           <AddProductToOrder  selectedProductType={selectedProductType} />
         </article>
       </section>
+      {/* <div className="grid grid-cols-2 grid-rows-1 mx-2 md:h-1/2 gap-4 ">
+      <AddProductToOrder />
+      <ResumenPedidos />
+      </div> */}
     </>
   );
 }

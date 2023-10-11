@@ -13,26 +13,26 @@ export default function LoginForm() {
     setPassword(e.target.value);
   };
 
- async function userLogin () {
-  return await auth(email, password)
-  .then(function (response) {
-    //console.log('response: ', response)
-    localStorage.setItem('token', response.data.accessToken);
-    localStorage.setItem('role', response.data.user.role);
-    localStorage.setItem('name', response.data.user.name);
-    switch (response.data.user.role) {
-      case 'waiter': navigateTo('/waiter');
-      break;
-      case 'admin': navigateTo('/admin');
-      break;
-    }
-  })
-  .catch(function (error) {
-    const message = document.querySelector('#message');
-    message.textContent = error.response.data;
-    message.display = 'block';
-  });
- }
+  async function userLogin() {
+    return await auth(email, password)
+      .then(function (response) {
+        //console.log('response: ', response)
+        localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('role', response.data.user.role);
+        localStorage.setItem('name', response.data.user.name);
+        switch (response.data.user.role) {
+          case 'waiter': navigateTo('/waiter');
+            break;
+          case 'admin': navigateTo('/admin');
+            break;
+        }
+      })
+      .catch(function (error) {
+        const message = document.querySelector('#message');
+        message.textContent = error.response.data;
+        message.display = 'block';
+      });
+  }
   return (
     <>
       <section id="login-form" className="h-full bg-bgqueen-secondary rounded-lg p-5 lg:w-11/12 md:mx-8">

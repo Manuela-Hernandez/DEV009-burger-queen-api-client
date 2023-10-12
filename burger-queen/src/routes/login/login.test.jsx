@@ -1,6 +1,5 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import Login from "./login.jsx";
-// import peticion from "../../components/loginForm/request"
 import axios   from 'axios';
 
 

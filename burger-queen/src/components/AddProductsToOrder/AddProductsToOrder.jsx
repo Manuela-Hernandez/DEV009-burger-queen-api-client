@@ -8,11 +8,10 @@ export default function AddProductToOrder({selectedProductType}) {
   const dispatch = useDispatch()
   const [products, setProducts] = useState([]);
   
-  function addProduct(product) {
-    
+  function addProduct(product) { 
     dispatch(addProducto({product, quantity: 1, subtotal: product.price}))
-   
   }
+  
   useEffect(() => {
     getProducts(localStorage.getItem('token'))
       .then((response) => {

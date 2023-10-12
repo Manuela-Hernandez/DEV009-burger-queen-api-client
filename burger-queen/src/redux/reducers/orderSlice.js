@@ -37,17 +37,15 @@ export const orderSlice = createSlice({
                 // state.productos[state.productos.indexOf(productExist)].subtotal -= state.productos[state.productos.indexOf(productExist)].product.price;
             } else {
                 state.productos = state.productos.filter((product) => !(product.product.id === action.payload.product.id))
+               
             }
             state.total -= action.payload.product.price;
 
         },
         deleteProduct: (state, action) => {
+            // console.log("productos", sate.productos)
             state.productos = state.productos.filter((product) => !(product.product.id === action.payload.product.id))
             state.total -= action.payload.subtotal;
-
-
-
-
         },
     }
 

@@ -1,19 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// import App from './App.jsx'
 import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Login from './routes/login/login'
-import Waiter from './routes/waiter/NewOrder'
-import Admin from './routes/admin/admin'
-import DeniedAccess from './routes/deniedAccess/deniedAccess'
+import Login from './pages/login/login'
+import Waiter from './pages/waiter/NewOrder'
+import Admin from './pages/admin/admin'
+import DeniedAccess from './pages/deniedAccess/deniedAccess'
 import { ProtectedRoute } from './components/loginForm/ProtectedRoute'
 
-import { Provider } from 'react-redux'
-import store from '../src/redux/store'
 
 const router = createBrowserRouter([
   {
@@ -46,9 +43,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
       <RouterProvider router={router} />
-    </Provider>
-
   </React.StrictMode>
 );

@@ -1,13 +1,13 @@
-import { useSelector, useDispatch } from "react-redux";
-import { addProducto, deleteProductQuantity, deleteProduct } from "../../redux/reducers/orderSlice";
+//import { useSelector, useDispatch } from "react-redux";
+//import { addProducto, deleteProductQuantity, deleteProduct } from "../../redux/reducers/orderSlice";
 import { useState } from "react";
 import { addOrder } from "../../services/request";
 
-export default function ProductSumary({ customerName }) {
+export default function ProductSumary({ customerName, order, dispatch}) {
   // const productos = useSelector((state) => state.order.productos);
-  const order = useSelector((state) => state.order);
+  //const order = useSelector((state) => state.order);
   // console.log("order en resumen", order)
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
   // let total = 0;
   function createOrder() {
     addOrder(localStorage.getItem('token'), customerName, productos)
@@ -23,7 +23,7 @@ export default function ProductSumary({ customerName }) {
       <section className="grid  bg-bgqueen-secondary border-solid border-2 border-bgqueen-secondary w-3/4 md: w-full">
         <header className="text-2xl text-white text-center font-semi-bold bg-bgqueen-primary h-12"> Resumen de pedido</header>
         <ol className="p-6 divide-y divide-bgqueen-cafe">
-          {order.productos.map((product) => (
+          {order.products.map((product) => (
             <li key={product.product.id}
               className="grid grid-cols-1 mb-2 p-2">
               <div className="grid grid-cols-2 grid-row-1 ">
@@ -32,15 +32,15 @@ export default function ProductSumary({ customerName }) {
                 </p>
                 <div className="justify-self-end">
                   <i className="fa-solid fa-minus text-bgqueen-primary "
-                    onClick={() => dispatch(deleteProductQuantity(product))}></i>
+                    onClick={() => dispatch({type : 'decreaseProductQuantity', item: product})}></i>
                   <span className="col-end mx-2 text-center">{product.quantity}</span>
                   <i className="fa-solid fa-plus text-bgqueen-primary"
-                    onClick={() => dispatch(addProducto(product))}></i>
+                    onClick={() => dispatch({type : 'addProduct', item: product})}></i>
                 </div>
               </div>
               <div className="grid grid-cols-2">
                 <p className="justify-self-start"
-                  onClick={() => dispatch(deleteProduct(product))}>Eliminar</p>
+                  onClick={() => dispatch({type : 'deleteProduct', item: product})}>Eliminar</p>
                 <h3 className="justify-self-end">${product.subtotal}</h3>
               </div>
             </li>

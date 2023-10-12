@@ -1,18 +1,11 @@
 import { getProducts } from "../../services/request";
 import React, { useState, useEffect } from 'react';
 import addIcon from '../../assets/icon-add.png';
-import { useDispatch } from "react-redux";
-import { addProducto } from "../../redux/reducers/orderSlice";
 
-export default function AddProductToOrder({selectedProductType}) {
-  const dispatch = useDispatch()
+export default function AddProductToOrder({selectedProductType, dispatch}) {
+
   const [products, setProducts] = useState([]);
-  
-  function addProduct(product) {
-    
-    dispatch(addProducto({product, quantity: 1, subtotal: product.price}))
-   
-  }
+
   useEffect(() => {
     getProducts(localStorage.getItem('token'))
       .then((response) => {
@@ -39,7 +32,7 @@ export default function AddProductToOrder({selectedProductType}) {
                 <h3 className="text-lg font-semibold">{product.name}</h3>
                 <p className="text-600">${product.price}</p>
               </section>
-              <img src={addIcon} alt="add" className="w-1/3 col-span-1 cursor-pointer" onClick={() => addProduct(product)}/>
+              <img src={addIcon} alt="add" className="w-1/3 col-span-1 cursor-pointer" onClick={() => dispatch({type : 'addProduct', item: {product, quantity: 1, subtotal: product.price}})}/>
             </li>
           ))}
         </ul>

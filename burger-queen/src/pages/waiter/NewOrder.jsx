@@ -1,74 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import { useState , useReducer} from 'react';
 import AddProductToOrder from '../../components/AddProductsToOrder/AddProductsToOrder';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import OrderSummary from '../../components/OrderSummary/Summary'
-
-const initialState = {
-  products: [],
-  total: 0,
-}
-const reducer = (state, action)=>{
-  switch (action.type) {
-    case "addProduct":
-      if (state.products.find((product) => product.product.id === action.item.product.id)) {
-        return {
-          ...state,
-          products: state.products.map((product) => {
-            if (product.product.id === action.item.product.id) {
-              return {
-                ...product,
-                quantity: product.quantity + 1,
-                subtotal: product.subtotal + action.item.product.price,
-              };
-            }
-            return product;
-          }),
-          total: state.total + action.item.product.price,
-        };
-      } else {
-        return {
-          ...state,
-          products: [...state.products, action.item],
-          total: state.total + action.item.product.price,
-        };
-      }
-    case "decreaseProductQuantity":
-      if (state.products.find((product) => product.product.id === action.item.product.id).quantity > 1) { 
-        return {
-          ...state,
-          products: state.products.map((product) => {
-            if (product.product.id === action.item.product.id) {
-              return {
-                ...product,
-                quantity: product.quantity - 1,
-                subtotal: product.subtotal - action.item.product.price,
-              };
-            } else {
-              return product;
-            }
-          }),
-          total: state.total - action.item.product.price,
-        };
-      }/* else {
-        return {
-          ...state,
-          products: state.products.filter((product) => product.product.id !== action.item.product.id),
-          total: state.total - action.item.subtotal,
-        };
-      }*/
-    case "deleteProduct":
-      return {
-        ...state,
-        products: state.products.filter((product) => product.product.id !== action.item.product.id),
-        total: state.total - action.item.subtotal,
-      };
-    case "cleanOrder":
-      return initialState;
-    default:
-      return state;
-  }
-}
+import { initialState, reducer } from './reducerActions';
 
 export default function NewOrder() {
   const [selectedProductType, setSelectedProductType] = useState(null);
@@ -92,8 +26,8 @@ export default function NewOrder() {
             id = 'customerName'
             onChange={handleCustomerNameChange}
             className='h-12 col-span-2 m-2 rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl' />
-            <button className={`m-2 p-2 rounded ${selectedProductType === 'Desayuno' ? 'bg-bgqueen-secondary' : 'bg-bgqueen-gray'}`} onClick={() => setSelectedProductType('Desayuno')}>Breakfast</button>
-            <button className={`m-2 p-2 rounded ${selectedProductType === 'Almuerzo' ? 'bg-bgqueen-secondary' : 'bg-bgqueen-gray'}`} onClick={() => setSelectedProductType('Almuerzo')}>Lunch</button>
+            <button className={`m-2 p-2 rounded ${selectedProductType === 'Desayuno' ? 'bg-bgqueen-secondary' : 'bg-bgqueen-gray'}`} id = 'btn-breakfast' onClick={() => setSelectedProductType('Desayuno')}>Breakfast</button>
+            <button className={`m-2 p-2 rounded ${selectedProductType === 'Almuerzo' ? 'bg-bgqueen-secondary' : 'bg-bgqueen-gray'}`} id = 'btn-lunch' onClick={() => setSelectedProductType('Almuerzo')}>Lunch</button>
         </article>
 
         <article className='row-span-4'>

@@ -34,6 +34,7 @@ export default function AddProductToOrder({ selectedProductType, dispatch }) {
                 </section>
                 <img src={addIcon} alt="add"
                     className="w-1/3 col-span-1 cursor-pointer"
+                    id = {`item-${product.id}`}
                     onClick={() => dispatch({ type: 'addProduct', item: { product, quantity: 1, subtotal: product.price } })} />
                 </li>
             ))}

@@ -46,15 +46,16 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
                   {product.product.name}
                 </p>
                 <div className="justify-self-end">
-                  <i className="fa-solid fa-minus text-bgqueen-primary "
+                  <i className="fa-solid fa-minus text-bgqueen-primary " id = 'decrease-item-qty'
                     onClick={() => dispatch({ type: 'decreaseProductQuantity', item: product })}></i>
                   <span className="col-end mx-2 text-center">{product.quantity}</span>
-                  <i className="fa-solid fa-plus text-bgqueen-primary"
+                  <i className="fa-solid fa-plus text-bgqueen-primary" id = 'add-item-qty'
                     onClick={() => dispatch({ type: 'addProduct', item: product })}></i>
                 </div>
               </div>
               <div className="grid grid-cols-2">
                 <p className="justify-self-start"
+                  id = 'delete-item'
                   onClick={() => deleteProducts(product) }>Delete</p>
                 <h3 className="justify-self-end">${product.subtotal}</h3>
               </div>
@@ -68,7 +69,7 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
         </div>
 
         <button className="justify-self-center bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-m"
-          onClick={() => createOrder()}>CONFIRM ORDER</button>
+          id='btn-confirm-orden' onClick={() => createOrder()}>CONFIRM ORDER</button>
 
       </section>
     </>

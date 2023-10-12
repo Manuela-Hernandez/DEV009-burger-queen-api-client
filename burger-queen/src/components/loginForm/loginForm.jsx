@@ -16,7 +16,6 @@ export default function LoginForm() {
   async function userLogin() {
     return await auth(email, password)
       .then(function (response) {
-        //console.log('response: ', response)
         localStorage.setItem('token', response.data.accessToken);
         localStorage.setItem('role', response.data.user.role);
         localStorage.setItem('name', response.data.user.name);

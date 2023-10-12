@@ -21,7 +21,7 @@ export function addOrder(token, customerName, order) {
       client: customerName,
       products: order, 
       status: "pending",
-      dataEntry: "2022-03-05 15:00",
+      dataEntry: new Date(),
   }, {
     headers: {
       'Authorization': `Bearer ${token}`

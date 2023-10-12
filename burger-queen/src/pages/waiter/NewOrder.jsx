@@ -78,6 +78,10 @@ export default function NewOrder() {
   const handleCustomerNameChange = (e) => {
     setCustomerName(e.target.value);
   };
+  const clearInput = () => {
+    const input = document.querySelector('#customerName'); // Establece el valor del input en una cadena vacía
+    input.value = '';
+  };
   return (
     <>
       <NavigationBar />
@@ -85,14 +89,15 @@ export default function NewOrder() {
         <article className='grid grid-cols-2 grid-rows-2'>
           <input type="text"
             placeholder='Customer name'
+            id = 'customerName'
             onChange={handleCustomerNameChange}
             className='h-12 col-span-2 m-2 rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl' />
-          <button className='bg-white m-2 p-2 rounded' onClick={() => setSelectedProductType('Desayuno')}>Breakfast</button>
-          <button className='bg-white m-2 p-2 rounded' onClick={() => setSelectedProductType('Almuerzo')}>Lunch</button>
+            <button className={`m-2 p-2 rounded ${selectedProductType === 'Desayuno' ? 'bg-bgqueen-secondary' : 'bg-bgqueen-gray'}`} onClick={() => setSelectedProductType('Desayuno')}>Breakfast</button>
+            <button className={`m-2 p-2 rounded ${selectedProductType === 'Almuerzo' ? 'bg-bgqueen-secondary' : 'bg-bgqueen-gray'}`} onClick={() => setSelectedProductType('Almuerzo')}>Lunch</button>
         </article>
 
         <article className='row-span-4'>
-          <OrderSummary customerName={customerName} order = {order} dispatch ={dispatch}/>
+          <OrderSummary customerName={customerName} order = {order} dispatch ={dispatch} clearInput={clearInput}/>
         </article>
 
         <article className='row-span-2 m-2'>

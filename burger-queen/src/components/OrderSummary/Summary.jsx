@@ -1,7 +1,7 @@
 import { addOrder } from "../../services/request";
-import { showAlertError, completed, questionDelete } from "../../alert/aler"
+import { showAlertError, completed, questionDelete } from "../../alert/aler.js"
 
-export default function ProductSumary({ customerName, order, dispatch }) {
+export default function ProductSumary({ customerName, order, dispatch, clearInput }) {
   function createOrder() {
     if (customerName.length === 0) {
       showAlertError("Please enter the customer's name");
@@ -15,7 +15,7 @@ export default function ProductSumary({ customerName, order, dispatch }) {
       .then((response) => {
         completed("Your order has been saved.")
         dispatch({ type: "cleanOrder" })
-
+        clearInput();
         console.log("Orden creada ", response);
       })
       .catch((error) => {
@@ -41,8 +41,8 @@ export default function ProductSumary({ customerName, order, dispatch }) {
           {order.products.map((product) => (
             <li key={product.product.id}
               className="grid grid-cols-1 mb-2 p-2">
-              <div className="grid grid-cols-2 grid-row-1 ">
-                <p className="text-bgqueen-primary">
+              <div className="grid grid-cols-3 grid-row-1 ">
+                <p className="text-bgqueen-primary col-span-2">
                   {product.product.name}
                 </p>
                 <div className="justify-self-end">

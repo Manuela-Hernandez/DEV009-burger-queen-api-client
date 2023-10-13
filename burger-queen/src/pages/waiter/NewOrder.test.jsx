@@ -3,7 +3,6 @@ import NewOrder from "./NewOrder";
 import axios from 'axios';
 import Swal from "sweetalert2";
 import sweetalert2 from 'sweetalert2';
-import * as request from '../../services/request.jsx'
 
 const productsMock = [
     {id: 1, name: 'Sandwich de jamón y queso', price: 1000, image: 'https://raw.githubusercontent.com/ssinuco/burger-queen-api-mock/main/resources/images/sandwich.png', type: 'Desayuno',},
@@ -11,26 +10,32 @@ const productsMock = [
     {id: 3, name: 'Agua 500ml', price: 500, image: 'https://raw.githubusercontent.com/ssinuco/burger-queen-api-mock/main/resources/images/water.png', type: 'Almuerzo', }
 ];
 
-// const orderTest = 
-//     {
-//         products: [{
-//             product: {id: 3, name: 'Agua 500ml', price: 500, image: 'https://raw.githubusercontent.com/ssinuco/burger-queen-api-mock/main/resources/images/water.png', type: 'Almuerzo', },
-//             quantity: 3,
-//             subtotal: 1500
-//         }],
-//         total: 1500,
-//     };
-// const data = {
-//     userId: '3',
-//     client: 'Manuela',
-//     products: orderTest, 
-//     status: "pending",
-//     dataEntry: new Date(),
-// }
+const orderTest = 
+    {
+        products: [{
+            product: {id: 3, name: 'Agua 500ml', price: 500, image: 'https://raw.githubusercontent.com/ssinuco/burger-queen-api-mock/main/resources/images/water.png', type: 'Almuerzo', },
+            quantity: 3,
+            subtotal: 1500
+        }],
+        total: 1500,
+    };
+const data = {
+    userId: '3',
+    client: 'Manuela',
+    products: orderTest.products, 
+    status: "pending",
+    dataEntry: new Date('2023-10-13T12:00:00.000Z').toISOString(),
+}
 
 jest.mock('sweetalert2');
 jest.mock('axios');
 
+const originalDate = Date;
+global.Date = class extends Date {
+    constructor() {
+        return new originalDate('2023-10-13T12:00:00Z'); // Establece la fecha actual deseada
+    }
+};
 const mockedUseNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), // Mantiene las exportaciones originales
@@ -38,17 +43,20 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('NewOrder', ()=>{
+    afterAll(() => {
+        // Restaurar la fecha original después de todas las pruebas
+        global.Date = originalDate;
+    });
     beforeEach(() => {
         jest.clearAllMocks();
         // mockedUseNavigate.mockRestore();// limpia mock de useNavigate
     });
     it("Debería poder guardar la orden", async () => {
-        //localStorage.setItem('token','123456')
-        //const addOrderMock = jest.spyOn(request,'addOrder');
+
+        localStorage.setItem('token','123456');
         axios.get.mockResolvedValue({data : productsMock});
         sweetalert2.fire.mockResolvedValue({isConfirmed: true});
         axios.post.mockResolvedValue('Pedido hecho');
-        console.log(localStorage.getItem('token'));
         render(<NewOrder />);
         const name = document.querySelector('#customerName');
         const btnLunch = document.querySelector('#btn-lunch');
@@ -92,9 +100,9 @@ describe('NewOrder', ()=>{
         });
         await waitFor(() => {
             expect(axios.post).toBeCalledTimes(1);
-            //expect(axios.post).toBeCalledWith("http://localhost:8080/orders",data,  {"headers": {"Authorization": "Bearer null"}});
+            expect(axios.post).toBeCalledWith("http://localhost:8080/orders",data,  {"headers": {"Authorization": "Bearer 123456"}});
         });
-        screen.debug();
+        // screen.debug();
     });
     it('Debería redirigir a /login y limpiar el localStorage al dar click en el botón cerrar sesión', async()=>{
         render(<NewOrder />);

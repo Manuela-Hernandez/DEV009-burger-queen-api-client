@@ -13,16 +13,14 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
     }
     addOrder(localStorage.getItem('token'), customerName, order.products)
       .then((response) => {
-        console.log('ORDEN - ', order)
-        console.log('PRODUCTOS PEDIDOS - ', order.products)
         completed("Your order has been saved.")
         dispatch({ type: "cleanOrder" })
         clearInput();
-        console.log("Orden creada ", response);
+        //console.log("Orden creada ", response);
       })
       .catch((error) => {
         showAlertError("An error has occurred");
-        console.log(error);
+        //console.log(error);
       });
   }
 

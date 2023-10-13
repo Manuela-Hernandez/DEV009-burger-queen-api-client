@@ -11,7 +11,6 @@ export default function AddProductToOrder({ selectedProductType, dispatch }) {
     getProducts(localStorage.getItem('token'))
       .then((response) => {
         // Actualiza el estado con los productos obtenidos
-        console.log(response.data);
         setProducts(response.data);
       })
       .catch((error) => {

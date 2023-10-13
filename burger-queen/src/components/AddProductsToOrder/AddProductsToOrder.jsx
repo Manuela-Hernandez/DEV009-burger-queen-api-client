@@ -1,6 +1,7 @@
 import { getProducts } from "../../services/request";
 import React, { useState, useEffect } from 'react';
 import addIcon from '../../assets/icon-add.png';
+import { showAlertError } from "../../alert/aler.js"
 
 export default function AddProductToOrder({ selectedProductType, dispatch }) {
 
@@ -14,7 +15,7 @@ export default function AddProductToOrder({ selectedProductType, dispatch }) {
         setProducts(response.data);
       })
       .catch((error) => {
-        console.error('Error al obtener los productos:', error);
+        showAlertError("An error has occurred while obtaining list of product");
       });
   }, []); // El segundo argumento, [], asegura que se ejecute una sola vez cuando el componente se monta
   return (

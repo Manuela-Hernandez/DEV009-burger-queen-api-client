@@ -11,8 +11,10 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
       showAlertError("Please select a product");
       return;
     }
-    addOrder(localStorage.getItem('token'), customerName, order.productos)
+    addOrder(localStorage.getItem('token'), customerName, order.products)
       .then((response) => {
+        console.log('ORDEN - ', order)
+        console.log('PRODUCTOS PEDIDOS - ', order.products)
         completed("Your order has been saved.")
         dispatch({ type: "cleanOrder" })
         clearInput();
@@ -46,16 +48,17 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
                   {product.product.name}
                 </p>
                 <div className="justify-self-end">
-                  <i className="fa-solid fa-minus text-bgqueen-primary " id = 'decrease-item-qty'
+                  <i className={`fa-solid text-bgqueen-primary ${product.quantity > 1 ? 'fa-minus':''}`}
+                    id = {`decrease-item-qty-${product.product.id}`}
                     onClick={() => dispatch({ type: 'decreaseProductQuantity', item: product })}></i>
                   <span className="col-end mx-2 text-center">{product.quantity}</span>
-                  <i className="fa-solid fa-plus text-bgqueen-primary" id = 'add-item-qty'
+                  <i className="fa-solid fa-plus text-bgqueen-primary" id = {`add-item-qty-${product.product.id}`}
                     onClick={() => dispatch({ type: 'addProduct', item: product })}></i>
                 </div>
               </div>
               <div className="grid grid-cols-2">
                 <p className="justify-self-start"
-                  id = 'delete-item'
+                  id = {`delete-item-${product.product.id}`}
                   onClick={() => deleteProducts(product) }>Delete</p>
                 <h3 className="justify-self-end">${product.subtotal}</h3>
               </div>

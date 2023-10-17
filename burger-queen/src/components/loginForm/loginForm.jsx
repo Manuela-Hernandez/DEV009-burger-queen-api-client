@@ -19,10 +19,13 @@ export default function LoginForm() {
         localStorage.setItem('token', response.data.accessToken);
         localStorage.setItem('role', response.data.user.role);
         localStorage.setItem('name', response.data.user.name);
+        localStorage.setItem('id', response.data.user.id);
         switch (response.data.user.role) {
           case 'waiter': navigateTo('/waiter');
             break;
           case 'admin': navigateTo('/admin');
+            break;
+          case 'chef': navigateTo('/chef');
             break;
         }
       })

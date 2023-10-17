@@ -8,6 +8,7 @@ import {
 import Login from './pages/login/login'
 import Waiter from './pages/waiter/NewOrder'
 import Admin from './pages/admin/admin'
+import Chef from './pages/chef/chef'
 import DeniedAccess from './pages/deniedAccess/deniedAccess'
 import { ProtectedRoute } from './components/loginForm/ProtectedRoute'
 
@@ -33,6 +34,13 @@ const router = createBrowserRouter([
     element:
       <ProtectedRoute requiredRole="admin">
         <Admin />,
+      </ProtectedRoute>
+  },
+  {
+    path: "/chef",
+    element:
+      <ProtectedRoute requiredRole="chef">
+        <Chef />,
       </ProtectedRoute>
   },
   {

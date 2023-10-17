@@ -11,7 +11,7 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
       showAlertError("Please select a product");
       return;
     }
-    addOrder(localStorage.getItem('token'), customerName, order.products)
+    addOrder(localStorage.getItem('token'), customerName, order.products,localStorage.getItem('id'))
       .then((response) => {
         completed("Your order has been saved.")
         dispatch({ type: "cleanOrder" })

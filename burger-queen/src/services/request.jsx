@@ -15,9 +15,9 @@ export function getProducts(token) {
   })
 }
 
-export function addOrder(token, customerName, order) {
+export function addOrder(token, customerName, order, employeeId) {
   return axios.post(baseUrl+ '/orders', {
-      userId: '3',
+      userId: employeeId,
       client: customerName,
       products: order, 
       status: "pending",
@@ -27,4 +27,12 @@ export function addOrder(token, customerName, order) {
       'Authorization': `Bearer ${token}`
     }
   },)
+}
+
+export function getAllOrders(token) {
+  return axios.get(baseUrl + '/orders', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
 }

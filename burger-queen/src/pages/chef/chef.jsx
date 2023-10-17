@@ -5,7 +5,6 @@ export default function Chef() {
     return (
       <> 
         <NavigationBar />
-        ORDERS
         <ActiveOrders/>
       </>
     );

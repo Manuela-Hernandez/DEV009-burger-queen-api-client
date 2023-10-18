@@ -46,10 +46,10 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
                   {product.product.name}
                 </p>
                 <div className="justify-self-end">
-                  <i className={`fa-solid text-bgqueen-primary ${product.quantity > 1 ? 'fa-minus':''}`}
+                  <i className={`fa-solid text-bgqueen-primary ${product.qty > 1 ? 'fa-minus':''}`}
                     id = {`decrease-item-qty-${product.product.id}`}
                     onClick={() => dispatch({ type: 'decreaseProductQuantity', item: product })}></i>
-                  <span className="col-end mx-2 text-center">{product.quantity}</span>
+                  <span className="col-end mx-2 text-center">{product.qty}</span>
                   <i className="fa-solid fa-plus text-bgqueen-primary" id = {`add-item-qty-${product.product.id}`}
                     onClick={() => dispatch({ type: 'addProduct', item: product })}></i>
                 </div>

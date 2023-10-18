@@ -13,7 +13,7 @@ export const reducer = (state, action)=>{
               if (product.product.id === action.item.product.id) {
                 return {
                   ...product,
-                  quantity: product.quantity + 1,
+                  qty: product.qty + 1,
                   subtotal: product.subtotal + action.item.product.price,
                 };
               }
@@ -29,14 +29,14 @@ export const reducer = (state, action)=>{
           };
         }
       case "decreaseProductQuantity":
-        if (state.products.find((product) => product.product.id === action.item.product.id).quantity > 1) { 
+        if (state.products.find((product) => product.product.id === action.item.product.id).qty > 1) { 
           return {
             ...state,
             products: state.products.map((product) => {
               if (product.product.id === action.item.product.id) {
                 return {
                   ...product,
-                  quantity: product.quantity - 1,
+                  qty: product.qty - 1,
                   subtotal: product.subtotal - action.item.product.price,
                 };
               } else {

@@ -53,17 +53,17 @@ const orderTest =
       image: 'https://raw.githubusercontent.com/ssinuco/burger-queen-api-mock/main/resources/images/water.png',
       type: 'Almuerzo',
     },
-    quantity: 3,
+    qty: 3,
     subtotal: 1500
   }],
   total: 1500,
 };
 const data = {
-  userId: '3',
+  userId: '4321',
   client: 'Manuela',
   products: orderTest.products,
   status: "pending",
-  dataEntry: new Date('2023-10-13T12:00:00.000Z').toISOString(),
+  dataEntry: '2023-10-13 12:00',
 }
 
 
@@ -79,6 +79,7 @@ describe('NewOrder', () => {
   it("Debería poder guardar la orden", async () => {
 
     localStorage.setItem('token', '123456');
+    localStorage.setItem('id', '4321');
     axios.get.mockResolvedValue({ data: productsMock });
     Swal.fire.mockResolvedValue({ isConfirmed: true });
     axios.post.mockResolvedValue('Pedido hecho');

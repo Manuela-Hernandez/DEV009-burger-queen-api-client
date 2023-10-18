@@ -1,4 +1,35 @@
 
+## <Sprint 4> - <18/10/2023>
+
+### Sprint learnings
+
+*Testing con Jest, utilizando mocks y espías.
+*Implementación de librerías como sweetAlert
+*Manejo dinámico del DOM
+*Peticiones HTTP (GET)
+*Etiquetas HTML (table, tr, td, thead, tbody, th)
+
+### Added
+
+*Validaciones y notificaciones implementando sweetAlert.
+*Limpieza de campos al completar la orden.
+*Tests de la historia de usuario 2.
+*Servicio para traer todas las órdenes, así como el filtrado de las que están pendientes.
+*Se genera tabla con la data de órdenes
+
+### Changed
+
+*Estilos en el componente _Summary_, adicionalmente se agrega total al estado del pedido.
+*Se cambia Redux por el Hook useReducer.
+
+### Fixed
+
+*La orden y el nombre del usuario no se eliminaba al guardar.
+
+### Removed
+
+*Configuración de Redux
+
 ## <Sprint 3> - <10/10/2023>
 
 ### Sprint learnings

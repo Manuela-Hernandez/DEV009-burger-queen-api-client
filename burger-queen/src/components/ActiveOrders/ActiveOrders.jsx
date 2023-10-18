@@ -11,6 +11,8 @@ export default function ActiveOrders() {
 
   const [isopen, setIsopen] = useState(false)
 
+  
+
   function openModal (order) {
     setProductsModal(order.products);
     setIsopen(true);
@@ -109,7 +111,7 @@ export default function ActiveOrders() {
           }
         </tbody>
       </table>
-      <Modal isopen={isopen} productsModal={productsModal} />
+      <Modal isopen={isopen} setIsopen={setIsopen} productsModal={productsModal} />
     </section>
   );
 }

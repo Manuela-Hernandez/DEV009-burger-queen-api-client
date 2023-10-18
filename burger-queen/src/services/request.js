@@ -21,7 +21,7 @@ export function addOrder(token, customerName, order, employeeId) {
       client: customerName,
       products: order, 
       status: "pending",
-      dataEntry: new Date().toISOString(),
+      dataEntry: new Date().toISOString().replace(/T/,' ').slice(0, 16),
   }, {
     headers: {
       'Authorization': `Bearer ${token}`

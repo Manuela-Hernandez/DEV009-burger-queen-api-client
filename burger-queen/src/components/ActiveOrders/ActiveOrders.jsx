@@ -1,9 +1,22 @@
 import { getAllOrders } from "../../services/request";
 import { showAlertError } from "../../alert/aler.js"
 import { useState, useEffect } from "react";
+import Modal from "./modal";
+// import Swal from "sweetalert2"
 
 export default function ActiveOrders() {
   const [allOrders, setOrders] = useState([]);
+
+  const [productsModal, setProductsModal] = useState([]);
+
+  const [isopen, setIsopen] = useState(false)
+
+  function openModal (order) {
+    setProductsModal(order.products);
+    setIsopen(true);
+  }
+
+
 
   useEffect(() => {
     getAllOrders(localStorage.getItem('token'))
@@ -33,7 +46,10 @@ export default function ActiveOrders() {
           {
             allOrders.map((order) => (
               <tr key={order.id}>
-                <td className=" text-center border border-slate-300 ..."><i className="fa-solid fa-chevron-down"></i></td>
+                <td className=" text-center border border-slate-300 ...">
+                  <i className="fa-solid fa-chevron-down" onClick={()=> openModal(order) }>
+                  </i>
+                </td>
                 <td className="border border-slate-300 ...">{order.id}</td>
                 <td className="border border-slate-300 ...">{order.client}</td>
                 <td className="border border-slate-300 ...">{order.status}</td>
@@ -44,6 +60,7 @@ export default function ActiveOrders() {
           }
         </tbody>
       </table>
+      <Modal isopen={isopen} productsModal={productsModal} />
     </section>
   );
 }

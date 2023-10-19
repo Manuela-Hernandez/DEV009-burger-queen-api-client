@@ -1,6 +1,7 @@
 import { changeOrderStatus } from "../../services/request"
 import { useState } from "react";
 import { completed, showAlertError } from "../../alert/aler";
+import { useNavigate } from "react-router-dom";
 
 export default function Modal({ isopen = false, setIsopen, productsModal = [] }) {
 
@@ -9,7 +10,11 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
   function changeStatus(status) {
     changeOrderStatus(localStorage.getItem('token'), productsModal.id, status)
       .then((response) => {
+        setIsopen(false);
         completed("Your order status has been changed.");
+        setTimeout(function() {
+          location.reload();
+        }, 1600);
         console.log('Cambio realizado: ', response);
       })
       .catch((error) => {
@@ -30,6 +35,7 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
     if (checked === productsModal.products.length) {
       console.log("ya estan seleccionados todos los productos");
       changeStatus("ready");
+      
       // completed("Your order status has been changed.");
       // setTimeout(function() {
       //   location.reload();

@@ -19,20 +19,19 @@ export default function ActiveOrders() {
   }
 
   function timeDuration(orderDataEntry){
-    const hourLocalTime = parseInt(new Date().toISOString().replace(/T/, ' ').slice(11, 13), 10);
-    const minutesLocalTime = parseInt(new Date().toISOString().replace(/T/, ' ').slice(14, 16), 10);
-
-    const orderHour = parseInt(orderDataEntry.slice(11, 13), 10);
-    const orderMinutes = parseInt(orderDataEntry.slice(14, 16), 10);
+    const hourLocalTime = parseInt(new Date().toLocaleString().slice(12, 14));
+    const minutesLocalTime = parseInt(new Date().toLocaleString().slice(15, 17));
+    const orderHour = parseInt(orderDataEntry.slice(12, 14));
+    const orderMinutes = parseInt(orderDataEntry.slice(15, 17));
 
     if (hourLocalTime > orderHour) {
         if (minutesLocalTime >= orderMinutes) {
-            return minutesLocalTime - orderMinutes + (hourLocalTime - orderHour) * 60;
+            return `${hourLocalTime - orderHour} h ${minutesLocalTime - orderMinutes} minutes`;
         } else {
-            return 60 - orderMinutes + minutesLocalTime + (hourLocalTime - orderHour - 1) * 60;
+            return ((hourLocalTime - orderHour - 1) * 60) > 1 ? `${(hourLocalTime - orderHour - 1) * 60} h ${60 - orderMinutes + minutesLocalTime} minutes`:`${60 - orderMinutes + minutesLocalTime} minutes`;
         }
     } else {
-        return minutesLocalTime - orderMinutes;
+        return `${minutesLocalTime - orderMinutes} minutes`;
     }
   }
 
@@ -98,7 +97,10 @@ export default function ActiveOrders() {
                 <td className="border border-slate-300 ...">{order.client}</td>
                 <td className="border border-slate-300 ...">{order.status}</td>
                 <td className="border border-slate-300 ...">{order.dataEntry}</td>
-                <td className={`border border-slate-300 ${order.duration > 20 ? 'text-bgqueen-red' : order.duration > 10 ? 'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration} minutes</td>
+                {
+                // verificar validacions para colores 
+                }
+                <td className={`border border-slate-300 ${order.duration > 20 ? 'text-bgqueen-red' : order.duration > 10 ? 'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration}</td>
               </tr>
             ))
           }

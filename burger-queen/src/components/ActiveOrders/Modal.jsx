@@ -1,6 +1,6 @@
 import { changeOrderStatus } from "../../services/request"
 import { useState } from "react";
-import { completed, showAlertError } from "../../alert/aler";
+import { completed, questionClose, showAlertError } from "../../alert/aler";
 import { useNavigate } from "react-router-dom";
 
 export default function Modal({ isopen = false, setIsopen, productsModal = [] }) {
@@ -15,47 +15,41 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
         setTimeout(function() {
           location.reload();
         }, 1600);
-        console.log('Cambio realizado: ', response);
       })
-      .catch((error) => {
+      .catch(() => {
         showAlertError("An error has occurred");
-        console.log('Ha ocurrido un error: ', error)
       });
   }
 
   const handleCheked = (e) => {
-    if (e.target.checked) {
-      setChecked(checked + 1);
-    } else {
-      setChecked(checked - 1);
-    }
-
+    setChecked(e.target.checked ? checked + 1 : checked - 1);
   };
   function validationToChangeStatus () {
     if (checked === productsModal.products.length) {
-      console.log("ya estan seleccionados todos los productos");
-      changeStatus("ready");
-      
-      // completed("Your order status has been changed.");
-      // setTimeout(function() {
-      //   location.reload();
-      // }, 3000)
-      
-
-      } else {
-        showAlertError("faltan productos por seleccionar");
-      }
-
-
+      changeStatus("ready");   
+    } else {
+      showAlertError("faltan productos por seleccionar");
     }
+  }
+  async function closeOrderDetails(){
+    const closeDetails = await questionClose();
+    if(closeDetails.isConfirmed) {
+      setIsopen(false)
+    }
+    
+  }
     return (
       <div>
         {isopen && (
           <div className="h-screen w-screen fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-            <div className="w-2/4 h-1/4 bg-white p-5 rounded flex flex-col justify-center items-center gap-5">
+            <div className="w-2/4  bg-white p-1 rounded flex flex-col justify-center items-center gap-1">
+              <button className="w-12 h-12 rounded-lg text-xl border-solid border-bgqueen-black hover:border-2 self-end"
+                onClick={closeOrderDetails}>
+                <i className="fa-solid fa-xmark"></i>
+              </button>
               <div>
-                <h1 className="text-center text-3xl font-semibold mb-4">Details</h1>
-                <p>Order #{productsModal.id}</p>
+                <h2 className="text-center text-3xl font-semibold mb-4">Details - Order #{productsModal.id}</h2>
+                <h3 className="text-xl font-semibold mb-4">Client: {productsModal.client}</h3>
                 {
                   productsModal.products.map((product) => (
                     <section className="grid grid-cols-1 grid-row-auto gap-2 justify-center" key={product.product.id}>
@@ -68,10 +62,9 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
                 }
               </div>
               <div className=" w-full h-full flex justify-center">
-                <button className="w-1/4 h-12 bg-bgqueen-primary text-white rounded-lg text-xl"
-                  onClick={() => setIsopen(false)}> close</button>
-                <button className="w-1/4 h-12 bg-bgqueen-primary text-white rounded-lg text-xl"
-                  onClick={validationToChangeStatus}> READY</button>
+                <button className="w-1/4 h-12 bg-bgqueen-primary text-white rounded-lg text-xl m-4"
+                  onClick={validationToChangeStatus}> READY
+                </button>
               </div>
             </div>
           </div>

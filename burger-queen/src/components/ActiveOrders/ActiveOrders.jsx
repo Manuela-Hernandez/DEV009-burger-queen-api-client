@@ -86,7 +86,12 @@ export default function ActiveOrders() {
             allOrders.map((order) => (
               <tr key={order.id}>
                 <td className=" text-center border border-slate-300 ...">
-                  <i className="fa-solid fa-chevron-down" onClick={()=> openModal(order) }>
+                  <i className={`fa-solid ${order.status === 'pending' ? 'fa-caret-down': 'fa-check text-bgqueen-green disabled'}`}
+                  onClick={()=> {
+                    if(order.status === 'pending'){
+                        openModal(order) 
+                    }
+                    }}>
                   </i>
                 </td>
                 <td className="border border-slate-300 ...">{order.id}</td>

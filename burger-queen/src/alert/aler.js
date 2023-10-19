@@ -30,3 +30,14 @@ export function completed(text) {
   }   
   )
 }
+export function questionClose() {
+  return Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this, any changes made will be lost!",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#28a745",
+    cancelButtonColor: '#d33',
+    confirmButtonText: "Yes, close it!"
+  })
+}

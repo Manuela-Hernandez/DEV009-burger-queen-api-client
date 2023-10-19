@@ -28,7 +28,7 @@ export default function ActiveOrders() {
         if (minutesLocalTime >= orderMinutes) {
             return `${hourLocalTime - orderHour} h ${minutesLocalTime - orderMinutes} minutes`;
         } else {
-            return ((hourLocalTime - orderHour - 1) * 60) > 1 ? `${(hourLocalTime - orderHour - 1) * 60} h ${60 - orderMinutes + minutesLocalTime} minutes`:`${60 - orderMinutes + minutesLocalTime} minutes`;
+            return ((hourLocalTime - orderHour - 1) * 60) > 1 ? `${(hourLocalTime - orderHour - 1)} h ${60 - orderMinutes + minutesLocalTime} minutes`:`${60 - orderMinutes + minutesLocalTime} minutes`;
         }
     } else {
         return `${minutesLocalTime - orderMinutes} minutes`;

@@ -19,7 +19,7 @@ export default function NewOrder() {
   return (
     <>
       <NavigationBar />
-      <section className='grid grid-cols-2 grid-rows-3 m-8'>
+      <section className='grid grid-cols-2 grid-rows-3 m-8 border-2 border-bgqueen-secondary '>
         <article className='grid grid-cols-2 grid-rows-2'>
           <input type="text"
             placeholder='Customer name'

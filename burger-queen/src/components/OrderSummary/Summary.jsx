@@ -69,7 +69,7 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
           <span className="justify-self-end" >${order.total}</span>
         </div>
 
-        <button className="justify-self-center bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-m"
+        <button className="justify-self-center bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-m mb-2"
           id='btn-confirm-orden' onClick={() => createOrder()}>CONFIRM ORDER</button>
 
       </section>

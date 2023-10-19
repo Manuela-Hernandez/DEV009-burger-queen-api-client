@@ -19,17 +19,6 @@ export default function ActiveOrders() {
   }
 
   function timeDuration(orderDataEntry){
-    // const hourLocalTime = new Date().toISOString().replace(/T/,' ').slice(11, 13);
-    // const minutesLocalTime = new Date().toISOString().replace(/T/,' ').slice(14, 16);
-    // if(hourLocalTime > orderDataEntry.slice(11, 13)){
-    //     if(minutesLocalTime >= orderDataEntry.slice(14, 16)){
-    //         return minutesLocalTime - orderDataEntry.slice(14, 16) + (hourLocalTime - orderDataEntry.slice(11, 13)) * 60;
-    //     }else{
-    //         return (60 - orderDataEntry.slice(14, 16)) + minutesLocalTime + ((hourLocalTime - orderDataEntry.slice(11, 13) - 1) * 60)
-    //     }
-    // }else{
-    //     return minutesLocalTime - orderDataEntry.slice(14, 16);
-    // }
     const hourLocalTime = parseInt(new Date().toISOString().replace(/T/, ' ').slice(11, 13), 10);
     const minutesLocalTime = parseInt(new Date().toISOString().replace(/T/, ' ').slice(14, 16), 10);
 

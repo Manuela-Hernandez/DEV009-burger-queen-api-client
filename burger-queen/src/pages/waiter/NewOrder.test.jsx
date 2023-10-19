@@ -63,7 +63,7 @@ const data = {
   client: 'Manuela',
   products: orderTest.products,
   status: "pending",
-  dataEntry: '2023-10-13 12:00',
+  dataEntry: '13/10/2023, 7:00:00',
 }
 
 

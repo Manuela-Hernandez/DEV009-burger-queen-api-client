@@ -68,7 +68,7 @@ export default function ActiveOrders() {
   }, []);
 
   return (
-    <section className="w-full h-full bg-white">
+    <section className="w-full h-full">
       <table className="bg-white w-4/5 m-auto border-separate  border border-slate-400 ...">
         <thead className="text-left">
           <tr className="bg-bgqueen-gray">

@@ -24,6 +24,12 @@ export default {
       emerald: colors.emerald,
       indigo: colors.indigo,
       yellow: colors.yellow,
+    },
+    extend: {
+      backgroundImage: {
+        'check-ready': "url('/src/assets/react.svg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      }
     }
   },
   plugins: [

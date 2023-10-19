@@ -27,8 +27,6 @@ export function completed(text) {
     icon: "success",
     showConfirmButton: false,
     timer: 1500
-  }
-   
-    
+  }   
   )
 }

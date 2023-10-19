@@ -14,7 +14,7 @@ export default function ActiveOrders() {
   
 
   function openModal (order) {
-    setProductsModal(order.products);
+    setProductsModal(order);
     setIsopen(true);
   }
 
@@ -57,7 +57,6 @@ export default function ActiveOrders() {
             ...order,
             duration: timeDuration(order.dataEntry),
           }));
-
         setOrders(ordersWithDurations);
       })
       .catch((error) => {

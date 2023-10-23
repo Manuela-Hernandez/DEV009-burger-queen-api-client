@@ -38,7 +38,6 @@ export default function ActiveOrders() {
   useEffect(() => {
     getAllOrders(localStorage.getItem('token'))
       .then((response) => {
-        // Calcula la duración al cargar los datos iniciales
         const ordersWithDurations = response.data
           .filter((order) => order.status !== 'delivered')
           .map((order) => ({
@@ -86,6 +85,7 @@ export default function ActiveOrders() {
               <tr key={order.id}>
                 <td className=" text-center border border-slate-300 ...">
                   <i className={`fa-solid ${order.status === 'pending' ? 'fa-caret-down': 'fa-check text-bgqueen-green disabled'}`}
+                  id = {`details-${order.id}`}
                   onClick={()=> {
                     if(order.status === 'pending'){
                         openModal(order) 

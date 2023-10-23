@@ -17,26 +17,26 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
         }, 1600);
       })
       .catch(() => {
-        showAlertError("An error has occurred");
+        showAlertError("An error has occurred while status was changing");
       });
   }
 
-  const handleCheked = (e) => {
+  const handleChecked = (e) => {
     setChecked(e.target.checked ? checked + 1 : checked - 1);
   };
+
   function validationToChangeStatus () {
     if (checked === productsModal.products.length) {
       changeStatus("ready");   
     } else {
-      showAlertError("faltan productos por seleccionar");
+      showAlertError("All the products have to be checked");
     }
   }
   async function closeOrderDetails(){
     const closeDetails = await questionClose();
     if(closeDetails.isConfirmed) {
-      setIsopen(false)
+      setIsopen(false);
     }
-    
   }
     return (
       <div>
@@ -45,16 +45,16 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
             <div className="w-2/4  bg-white p-1 rounded flex flex-col justify-center items-center gap-1">
               <button className="w-12 h-12 rounded-lg text-xl border-solid border-bgqueen-black hover:border-2 self-end"
                 onClick={closeOrderDetails}>
-                <i className="fa-solid fa-xmark"></i>
+                <i className="fa-solid fa-xmark" id = 'button-close-order'></i>
               </button>
               <div>
                 <h2 className="text-center text-3xl font-semibold mb-4">Details - Order #{productsModal.id}</h2>
                 <h3 className="text-xl font-semibold mb-4">Client: {productsModal.client}</h3>
                 {
-                  productsModal.products.map((product) => (
+                  productsModal.products.map((product, index) => (
                     <section className="grid grid-cols-1 grid-row-auto gap-2 justify-center" key={product.product.id}>
                       <label className="flex items-center space-x-2">
-                        <input type="checkbox" className="h-6 w-6 rounded-full checked:bg-bgqueen-primary" onChange={handleCheked} />
+                        <input type="checkbox" className="h-6 w-6 rounded-full checked:bg-bgqueen-primary" onChange={handleChecked} id={`product-${index}`}/>
                         <span className="text-xl">{product.qty} {product.product.name}</span>
                       </label>
                     </section>
@@ -63,6 +63,7 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
               </div>
               <div className=" w-full h-full flex justify-center">
                 <button className="w-1/4 h-12 bg-bgqueen-primary text-white rounded-lg text-xl m-4"
+                  id="button-set-ready"
                   onClick={validationToChangeStatus}> READY
                 </button>
               </div>

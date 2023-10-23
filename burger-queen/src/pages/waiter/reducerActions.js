@@ -60,7 +60,7 @@ export const reducer = (state, action)=>{
         };
       case "cleanOrder":
         return initialState;
-      default:
-        return state;
+      //default:
+        //return state;
     }
   }

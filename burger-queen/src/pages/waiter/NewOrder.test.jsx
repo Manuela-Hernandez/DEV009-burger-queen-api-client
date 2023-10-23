@@ -63,7 +63,7 @@ const data = {
   client: 'Manuela',
   products: orderTest.products,
   status: "pending",
-  dataEntry: '13/10/2023, 7:00:00',
+  dataEntry: '13/10/2023, 06:00:00',
 }
 
 
@@ -181,7 +181,7 @@ describe('NewOrder', () => {
     axios.get.mockResolvedValueOnce({ data: productsMock });
     axios.post.mockRejectedValue({ response: { data: 'error' } });
     const mockFire = jest.spyOn(Swal, "fire");
-    console.log(localStorage.getItem("token"));
+    //console.log(localStorage.getItem("token"));
     render(<NewOrder />);
     const name = document.querySelector('#customerName');
     fireEvent.change(name, { target: { value: 'Manuela' } });

@@ -2,10 +2,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 import Login from "./login.jsx";
 import axios   from 'axios';
 
-
 jest.mock('axios');
-
-
 
 const mockedUseNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -65,6 +62,23 @@ describe("Login", () => {
     await waitFor(() => {
       expect(mockedUseNavigate).toBeCalledTimes(1);
       expect(mockedUseNavigate).toBeCalledWith('/admin');
+    });
+  });
+  it("Debería navegar a /chef al introducir las credenciales de un cocinero", async () => {
+    axios.post.mockResolvedValueOnce({ data: {user : { role: 'chef'}} });
+    
+    const { getByPlaceholderText, getByText } = render(<Login />);
+    const email = getByPlaceholderText('Email');
+    const password = getByPlaceholderText('Password');
+    const btnLogin = getByText('Login')
+    
+    fireEvent.change(email, { target: { value: 'empleado2@systers.xyz' } });
+    fireEvent.change(password, { target: { value: '0123456789' } });
+    fireEvent.click(btnLogin);
+
+    await waitFor(() => {
+      expect(mockedUseNavigate).toBeCalledTimes(1);
+      expect(mockedUseNavigate).toBeCalledWith('/chef');
     });
   });
 });

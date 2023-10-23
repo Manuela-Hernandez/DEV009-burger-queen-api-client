@@ -11,28 +11,33 @@ export default function ActiveOrders() {
 
   const [isopen, setIsopen] = useState(false)
 
-  
 
-  function openModal (order) {
+
+  function openModal(order) {
     setProductsModal(order);
     setIsopen(true);
   }
 
-  function timeDuration(orderDataEntry){
+  function timeDuration(orderDataEntry) {
     const hourLocalTime = parseInt(new Date().toLocaleString().slice(12, 14));
     const minutesLocalTime = parseInt(new Date().toLocaleString().slice(15, 17));
     const orderHour = parseInt(orderDataEntry.slice(12, 14));
     const orderMinutes = parseInt(orderDataEntry.slice(15, 17));
 
+    const duration = [ 0, 0];
     if (hourLocalTime > orderHour) {
-        if (minutesLocalTime >= orderMinutes) {
-            return `${hourLocalTime - orderHour} h ${minutesLocalTime - orderMinutes} minutes`;
-        } else {
-            return ((hourLocalTime - orderHour - 1) * 60) > 1 ? `${(hourLocalTime - orderHour - 1)} h ${60 - orderMinutes + minutesLocalTime} minutes`:`${60 - orderMinutes + minutesLocalTime} minutes`;
-        }
+      if (minutesLocalTime >= orderMinutes) {
+        duration [0] = hourLocalTime - orderHour;
+        duration [1] = minutesLocalTime - orderMinutes;
+
+      } else {
+        duration [0] = ((hourLocalTime - orderHour - 1) * 60) > 1 ? (hourLocalTime - orderHour - 1) : 0;
+        duration [1] = (60 - orderMinutes + minutesLocalTime);
+      }
     } else {
-        return `${minutesLocalTime - orderMinutes} minutes`;
+      duration [1] = minutesLocalTime - orderMinutes;
     }
+    return duration;
   }
 
   useEffect(() => {
@@ -84,12 +89,12 @@ export default function ActiveOrders() {
             allOrders.map((order) => (
               <tr key={order.id}>
                 <td className=" text-center border border-slate-300 ...">
-                  <i className={`fa-solid ${order.status === 'pending' ? 'fa-caret-down': 'fa-check text-bgqueen-green disabled'}`}
-                  id = {`details-${order.id}`}
-                  onClick={()=> {
-                    if(order.status === 'pending'){
-                        openModal(order) 
-                    }
+                  <i className={`fa-solid ${order.status === 'pending' ? 'fa-caret-down' : 'fa-check text-bgqueen-green disabled'}`}
+                    id={`details-${order.id}`}
+                    onClick={() => {
+                      if (order.status === 'pending') {
+                        openModal(order)
+                      }
                     }}>
                   </i>
                 </td>
@@ -98,9 +103,9 @@ export default function ActiveOrders() {
                 <td className="border border-slate-300 ...">{order.status}</td>
                 <td className="border border-slate-300 ...">{order.dataEntry}</td>
                 {
-                // verificar validacions para colores 
+                  // verificar validacions para colores 
                 }
-                <td className={`border border-slate-300 ${order.duration > 20 ? 'text-bgqueen-red' : order.duration > 10 ? 'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration}</td>
+                <td className={`border border-slate-300 ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ?  'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{`${order.duration[0]}hours ${order.duration[1]}minutes`}</td>
               </tr>
             ))
           }

@@ -2,7 +2,6 @@ import { getAllOrders } from "../../services/request";
 import { showAlertError } from "../../alert/aler.js"
 import { useState, useEffect } from "react";
 import Modal from "./modal";
-// import Swal from "sweetalert2"
 
 export default function ActiveOrders() {
   const [allOrders, setOrders] = useState([]);
@@ -64,7 +63,6 @@ export default function ActiveOrders() {
       });
     }, 60000);
 
-    // Limpia el intervalo cuando el componente se desmonta para evitar fugas de memoria
     return () => {
       clearInterval(intervalId);
     };
@@ -72,39 +70,38 @@ export default function ActiveOrders() {
 
   return (
     <section className="w-full h-full">
-      <table className="bg-white w-4/5 m-auto border-separate  border border-slate-400 ...">
+      <table className="bg-white w-4/5 m-auto mt-6 border-separate border md:w-11/12 text-lg">
         <thead className="text-left">
           <tr className="bg-bgqueen-gray">
-            <th className="border border-slate-300 ...">DETAILS</th>
-            <th className="border border-slate-300 ...">ID</th>
-            <th className="border border-slate-300 ...">CLIENT</th>
-            <th className="border border-slate-300 ...">STATUS</th>
-            <th className="border border-slate-300 ...">REGISTER</th>
-            <th className="border border-slate-300 ...">DURATION</th>
+            <th>DETAILS</th>
+            <th>ID</th>
+            <th>STATUS</th>
+            <th>REGISTER</th>
+            <th>DURATION</th>
           </tr>
         </thead>
         <tbody>
           {
             allOrders.map((order) => (
               <tr key={order.id}>
-                <td className=" text-center border border-slate-300 ...">
-                  <i className={`fa-solid ${order.status === 'pending' ? 'fa-caret-down' : 'fa-check text-bgqueen-green disabled'}`}
-                    id={`details-${order.id}`}
-                    onClick={() => {
-                      if (order.status === 'pending') {
-                        openModal(order)
-                      }
-                    }}>
-                  </i>
+                <td className=" text-center border">
+                  {
+                    order.status === 'pending' ? 
+                        <button className="bg-bgqueen-primary text-white rounded-md w-3/4 m-1 md:w-5/6"
+                            onClick={() => {
+                                if (order.status === 'pending') {
+                                openModal(order)
+                                }
+                            }} >START ORDER
+                            <i className={'fa-solid ml-2 fa-caret-down'} id={`details-${order.id}`}></i>
+                        </button>
+                        : <i className={'fa-solid ml-2 fa-check text-bgqueen-green'}> </i>
+                  }
                 </td>
-                <td className="border border-slate-300 ...">{order.id}</td>
-                <td className="border border-slate-300 ...">{order.client}</td>
-                <td className="border border-slate-300 ...">{order.status}</td>
-                <td className="border border-slate-300 ...">{order.dataEntry}</td>
-                {
-                  // verificar validacions para colores 
-                }
-                <td className={`border border-slate-300 ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ?  'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td>
+                <td className="border">{order.id}</td>
+                <td className="border">{order.status}</td>
+                <td className="border">{order.dataEntry}</td>
+                <td className={`border ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ?  'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td>
               </tr>
             ))
           }

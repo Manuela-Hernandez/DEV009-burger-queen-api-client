@@ -19,11 +19,10 @@ export default function ActiveOrders() {
   }
 
   function timeDuration(orderDataEntry) {
-    const hourLocalTime = parseInt(new Date().toLocaleString().slice(12, 14));
-    const minutesLocalTime = parseInt(new Date().toLocaleString().slice(15, 17));
-    const orderHour = parseInt(orderDataEntry.slice(12, 14));
-    const orderMinutes = parseInt(orderDataEntry.slice(15, 17));
-
+    const hourLocalTime = parseInt(new Date().toLocaleString().slice(-8, -6));
+    const minutesLocalTime = parseInt(new Date().toLocaleString().slice(-5, -3));
+    const orderHour = parseInt(orderDataEntry.slice(-8, -6));
+    const orderMinutes = parseInt(orderDataEntry.slice(-5, -3));
     const duration = [ 0, 0];
     if (hourLocalTime > orderHour) {
       if (minutesLocalTime >= orderMinutes) {
@@ -105,7 +104,7 @@ export default function ActiveOrders() {
                 {
                   // verificar validacions para colores 
                 }
-                <td className={`border border-slate-300 ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ?  'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{`${order.duration[0]}hours ${order.duration[1]}minutes`}</td>
+                <td className={`border border-slate-300 ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ?  'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td>
               </tr>
             ))
           }

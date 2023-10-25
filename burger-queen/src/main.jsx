@@ -10,6 +10,8 @@ import Waiter from './pages/waiter/NewOrder'
 import Admin from './pages/admin/admin'
 import Chef from './pages/chef/chef'
 import DeniedAccess from './pages/deniedAccess/deniedAccess'
+import AllActiveOrders from './pages/waiter/AllActiveOrders'
+import App from './pages/waiter/App';
 import { ProtectedRoute } from './components/loginForm/ProtectedRoute'
 
 
@@ -26,8 +28,26 @@ const router = createBrowserRouter([
     path: "/waiter",
     element:
       <ProtectedRoute requiredRole="waiter">
-        <Waiter />,
-      </ProtectedRoute>
+        <App />,
+      </ProtectedRoute>,
+    children: [
+      {
+        path: "",
+        element:
+          <ProtectedRoute requiredRole="waiter">
+            <Waiter />,
+          </ProtectedRoute>,
+
+      },
+      {
+        path: "allOrders",
+        element:
+          <ProtectedRoute requiredRole="waiter">
+            <AllActiveOrders />,
+          </ProtectedRoute>,
+
+      },
+    ]
   },
   {
     path: "/admin",
@@ -51,6 +71,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

@@ -1,4 +1,33 @@
 
+## <Sprint 5> - <25/10/2023>
+
+### Sprint learnings
+
+* Renderizado condicional
+* Peticiones HTTP (patch)
+* Testing Library
+
+### Added
+
+* Función para calcular la duración de la orden. Calculando el tiempo transcurrido desde que se registró la orden.
+* Se agrega modal para ver los productos de la orden, teniendo la funcionalidad de ser cerrado o bien completar la orden mediante casillas de verificación y cambiar su status a _ready_ solo si se han seleccionado todas las casillas de verificación.
+* Se agrega la validación para que solo se muestre el botón de _start_ a las ordenes pendientes.
+* Tests complementarios.
+
+### Changed
+
+* Formato de fecha para su almacenamiento en dataEntry.
+* Estilo principal del sitio, despues de tests de usabilidad.
+
+### Fixed
+
+* Corrección de tests de la historia de usuario 2 por cambio de formato Date.
+* Corrección de funcion timeDuration debido al formato de hora que retorna Date y dataEntry.
+
+### Removed
+
+* Estilos que no efectuaban cambios y comentarios.
+
 ## <Sprint 4> - <18/10/2023>
 
 ### Sprint learnings

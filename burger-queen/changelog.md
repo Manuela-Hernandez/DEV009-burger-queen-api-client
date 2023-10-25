@@ -6,6 +6,8 @@
 * Renderizado condicional
 * Peticiones HTTP (patch)
 * Testing Library
+* Tailwind
+* Hooks
 
 ### Added
 

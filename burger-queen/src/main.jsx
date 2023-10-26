@@ -28,14 +28,14 @@ const router = createBrowserRouter([
     path: "/waiter",
     element:
       <ProtectedRoute requiredRole="waiter">
-        <App />,
+        <App />
       </ProtectedRoute>,
     children: [
       {
         path: "",
         element:
           <ProtectedRoute requiredRole="waiter">
-            <Waiter />,
+            <Waiter />
           </ProtectedRoute>,
 
       },
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         path: "allOrders",
         element:
           <ProtectedRoute requiredRole="waiter">
-            <AllActiveOrders />,
+            <AllActiveOrders />
           </ProtectedRoute>,
 
       },
@@ -53,14 +53,14 @@ const router = createBrowserRouter([
     path: "/admin",
     element:
       <ProtectedRoute requiredRole="admin">
-        <Admin />,
+        <Admin />
       </ProtectedRoute>
   },
   {
     path: "/chef",
     element:
       <ProtectedRoute requiredRole="chef">
-        <Chef />,
+        <Chef />
       </ProtectedRoute>
   },
   {

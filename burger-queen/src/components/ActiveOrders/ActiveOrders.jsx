@@ -1,57 +1,36 @@
-import { getAllOrders } from "../../services/request";
-import { showAlertError } from "../../alert/aler.js"
+// import { getAllOrders } from "../../services/request";
+// import { showAlertError } from "../../alert/aler.js"
 import { useState, useEffect } from "react";
 import Modal from "./modal";
+import {timeDuration, filterOrders } from "../../services/tools"
+
 
 export default function ActiveOrders() {
+
   const [allOrders, setOrders] = useState([]);
-
+  
   const [productsModal, setProductsModal] = useState([]);
-
-  const [isopen, setIsopen] = useState(false)
-
-
+  const [isopen, setIsopen] = useState(false);
 
   function openModal(order) {
     setProductsModal(order);
     setIsopen(true);
   }
 
-  function timeDuration(orderDataEntry) {
-    const hourLocalTime = parseInt(new Date().toLocaleString().slice(-8, -6));
-    const minutesLocalTime = parseInt(new Date().toLocaleString().slice(-5, -3));
-    const orderHour = parseInt(orderDataEntry.slice(-8, -6));
-    const orderMinutes = parseInt(orderDataEntry.slice(-5, -3));
-    const duration = [0, 0];
-    if (hourLocalTime > orderHour) {
-      if (minutesLocalTime >= orderMinutes) {
-        duration[0] = hourLocalTime - orderHour;
-        duration[1] = minutesLocalTime - orderMinutes;
-
-      } else {
-        duration[0] = ((hourLocalTime - orderHour - 1) * 60) > 1 ? (hourLocalTime - orderHour - 1) : 0;
-        duration[1] = (60 - orderMinutes + minutesLocalTime);
-      }
-    } else {
-      duration[1] = minutesLocalTime - orderMinutes;
-    }
-    return duration;
-  }
 
   useEffect(() => {
-    getAllOrders(localStorage.getItem('token'))
-      .then((response) => {
-        const ordersWithDurations = response.data
-          .filter((order) => order.status !== 'delivered')
-          .map((order) => ({
-            ...order,
-            duration: timeDuration(order.dataEntry),
-          }));
-        setOrders(ordersWithDurations);
-      })
-      .catch((error) => {
-        showAlertError("An error has occurred while obtaining list of orders");
-      });
+    const axiosData = async () => {
+      try {
+        const filteredOrders = await filterOrders();
+        setOrders(filteredOrders);
+      } catch (error) {
+        showAlertError(error.message);
+      }
+    };
+
+
+    axiosData();
+  
 
     // Establece un intervalo para actualizar la duración cada minuto
     const intervalId = setInterval(() => {

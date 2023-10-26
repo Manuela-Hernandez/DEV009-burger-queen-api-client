@@ -1,6 +1,5 @@
 import { getProducts } from "../../services/request";
 import React, { useState, useEffect } from 'react';
-import addIcon from '../../assets/icon-add.png';
 import { showAlertError } from "../../alert/aler.js"
 
 export default function AddProductToOrder({ selectedProductType, dispatch }) {

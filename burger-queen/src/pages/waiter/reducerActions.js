@@ -45,13 +45,7 @@ export const reducer = (state, action)=>{
             }),
             total: state.total - action.item.product.price,
           };
-        }/* else {
-          return {
-            ...state,
-            products: state.products.filter((product) => product.product.id !== action.item.product.id),
-            total: state.total - action.item.subtotal,
-          };
-        }*/
+        }
       case "deleteProduct":
         return {
           ...state,
@@ -60,7 +54,5 @@ export const reducer = (state, action)=>{
         };
       case "cleanOrder":
         return initialState;
-      //default:
-        //return state;
     }
   }

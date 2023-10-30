@@ -59,27 +59,25 @@ export default function AllActiveOrders() {
   }, []);
   return (
     <section className="w-full h-full">
-      <table className="bg-white w-4/5 m-auto mt-6 border-separate border md:w-11/12 text-lg">
-        <thead className="text-left">
-          <tr className="bg-bgqueen-gray">
-            <th>ID</th>
-            <th>CUSTOMER NAME</th>
-            <th>REGISTER</th>
-            <th>DURATION</th>
-            <th>STATUS</th>
+      <table className="bg-white w-4/5 m-auto mt-6 border md:w-11/12 text-lg text-center ">
+        <thead className="text-center ">
+          <tr className="bg-bgqueen-secondary text-bgqueen-primary border border-bgqueen-cafe border-2">
+            <th className="border-2 border-bgqueen-cafe">ID</th>
+            <th className="border-2 border-bgqueen-cafe">CUSTOMER NAME</th>
+            <th className="border-2 border-bgqueen-cafe">DURATION</th>
+            <th className="border-2 border-bgqueen-cafe">STATUS</th>
             {/* <th></th> */}
           </tr>
         </thead>
         <tbody>
           {
             allOrders.map((order) => (
-              <tr key={order.id}>
-                <td className="border">{order.id}</td>
-                <td className="border">{order.client}</td>
-                <td className="border">{order.dataEntry}</td>
-                <td className={`border ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ?  'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td>
+              <tr key={order.id} className="border-2 border-bgqueen-cafe">
+                <td className="">{order.id}</td>
+                <td className="">{order.client}</td>
+                <td className={`${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ?  'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td>
                 {/* <td className="border">{order.status}</td> */}
-                <td className=" text-center border">
+                <td className="text-center ">
                   {
                     order.status === 'ready' ?
                         <button className="bg-bgqueen-primary text-white rounded-md w-3/4 m-1 md:w-5/6 "

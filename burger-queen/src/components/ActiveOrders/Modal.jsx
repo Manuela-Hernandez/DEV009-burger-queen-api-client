@@ -36,6 +36,7 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
     const closeDetails = await questionClose();
     if(closeDetails.isConfirmed) {
       setIsopen(false);
+      setChecked(0);
     }
   }
     return (

@@ -3,26 +3,24 @@ import { showAlertError } from "../alert/aler"
 
 
 export function timeDuration(orderDataEntry) {
-  const hourLocalTime = parseInt(new Date().toLocaleString().slice(-8, -6));
-  const minutesLocalTime = parseInt(new Date().toLocaleString().slice(-5, -3));
-  const orderHour = parseInt(orderDataEntry.slice(-8, -6));
-  const orderMinutes = parseInt(orderDataEntry.slice(-5, -3));
-  const duration = [0, 0];
-  if (hourLocalTime > orderHour) {
-    if (minutesLocalTime >= orderMinutes) {
-      duration[0] = hourLocalTime - orderHour;
-      duration[1] = minutesLocalTime - orderMinutes;
+  const localDate = new Date();
+  const dateOrder = new Date(orderDataEntry);
+  const result = localDate - dateOrder;
 
-    } else {
-      duration[0] = ((hourLocalTime - orderHour - 1) * 60) > 1 ? (hourLocalTime - orderHour - 1) : 0;
-      duration[1] = (60 - orderMinutes + minutesLocalTime);
-    }
-  } else {
-    duration[1] = minutesLocalTime - orderMinutes;
-  }
-  return duration;
+  const days = Math.floor(result / (24 * 60 * 60 * 1000));
+
+  const hoursRemaining = (result % (24 * 60 * 60 * 1000));
+  const hours = Math.floor(hoursRemaining / (60 * 60 * 1000));
+
+  const minutesRemaining = hoursRemaining % (60 * 60 * 1000);
+  const minutes = Math.floor(minutesRemaining / (60 * 1000));
+
+  return {
+    days,
+    hours,
+    minutes
+  };
 }
-
 
 export async function filterOrders() {
   try {

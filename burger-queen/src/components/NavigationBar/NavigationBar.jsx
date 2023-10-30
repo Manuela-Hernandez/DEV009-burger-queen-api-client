@@ -13,7 +13,10 @@ export default function NavigationBar() {
         alt="Logo de Burger Queen"
         className="h-full" />
       <p className="justify-self-center text-4xl text-white text-bold">{localStorage.name}</p>
-      <i className=" text-white text-5xl fa-solid fa-right-to-bracket justify-self-end cursor-pointer mr-4" id="exit-icon" onClick={logOut} ></i>
+      <i className=" text-white text-5xl fa-solid fa-right-to-bracket justify-self-end cursor-pointer mr-4"
+        id="exit-icon"
+        onClick={logOut} ></i>
+       
     </nav>
   );
 }

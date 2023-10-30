@@ -21,7 +21,7 @@ export function addOrder(token, customerName, order, employeeId) {
       client: customerName,
       products: order, 
       status: "pending",
-      dataEntry: new Date().toLocaleString(),
+      dataEntry: new Date(),
   }, {
     headers: {
       'Authorization': `Bearer ${token}`

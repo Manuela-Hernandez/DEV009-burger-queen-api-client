@@ -2,15 +2,17 @@
 // import { showAlertError } from "../../alert/aler.js"
 import { useState, useEffect } from "react";
 import Modal from "./modal";
-import {timeDuration, filterOrders } from "../../services/tools"
+import { timeDuration, filterOrders } from "../../services/tools"
 
 
 export default function ActiveOrders() {
 
   const [allOrders, setOrders] = useState([]);
-  
+
   const [productsModal, setProductsModal] = useState([]);
   const [isopen, setIsopen] = useState(false);
+
+  // const [elapsedTime, setElapsedTime] = useState({ days: 0, hours: 0, minutes: 0 });
 
   function openModal(order) {
     setProductsModal(order);
@@ -27,10 +29,7 @@ export default function ActiveOrders() {
         showAlertError(error.message);
       }
     };
-
-
     axiosData();
-  
 
     // Establece un intervalo para actualizar la duración cada minuto
     const intervalId = setInterval(() => {
@@ -49,7 +48,7 @@ export default function ActiveOrders() {
 
   return (
     <section className="w-full h-full">
-      <table className="bg-white w-4/5 m-auto mt-6 border-separate border md:w-11/12 text-lg">
+      <table className="bg-white w-4/5 m-auto mt-6 border-separate border-spacing-2 border md:w-11/12 text-lg">
         <thead className="text-left">
           <tr className="bg-bgqueen-gray">
             <th>ID</th>
@@ -61,10 +60,14 @@ export default function ActiveOrders() {
         <tbody>
           {
             allOrders.map((order) => (
-              <tr key={order.id}>
+              <tr key={order.id} >
                 <td className="border">{order.id}</td>
-                <td className="border">{order.dataEntry}</td>
-                <td className={`border ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ? 'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td>
+                <td className="border">{new Date(order.dataEntry).toLocaleString()}</td>
+                <td className={`border ${order.duration.days > 1 ? 'text-bgqueen-red' : ''} ${order.duration.hours > 1 ? (order.duration.hours > 15 ? 'text-bgqueen-orange' : 'text-bgqueen-red') : ''} ${order.duration.minutes < 15 ? 'text-bgqueen-green' : (order.duration.minutes >= 15 && order.duration.minutes < 25 ? 'text-bgqueen-orange' : 'text-bgqueen-red')}`}>
+                  {order.duration.days >= 1 && `${order.duration.days} days, `}
+                  {order.duration.hours >= 1 && `${order.duration.hours} hours, `}
+                  {order.duration.minutes} minutes
+                </td>
                 <td className=" text-center border">
                   {
                     order.status === 'pending' ?

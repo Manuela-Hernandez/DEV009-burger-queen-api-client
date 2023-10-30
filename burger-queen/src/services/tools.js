@@ -29,7 +29,7 @@ export async function filterOrders() {
       .filter((order) => order.status !== 'delivered')
       .map((order) => ({
         ...order,
-        duration: timeDuration(order.dataEntry),
+        duration: timeDuration(localStorage.getItem('role') === "chef" ? order.dataEntry : order.dateProcessed),
       }))
     return ordersWithDurations;
 

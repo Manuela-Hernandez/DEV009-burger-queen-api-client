@@ -25,8 +25,8 @@ export default function NewOrder() {
 
       <section className='grid grid-cols-2 grid-rows-3 m-8 border-2 border-bgqueen-secondary'>
         <article className='grid grid-cols-2 grid-rows-2'>
-          <button className="bg-bgqueen-primary text-white rounded-lg text-xl m-2"
-            onClick={() => navigateTo('allOrders')}> See all orders</button>
+          <button className="text-bgqueen-primary rounded-lg text-xl m-2 border border-2 border-bgqueen-primary font-text-primary"
+            onClick={() => navigateTo('allOrders')}> See all orders <i className="fa-solid fa-burger text-2xl"></i></button>
           <input type="text"
             placeholder='Customer name'
             id='customerName'

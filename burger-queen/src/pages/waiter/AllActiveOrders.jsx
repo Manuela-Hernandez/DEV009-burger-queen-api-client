@@ -21,7 +21,6 @@ export default function AllActiveOrders() {
 
   // }
   useEffect(() => {
-
     const axiosData = async () => {
       try {
         const filteredOrders = await filterOrders();
@@ -47,9 +46,10 @@ export default function AllActiveOrders() {
   }, []);
   return (
     <section className="w-full h-full">
-      <button className="bg-bgqueen-primary text-white rounded-lg text-xl ml-10 mt-4 px-4 justify-self-center w-auto h-12"
+      <button className="text-bgqueen-primary rounded-lg text-xl m-2 border border-2 border-bgqueen-primary font-bold ml-10 mt-4 px-4 justify-self-center w-auto h-12 "
         onClick={() => navigateTo('/waiter')}>
-        Create new order
+        Create new order 
+        <i className="ml-2 fa-solid fa-plus"></i>
       </button>
       <table className="bg-white w-4/5 m-auto mt-6 border md:w-11/12 text-lg text-center ">
         <thead className="text-center ">
@@ -58,7 +58,6 @@ export default function AllActiveOrders() {
             <th className="border-2 border-bgqueen-cafe">CUSTOMER NAME</th>
             <th className="border-2 border-bgqueen-cafe">DURATION</th>
             <th className="border-2 border-bgqueen-cafe">STATUS</th>
-            {/* <th></th> */}
           </tr>
         </thead>
         <tbody>
@@ -67,15 +66,17 @@ export default function AllActiveOrders() {
               <tr key={order.id}>
                 <td className="border">{order.id}</td>
                 <td className="border">{order.client}</td>
-                {/* <td className="border">{order.dataEntry}</td> */}
-                <td className={`border ${order.duration.days > 1 ? 'text-bgqueen-red' : ''} ${order.duration.hours > 1 ? (order.duration.hours > 15 ? 'text-bgqueen-orange' : 'text-bgqueen-red') : ''} ${order.duration.minutes < 15 ? 'text-bgqueen-green' : (order.duration.minutes >= 15 && order.duration.minutes < 25 ? 'text-bgqueen-orange' : 'text-bgqueen-red')}`}>
-                  {order.dateProcessed === undefined && ` en proceso `}
-                  {order.dateProcessed !== undefined && order.duration.days >= 1 && `${order.duration.days} days, `}
-                  {order.dateProcessed !== undefined &&  order.duration.hours >= 1 && `${order.duration.hours} hours, `}
-                  {order.dateProcessed !== undefined && ` ${order.duration.minutes} minutes`}
-                </td>
-                {/* <td className={`border ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ? 'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td> */}
-                {/* <td className="border">{order.status}</td> */}
+                {
+                  order.dateProcessed === undefined ?
+                    <td className="border">On kitchen</td>
+                    :
+                    <td className={`border ${order.duration.days > 1 ? 'text-bgqueen-red' : ''} ${order.duration.hours > 1 ? (order.duration.hours > 15 ? 'text-bgqueen-orange' : 'text-bgqueen-red') : ''} ${order.duration.minutes < 15 ? 'text-bgqueen-green' : (order.duration.minutes >= 15 && order.duration.minutes < 25 ? 'text-bgqueen-orange' : 'text-bgqueen-red')}`}>
+                      {order.duration.days >= 1 && `${order.duration.days} days, `}
+                      {order.duration.hours >= 1 && `${order.duration.hours} hours, `}
+                      {order.duration.minutes} minutes
+                    </td>
+                }
+
                 <td className="text-center ">
                   {
                     order.status === 'ready' ?
@@ -86,7 +87,6 @@ export default function AllActiveOrders() {
                           }
                         }} >DELIVER
                         <i className="fa-solid fa-burger fa-beat ml-4"></i>
-                        {/* <i className={'fa-solid ml-2 fa-caret-down'} id={`details-${order.id}`}></i> */}
                       </button>
                       : <i className="fa-regular fa-clock"></i>
                   }

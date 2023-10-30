@@ -7,6 +7,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'text-primary': ['Nunito Sans', 'sans-serif'],
+    },
     colors: {
       "bgqueen-primary": "#781B14",
       "bgqueen-secondary": "#E4C485",
@@ -15,7 +18,7 @@ export default {
       "bgqueen-red": "#FF0000",
       "bgqueen-green": "#00913f",
       "bgqueen-yellow": "#ffff00",
-      "bgqueen-orange" : "#f97316",
+      "bgqueen-orange": "#f97316",
       "zinc": "#f4f4f5",
       "stone": "#e7e5e4",
       transparent: 'transparent',

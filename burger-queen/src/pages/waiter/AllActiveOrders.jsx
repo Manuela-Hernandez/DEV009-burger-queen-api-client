@@ -2,59 +2,42 @@ import { getAllOrders } from "../../services/request";
 import { showAlertError } from "../../alert/aler.js"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { timeDuration, filterOrders } from "../../services/tools";
+import Modal from "../../components/ActiveOrders/Modal"
 
 
 
 export default function AllActiveOrders() {
   const [allOrders, setOrders] = useState([]);
-  //const [productsModal, setProductsModal] = useState([]);
+  const [productsModal, setProductsModal] = useState([]);
   const [isopen, setIsopen] = useState(false)
 
   const navigateTo = useNavigate();
 
-  //   function openModal(order) {
-  //     setProductsModal(order);
-  //     setIsopen(true);
-  //   }
-  // function timeDuration(orderDataEntry) {
-  //   const hourLocalTime = parseInt(new Date().toLocaleString().slice(-8, -6));
-  //   const minutesLocalTime = parseInt(new Date().toLocaleString().slice(-5, -3));
-  //   const orderHour = parseInt(orderDataEntry.slice(-8, -6));
-  //   const orderMinutes = parseInt(orderDataEntry.slice(-5, -3));
-  //   const duration = [0, 0];
-  //   if (hourLocalTime > orderHour) {
-  //     if (minutesLocalTime >= orderMinutes) {
-  //       duration[0] = hourLocalTime - orderHour;
-  //       duration[1] = minutesLocalTime - orderMinutes;
-  //     } else {
-  //       duration[0] = ((hourLocalTime - orderHour - 1) * 60) > 1 ? (hourLocalTime - orderHour - 1) : 0;
-  //       duration[1] = (60 - orderMinutes + minutesLocalTime);
-  //     }
-  //   } else {
-  //     duration[1] = minutesLocalTime - orderMinutes;
-  //   }
-  //   return duration;
+  function openModal(order) {
+    setProductsModal(order);
+    setIsopen(true);
+  }
+
   // }
   useEffect(() => {
-    // getAllOrders(localStorage.getItem('token'))
-    //   .then((response) => {
-    //     const ordersWithDurations = response.data
-    //       .filter((order) => order.status !== 'delivered')
-    //       .map((order) => ({
-    //         ...order,
-    //         duration: timeDuration(order.dataEntry),
-    //       }));
-    //     setOrders(ordersWithDurations);
-    //   })
-    //   .catch((error) => {
-    //     showAlertError("An error has occurred while obtaining list of orders");
-    //   });
+
+    const axiosData = async () => {
+      try {
+        const filteredOrders = await filterOrders();
+        setOrders(filteredOrders);
+      } catch (error) {
+        showAlertError(error.message);
+      }
+    };
+    axiosData();
+
     // Establece un intervalo para actualizar la duración cada minuto
     const intervalId = setInterval(() => {
       setOrders((allOrders) => {
         return allOrders.map((order) => ({
           ...order,
-          duration: timeDuration(order.dataEntry),
+          duration: timeDuration(order.dateProcessed),
         }));
       });
     }, 60000);
@@ -84,16 +67,22 @@ export default function AllActiveOrders() {
               <tr key={order.id}>
                 <td className="border">{order.id}</td>
                 <td className="border">{order.client}</td>
-                <td className="border">{order.dataEntry}</td>
-                <td className={`border ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ? 'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td>
+                {/* <td className="border">{order.dataEntry}</td> */}
+                <td className={`border ${order.duration.days > 1 ? 'text-bgqueen-red' : ''} ${order.duration.hours > 1 ? (order.duration.hours > 15 ? 'text-bgqueen-orange' : 'text-bgqueen-red') : ''} ${order.duration.minutes < 15 ? 'text-bgqueen-green' : (order.duration.minutes >= 15 && order.duration.minutes < 25 ? 'text-bgqueen-orange' : 'text-bgqueen-red')}`}>
+                  {order.dateProcessed === undefined && ` en proceso `}
+                  {order.dateProcessed !== undefined && order.duration.days >= 1 && `${order.duration.days} days, `}
+                  {order.dateProcessed !== undefined &&  order.duration.hours >= 1 && `${order.duration.hours} hours, `}
+                  {order.dateProcessed !== undefined && ` ${order.duration.minutes} minutes`}
+                </td>
+                {/* <td className={`border ${order.duration[0] > 1 || order.duration[1] > 20 && order.duration[0] < 1 ? 'text-bgqueen-red' : order.duration[1] > 15 && order.duration[0] < 1 ? 'text-bgqueen-orange' : 'text-bgqueen-green'}`}>{order.duration[0] > 0 ? `${order.duration[0]} hours ${order.duration[1]} minutes` : `${order.duration[1]} minutes`}</td> */}
                 {/* <td className="border">{order.status}</td> */}
                 <td className="text-center ">
                   {
                     order.status === 'ready' ?
                       <button className="bg-bgqueen-primary text-white rounded-md w-3/4 m-1 md:w-5/6 "
                         onClick={() => {
-                          if (order.status === 'pending') {
-                            //openModal(order)
+                          if (order.status === 'ready') {
+                            openModal(order)
                           }
                         }} >DELIVER
                         <i className="fa-solid fa-burger fa-beat ml-4"></i>
@@ -107,7 +96,7 @@ export default function AllActiveOrders() {
           }
         </tbody>
       </table>
-      {/* <Modal isopen={isopen} setIsopen={setIsopen} productsModal={productsModal} /> */}
+      <Modal isopen={isopen} setIsopen={setIsopen} productsModal={productsModal} />
     </section>
   );
 }

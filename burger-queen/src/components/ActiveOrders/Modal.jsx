@@ -27,7 +27,12 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
 
   function validationToChangeStatus () {
     if (checked === productsModal.products.length) {
-      changeStatus("ready");   
+      if (localStorage.getItem("role") === "chef" ) {
+        changeStatus("ready");   
+      }else {
+        changeStatus("delivered");
+      }
+      
     } else {
       showAlertError("All the products have to be checked");
     }

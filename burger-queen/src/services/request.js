@@ -41,6 +41,7 @@ export function getAllOrders(token) {
 export function changeOrderStatus(token,orderId,newStatus) {
   return axios.patch(`${baseUrl}/orders/${orderId}`,{
     status: newStatus,
+    dateProcessed: new Date(),
   }, {
     headers: {
       'Authorization': `Bearer ${token}`

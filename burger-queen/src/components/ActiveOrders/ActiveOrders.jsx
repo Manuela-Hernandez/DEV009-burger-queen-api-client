@@ -59,7 +59,7 @@ export default function ActiveOrders() {
         </thead>
         <tbody>
           {
-            allOrders && allOrders.map((order) => (
+             allOrders !== undefined && allOrders.map((order) => (
               <tr key={order.id} >
                 <td className="border">{order.id}</td>
                 <td className="border">{new Date(order.dataEntry).toLocaleString()}</td>

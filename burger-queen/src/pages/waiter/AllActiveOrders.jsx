@@ -34,7 +34,7 @@ export default function AllActiveOrders() {
     // Establece un intervalo para actualizar la duración cada minuto
     const intervalId = setInterval(() => {
       setOrders((allOrders) => {
-        return allOrders.map((order) => ({
+        return allOrders && allOrders.map((order) => ({
           ...order,
           duration: timeDuration(order.dateProcessed),
         }));
@@ -62,7 +62,7 @@ export default function AllActiveOrders() {
         </thead>
         <tbody>
           {
-            allOrders && allOrders.map((order) => (
+            allOrders !== undefined && allOrders.map((order) => (
               <tr key={order.id}>
                 <td className="border">{order.id}</td>
                 <td className="border">{order.client}</td>

@@ -9,6 +9,7 @@ export default {
   theme: {
     fontFamily: {
       'text-primary': ['Nunito Sans', 'sans-serif'],
+      'titles': ['Lato', 'sans-serif'],
     },
     colors: {
       "bgqueen-primary": "#781B14",

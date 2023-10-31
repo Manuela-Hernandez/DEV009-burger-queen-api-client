@@ -60,7 +60,8 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
                     <section className="grid grid-cols-1 grid-row-auto gap-2 justify-center" key={product.product.id}>
                       <label className="flex items-center space-x-2">
                         <input type="checkbox" className="h-6 w-6 rounded-full checked:bg-bgqueen-primary" onChange={handleChecked} id={`product-${index}`}/>
-                        <span className="text-xl">{product.qty} {product.product.name}</span>
+                        {/* <span className="text-xl">{product.qty} {product.product.name}</span> */}
+                        {product.qty} {product.product.name}
                       </label>
                     </section>
                   ))

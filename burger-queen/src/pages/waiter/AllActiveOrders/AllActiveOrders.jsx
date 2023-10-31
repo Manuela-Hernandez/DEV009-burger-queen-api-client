@@ -1,8 +1,8 @@
-import { showAlertError } from "../../alert/aler.js"
+import { showAlertError } from "../../../alert/aler.js"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { timeDuration, filterOrders } from "../../services/tools";
-import Modal from "../../components/Modal/Modal.jsx"
+import { timeDuration, filterOrders } from "../../../services/tools.js";
+import Modal from "../../../components/Modal/Modal.jsx"
 
 
 
@@ -80,7 +80,7 @@ export default function AllActiveOrders() {
                 <td className="text-center ">
                   {
                     order.status === 'ready' ?
-                      <button className="bg-bgqueen-primary text-white rounded-md w-3/4 m-1 md:w-5/6 "
+                      <button className="bg-bgqueen-primary text-white rounded-md w-3/4 m-1 md:w-5/6 " data-testid={`order-${order.id}`}
                         onClick={() => {
                           if (order.status === 'ready') {
                             openModal(order)

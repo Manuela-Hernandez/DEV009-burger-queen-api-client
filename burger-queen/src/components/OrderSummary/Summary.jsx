@@ -36,7 +36,7 @@ export default function ProductSumary({ customerName, order, dispatch, clearInpu
   return (
     <>
       <section className="grid  bg-bgqueen-secondary w-3/4 md: w-full">
-        <header className="text-2xl text-white text-center font-semi-bold bg-bgqueen-primary h-12"> Order summary</header>
+        <header className="text-3xl text-white text-center font-semi-bold bg-bgqueen-primary h-12 font-titles font-bold"> Order summary</header>
         <ol className="p-6 divide-y divide-bgqueen-cafe">
           {order.products.map((product) => (
             <li key={product.product.id}

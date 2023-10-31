@@ -10,7 +10,7 @@ import Waiter from './pages/waiter/NewOrder'
 import Admin from './pages/admin/admin'
 import Chef from './pages/chef/chef'
 import DeniedAccess from './pages/deniedAccess/deniedAccess'
-import AllActiveOrders from './pages/waiter/AllActiveOrders'
+import AllActiveOrders from './pages/waiter/AllActiveOrders/AllActiveOrders'
 import App from './pages/waiter/App';
 import { ProtectedRoute } from './components/loginForm/ProtectedRoute'
 

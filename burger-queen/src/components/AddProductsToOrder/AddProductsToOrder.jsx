@@ -18,7 +18,7 @@ export default function AddProductToOrder({ selectedProductType, dispatch }) {
   }, []); // El segundo argumento, [], asegura que se ejecute una sola vez cuando el componente se monta
   return (
     <div className="container bg-bgqueen-secondary w-full rounded-lg md:w-full">
-      <h2 className="text-3xl text-bgqueen-primary font-semibold mb-4 text-center p-2">{selectedProductType}</h2>
+      <h2 className="text-3xl text-bgqueen-primary mb-4 text-center p-2 font-titles font-bold">{selectedProductType}</h2>
       <ul className="w-11/12 mx-auto grid grid-cols-1">
         {products
           .filter((product) => {

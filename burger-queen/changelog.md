@@ -1,4 +1,27 @@
 
+## <Sprint 6> - <31/10/2023>
+
+### Sprint learnings
+
+* Logica de programacion
+* Renderizado condicional
+* Router (Rutas anidadas y navegación)
+* Componentes y su reutilización
+
+### Added
+
+* Se agregó la ruta anidada para waiter.
+* Se agregaron botones para la navegacion entre rutas.
+
+### Changed
+
+* Se modificó la función timeDuration para considerar los días en el transcurso del tiempo.
+* Se modificó el componente modal considerando validaciones para que que lo podamos reutilizar por rol
+
+### Fixed
+
+* Se arregla un problema que se mostraba un indefinido cuando la api key expiraba.
+  
 ## <Sprint 5> - <25/10/2023>
 
 ### Sprint learnings

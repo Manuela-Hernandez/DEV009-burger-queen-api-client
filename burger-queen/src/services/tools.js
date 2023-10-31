@@ -32,7 +32,6 @@ export async function filterOrders() {
         duration: timeDuration(localStorage.getItem('role') === "chef" ? order.dataEntry : order.dateProcessed),
       }))
     return ordersWithDurations;
-
   } catch (error) {
     showAlertError("An error has occurred while obtaining the list of orders");
   }

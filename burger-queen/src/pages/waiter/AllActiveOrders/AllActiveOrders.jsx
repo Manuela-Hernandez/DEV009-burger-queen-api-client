@@ -26,7 +26,6 @@ export default function AllActiveOrders() {
         const filteredOrders = await filterOrders();
         setOrders(filteredOrders);
       } catch (error) {
-        showAlertError(error.message);
       }
     };
     axiosData();

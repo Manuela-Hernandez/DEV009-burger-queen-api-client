@@ -38,7 +38,7 @@ const dataTest = [
     {id: '1', userId: '4321', client: 'Manuela', products: orderTest.products, status: "pending", dataEntry: '13/10/2023, 06:00:00',},
     {id: '2', userId: '4321', client: 'Brenda', products: orderTest.products, status: "pending", dataEntry: '13/10/2023, 05:45:00', },
     {id: '3', userId: '4321', client: 'Armando', products: orderTest.products, status: "pending", dataEntry: '13/10/2023, 04:05:00', },
-    {id: '4', userId: '4321', client: 'Oscar Reyes', products: orderTest.products, status: "ready", dataEntry: '13/10/2023, 04:35:00', }
+    {id: '4', userId: '4321', client: 'Oscar Reyes', products: orderTest.products, status: "ready", dataEntry: '11/10/2023, 04:35:00', dateProcessed: new Date('2023-10-11T05:15:00.000Z') }
 ];
 
 
@@ -60,25 +60,50 @@ describe('AllActiveOrders', () => {
             expect(mockedUseNavigate).toBeCalledWith('/waiter');
           });
     });
-    it('Deberia redirigir a /waiter', async()=>{
+    it('Deberia llamar a axios con el estado -delivered-', async()=>{
         localStorage.setItem('token', '6543210');
         localStorage.setItem('id', '4321');
-        localStorage.setItem('role', 'chef');
+        localStorage.setItem('role', 'waiter');
 
         axios.get.mockResolvedValue({ data: dataTest });
-
+        axios.patch.mockResolvedValue('Cambio hecho')
         await act(async () => { // Envuelve la renderización en act
             render(<AllOrders />);
         });
-        fireEvent.click(screen.getByTestId('order-4'));
+        fireEvent.click(screen.getByText('DELIVER'));
 
         fireEvent.click(screen.getByLabelText('3 Agua 500ml'));
 
-        
-        // await waitFor(() => {
-        //     expect(mockedUseNavigate).toBeCalledTimes(1);
-        //     expect(mockedUseNavigate).toBeCalledWith('/waiter');
-        //   });
-        screen.debug();
+        fireEvent.click(screen.getByText('DELIVER ORDER'));
+
+        await waitFor(() => {
+            expect(axios.patch).toBeCalledTimes(1);
+            expect(axios.patch).toBeCalledWith("http://localhost:8080/orders/4", { "dateProcessed": new Date('2023-10-13T12:15:00.000Z'), "status": "delivered", }, { "headers": { "Authorization": "Bearer 6543210" } });
+    
+            expect(Swal.fire).toBeCalledTimes(1);
+            expect(Swal.fire).toBeCalledWith({
+                "title": "process successfully",
+                "text": "Your order status has been changed.",
+                "icon": "success",
+                "showConfirmButton": false,
+                "timer": 1500
+              });
+        });
+        // screen.debug();
+    });
+    it('Deberia transcurrir 1 minuto para la modificacion de hora', async()=>{
+        jest.useFakeTimers();
+        localStorage.setItem('token', '6543210');
+        localStorage.setItem('id', '4321');
+        localStorage.setItem('role', 'waiter');
+
+        axios.get.mockResolvedValue({ data: dataTest });
+        await act(async () => { // Envuelve la renderización en act
+            render(<AllOrders />);
+        });
+        await act(async()=>{
+            jest.advanceTimersByTime(60001);
+        });
+         // screen.debug();
     });
 })

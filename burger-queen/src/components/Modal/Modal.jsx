@@ -70,7 +70,7 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
               <div className=" w-full h-full flex justify-center">
                 <button className="w-1/4 h-12 bg-bgqueen-primary text-white rounded-lg text-xl m-4"
                   id="button-set-ready"
-                  onClick={validationToChangeStatus}> {localStorage.getItem('role') === 'chef' ? 'READY':'DELIVER'}
+                  onClick={validationToChangeStatus}> {localStorage.getItem('role') === 'chef' ? 'READY':'DELIVER ORDER'}
                 </button>
               </div>
             </div>

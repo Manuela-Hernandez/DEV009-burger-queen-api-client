@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor, act } from "@testing-library/react"
 import NewOrder from "./NewOrder";
 import axios from 'axios';
 import Swal from "sweetalert2";
+import App from "./App"
 
 jest.mock('sweetalert2');
 jest.mock('axios');
@@ -65,6 +66,12 @@ const data = {
   status: "pending",
   dataEntry: '13/10/2023, 7:00:00',
 }
+
+describe('App', () => {
+  it("should render App", () => {
+    render(<App />);
+  });
+})
 
 
 describe('NewOrder', () => {
@@ -131,7 +138,8 @@ describe('NewOrder', () => {
     // screen.debug();
   });
   it('Debería redirigir a /login y limpiar el localStorage al dar click en el botón cerrar sesión', async () => {
-    render(<NewOrder />);
+    // render(<NewOrder />);
+    render(<App />);
     const btnLogout = document.querySelector('#exit-icon');
     fireEvent.click(btnLogout);
     await waitFor(() => {

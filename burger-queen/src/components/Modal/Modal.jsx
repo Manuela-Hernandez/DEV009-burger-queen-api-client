@@ -1,7 +1,6 @@
 import { changeOrderStatus } from "../../services/request"
 import { useState } from "react";
 import { completed, questionClose, showAlertError } from "../../alert/aler";
-import { useNavigate } from "react-router-dom";
 
 export default function Modal({ isopen = false, setIsopen, productsModal = [] }) {
 

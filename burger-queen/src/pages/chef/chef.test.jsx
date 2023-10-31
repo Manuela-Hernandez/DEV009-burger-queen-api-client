@@ -200,7 +200,7 @@ describe('Chef', () => {
             expect(Swal.fire).toBeCalledWith({
                 "icon": "error",
                 "title": "Oops...",
-                "text": "An error has occurred while obtaining list of orders",
+                "text": "An error has occurred while obtaining thelist of orders",
               });
         });
     });

@@ -147,6 +147,14 @@ describe('NewOrder', () => {
       expect(mockedUseNavigate).toBeCalledWith('/login');
     });
   });
+  it('Debería redirigir a /allOrders', async () => {
+    render(<NewOrder />);
+    fireEvent.click(screen.getByText('See all orders'));
+    await waitFor(() => {
+      expect(mockedUseNavigate).toBeCalledTimes(1);
+      expect(mockedUseNavigate).toBeCalledWith('allOrders');
+    });
+  });
   it('Debería mostrar una alerta de error indicando que no se han cargado correctamente los productos', async () => {
     axios.get.mockRejectedValue('Error al cargar productos');
     const mockFire = jest.spyOn(Swal, "fire");

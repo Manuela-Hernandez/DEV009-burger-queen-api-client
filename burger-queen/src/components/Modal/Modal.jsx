@@ -56,7 +56,7 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
                 <h2 className="text-center text-3xl font-semibold mb-4">Details - Order #{productsModal.id}</h2>
                 <h3 className="text-xl font-semibold mb-4">Client: {productsModal.client}</h3>
                 {
-                  productsModal.products.map((product, index) => (
+                  productsModal && productsModal.products.map((product, index) => (
                     <section className="grid grid-cols-1 grid-row-auto gap-2 justify-center" key={product.product.id}>
                       <label className="flex items-center space-x-2">
                         <input type="checkbox" className="h-6 w-6 rounded-full checked:bg-bgqueen-primary" onChange={handleChecked} id={`product-${index}`}/>

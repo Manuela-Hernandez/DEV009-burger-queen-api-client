@@ -52,6 +52,7 @@ describe('Chef', () => {
     it("Debería modificar el estado de la orden", async () => {
         localStorage.setItem('token', '6543210');
         localStorage.setItem('id', '4321');
+        localStorage.setItem('role', 'chef');
         axios.get.mockResolvedValue({ data: dataTest });
         axios.patch.mockResolvedValue('Cambio hecho')
 
@@ -76,7 +77,7 @@ describe('Chef', () => {
         });        
         await waitFor(() => {
             expect(axios.patch).toBeCalledTimes(1);
-            expect(axios.patch).toBeCalledWith("http://localhost:8080/orders/1", { "status": "ready", }, { "headers": { "Authorization": "Bearer 6543210" } });
+            expect(axios.patch).toBeCalledWith("http://localhost:8080/orders/1", { "dateProcessed": new Date('2023-10-13T12:15:00.000Z'), "status": "ready", }, { "headers": { "Authorization": "Bearer 6543210" } });
     
             expect(Swal.fire).toBeCalledTimes(1);
             expect(Swal.fire).toBeCalledWith({
@@ -91,6 +92,7 @@ describe('Chef', () => {
     it("Debería mostrar un mensaje cuando no se guarda la orden", async () => {
         localStorage.setItem('token', '123456');
         localStorage.setItem('id', '4321');
+        localStorage.setItem('role', 'chef');
         axios.get.mockResolvedValue({ data: dataTest });
         axios.patch.mockRejectedValue('Cambio no hecho')
 
@@ -114,7 +116,7 @@ describe('Chef', () => {
           
         await waitFor(() => {
             expect(axios.patch).toBeCalledTimes(1);
-            expect(axios.patch).toBeCalledWith("http://localhost:8080/orders/2", { "status": "ready", }, { "headers": { "Authorization": "Bearer 123456" } });
+            expect(axios.patch).toBeCalledWith("http://localhost:8080/orders/2", { "dateProcessed": new Date('2023-10-13T12:15:00.000Z'), "status": "ready", }, { "headers": { "Authorization": "Bearer 123456" } });
     
             expect(Swal.fire).toBeCalledTimes(1);
             expect(Swal.fire).toBeCalledWith({
@@ -200,7 +202,7 @@ describe('Chef', () => {
             expect(Swal.fire).toBeCalledWith({
                 "icon": "error",
                 "title": "Oops...",
-                "text": "An error has occurred while obtaining thelist of orders",
+                "text": "An error has occurred while obtaining the list of orders",
               });
         });
     });

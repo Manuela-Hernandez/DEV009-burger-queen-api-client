@@ -1,7 +1,7 @@
 // import { getAllOrders } from "../../services/request";
 // import { showAlertError } from "../../alert/aler.js"
 import { useState, useEffect } from "react";
-import Modal from "./modal";
+import Modal from "../Modal/Modal";
 import { timeDuration, filterOrders } from "../../services/tools"
 
 
@@ -59,7 +59,7 @@ export default function ActiveOrders() {
         </thead>
         <tbody>
           {
-            allOrders.map((order) => (
+            allOrders && allOrders.map((order) => (
               <tr key={order.id} >
                 <td className="border">{order.id}</td>
                 <td className="border">{new Date(order.dataEntry).toLocaleString()}</td>

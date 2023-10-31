@@ -1,14 +1,14 @@
-import { getAllOrders } from "../../services/request";
 import { showAlertError } from "../../alert/aler.js"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { timeDuration, filterOrders } from "../../services/tools";
-import Modal from "../../components/ActiveOrders/Modal"
+import Modal from "../../components/Modal/Modal.jsx"
 
 
 
 export default function AllActiveOrders() {
   const [allOrders, setOrders] = useState([]);
+
   const [productsModal, setProductsModal] = useState([]);
   const [isopen, setIsopen] = useState(false)
 
@@ -62,7 +62,7 @@ export default function AllActiveOrders() {
         </thead>
         <tbody>
           {
-            allOrders.map((order) => (
+            allOrders && allOrders.map((order) => (
               <tr key={order.id}>
                 <td className="border">{order.id}</td>
                 <td className="border">{order.client}</td>

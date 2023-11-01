@@ -12,7 +12,7 @@ export default function NavigationBar() {
       <img src="https://i.postimg.cc/Nf0qKLPK/logoBQ.png"
         alt="Logo de Burger Queen"
         className="h-full" />
-      <p className="justify-self-center text-4xl text-white font-titles">{localStorage.name}</p>
+      <p className="justify-self-center text-4xl text-white font-titles">{localStorage.name} | {localStorage.role}</p>
       <i className=" text-white text-5xl fa-solid fa-right-to-bracket justify-self-end cursor-pointer mr-4"
         id="exit-icon"
         onClick={logOut} ></i>

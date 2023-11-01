@@ -1,6 +1,15 @@
-export default function Root() {
+import { Outlet } from "react-router-dom";
+import NavigationBar from '../../components/NavigationBar/NavigationBar';
+
+export default function Admin() {
   return (
-    <> ADMIN
+    <>
+      <header>
+        <NavigationBar/>
+      </header>
+      <main>
+        <Outlet />
+      </main>
     </>
-  );
+  )
 }

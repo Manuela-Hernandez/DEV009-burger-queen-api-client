@@ -37,6 +37,13 @@ export function getAllOrders(token) {
   })
 }
 
+export function getAllUsers(token) {
+  return axios.get(baseUrl + '/users', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+}
 
 export function changeOrderStatus(token,orderId,newStatus) {
   return axios.patch(`${baseUrl}/orders/${orderId}`,{

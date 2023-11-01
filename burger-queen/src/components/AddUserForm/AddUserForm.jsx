@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { addUser } from "../../services/request";
 
 export default function AddUserForm() {
 
   const [nameUser, setName] = useState(''); 
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('Role');
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -23,7 +24,22 @@ export default function AddUserForm() {
     setRole(e.target.value);
     console.log( role);
   };
-
+  function saveUser(){
+    console.log(role);
+    if(role !== 'Role'){
+      addUser(localStorage.token, nameUser, email, password, role)
+      .then((response) => {
+        console.log(response);
+        console.log('Usuario guardado');
+      })
+      .catch((error)=>{
+        console.log(error.response.data);
+        console.log('Usuario NO guardado');
+      })
+    } else {
+      console.log('Selecciona un rol');
+    }
+  }
   return (
     <>
       <h2 className="text-4xl text-bgqueen-primary text-center font-bold">User</h2>
@@ -58,7 +74,7 @@ export default function AddUserForm() {
           value={role}
           onChange={handleRoleChange}
         >
-          <option value="role">
+          <option>
             Role
           </option>
           <option value="waiter">
@@ -74,9 +90,8 @@ export default function AddUserForm() {
         <button
           type="button"
           className="bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-xl"
-          // onClick={userLogin}
-          id='login-btn'
-        >
+          onClick={saveUser}
+          id='save-btn'>
           Save
         </button>
       </form>

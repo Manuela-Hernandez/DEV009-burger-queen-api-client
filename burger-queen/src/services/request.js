@@ -28,6 +28,18 @@ export function addOrder(token, customerName, order, employeeId) {
     }
   },)
 }
+export function addUser(token, userName, userEmail, userPassword, userRole) {
+  return axios.post(baseUrl+ '/users', {
+      'name': userName,
+      'email': userEmail,
+      'password': userPassword, 
+      'role': userRole,
+  }, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  },)
+}
 
 export function getAllOrders(token) {
   return axios.get(baseUrl + '/orders', {

@@ -6,15 +6,12 @@ export default function AddUserForm({setIsopen, information = []}) {
 
   const [nameUser, setName] = useState('');
   const [email, setEmail] = useState('');
-  //const [password, setPassword] = useState('');
   const [role, setRole] = useState('Role');
 
   useEffect(() => {
     setName(information.name);
     setEmail(information.email);
     setRole(information.role)
-    //setEmail(information.password);
-    //document.getElementById('username').value = information.email;
   }, []);
 
   const handleNameChange = (e) => {
@@ -25,9 +22,6 @@ export default function AddUserForm({setIsopen, information = []}) {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-//   const handlePasswordChange = (e) => {
-//     setPassword(e.target.value);
-//   };
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
@@ -37,7 +31,7 @@ export default function AddUserForm({setIsopen, information = []}) {
     console.log(information);
     if(role !== 'Role' && nameUser.length > 0){
       editUser(localStorage.token, nameUser, email, role, information.id)
-      .then((response) => {
+      .then(() => {
         setIsopen(false);
         completed('The user information has been changed.');
 

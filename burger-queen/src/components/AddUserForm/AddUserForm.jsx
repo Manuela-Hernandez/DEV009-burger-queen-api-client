@@ -2,7 +2,7 @@ import { useState } from "react";
 import { addUser } from "../../services/request";
 import { completed, showAlertError, warning } from "../../alert/aler";
 
-export default function AddUserForm() {
+export default function AddUserForm({setIsopen}) {
 
   const [nameUser, setName] = useState(''); 
   const [email, setEmail] = useState(''); 
@@ -31,20 +31,18 @@ export default function AddUserForm() {
       addUser(localStorage.token, nameUser, email, password, role)
       .then((response) => {
         console.log(response);
-        completed('The user has been saved');
+        setIsopen(false);
+        completed('The user has been saved.');
 
-        // console.log('Usuario guardado');
       })
       .catch((error)=>{
-        // console.log(error.response.data);
         showAlertError(error.response.data);
-        console.log('Usuario NO guardado');
       })
     } else {
       if(role === 'Role') {
-        warning('Selecciona un rol')
+        warning('Please select a employee role.')
       } else {
-        showAlertError('Please enter the employee name')
+        showAlertError('Please enter the employee name.')
       }
       
       console.log('Selecciona un rol');
@@ -52,7 +50,7 @@ export default function AddUserForm() {
   }
   return (
     <>
-      <h2 className="text-4xl text-bgqueen-primary text-center font-bold">User</h2>
+      <h2 className="text-4xl text-bgqueen-primary text-center font-bold">New user</h2>
       <form className="w-4/5 mt-5 flex flex-col gap-y-4 items-center">
         <input
           type="text"
@@ -84,8 +82,8 @@ export default function AddUserForm() {
           value={role}
           onChange={handleRoleChange}
         >
-          <option>
-            Role
+          <option value='Role'>
+            Select a role
           </option>
           <option value="waiter">
             Waiter
@@ -99,7 +97,7 @@ export default function AddUserForm() {
         </select>
         <button
           type="button"
-          className="bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-xl"
+          className="bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-xl mb-3"
           onClick={saveUser}
           id='save-btn'>
           Save

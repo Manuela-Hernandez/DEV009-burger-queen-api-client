@@ -1,7 +1,7 @@
 import { questionClose } from "../../alert/aler";
 import AddUserForm from "../AddUserForm/AddUserForm";
 
-export default function ModalAdmin({ isopen = false, setIsopen }) {
+export default function ModalAdmin({ isopen , setIsopen }) {
 
   async function closeOrderDetails(){
     const closeDetails = await questionClose();
@@ -19,7 +19,7 @@ export default function ModalAdmin({ isopen = false, setIsopen }) {
               onClick={closeOrderDetails}>
               <i className="fa-solid fa-xmark" id='button-close-order'></i>
             </button>
-            <AddUserForm />
+            <AddUserForm setIsopen = {setIsopen}/>
           </div>
         </div>
       )

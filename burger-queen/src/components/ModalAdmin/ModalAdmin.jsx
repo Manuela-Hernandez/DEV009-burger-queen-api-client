@@ -1,7 +1,8 @@
 import { questionClose } from "../../alert/aler";
 import AddUserForm from "../AddUserForm/AddUserForm";
+import EditUser from "../EditUser/EditUser"
 
-export default function ModalAdmin({ isopen , setIsopen }) {
+export default function ModalAdmin({ isopen , setIsopen, action, information}) {
 
   async function closeOrderDetails(){
     const closeDetails = await questionClose();
@@ -19,7 +20,19 @@ export default function ModalAdmin({ isopen , setIsopen }) {
               onClick={closeOrderDetails}>
               <i className="fa-solid fa-xmark" id='button-close-order'></i>
             </button>
-            <AddUserForm setIsopen = {setIsopen}/>
+            {
+              action === 'AddUser' ?
+                <h2 className="text-4xl text-bgqueen-primary text-center font-bold">New user</h2>
+              :
+                <h2 className="text-4xl text-bgqueen-primary text-center font-bold">Edit user</h2>
+            }
+            {
+              action === 'AddUser' ?
+                <AddUserForm setIsopen = {setIsopen}/>
+              :
+                <EditUser setIsopen = {setIsopen} information={information}/>
+            }
+            
           </div>
         </div>
       )

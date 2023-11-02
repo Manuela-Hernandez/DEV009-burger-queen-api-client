@@ -1,13 +1,21 @@
-import { useState } from "react";
-import { addUser } from "../../services/request";
+import { useEffect, useState } from "react";
+import { editUser } from "../../services/request";
 import { completed, showAlertError, warning } from "../../alert/aler";
 
-export default function AddUserForm({setIsopen}) {
+export default function AddUserForm({setIsopen, information = []}) {
 
-  const [nameUser, setName] = useState(''); 
-  const [email, setEmail] = useState(''); 
-  const [password, setPassword] = useState('');
+  const [nameUser, setName] = useState('');
+  const [email, setEmail] = useState('');
+  //const [password, setPassword] = useState('');
   const [role, setRole] = useState('Role');
+
+  useEffect(() => {
+    setName(information.name);
+    setEmail(information.email);
+    setRole(information.role)
+    //setEmail(information.password);
+    //document.getElementById('username').value = information.email;
+  }, []);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -17,21 +25,21 @@ export default function AddUserForm({setIsopen}) {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+//   const handlePasswordChange = (e) => {
+//     setPassword(e.target.value);
+//   };
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
     console.log( role);
   };
-  function saveUser(){
+  function saveChanges(){
+    console.log(information);
     if(role !== 'Role' && nameUser.length > 0){
-      addUser(localStorage.token, nameUser, email, password, role)
+      editUser(localStorage.token, nameUser, email, role, information.id)
       .then((response) => {
-        //console.log(response);
         setIsopen(false);
-        completed('The user has been saved.');
+        completed('The user information has been changed.');
 
       })
       .catch((error)=>{
@@ -51,6 +59,7 @@ export default function AddUserForm({setIsopen}) {
         <input
           type="text"
           name="name"
+
           className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14"
           placeholder="Name"
           value={nameUser}
@@ -63,14 +72,6 @@ export default function AddUserForm({setIsopen}) {
           placeholder="Email"
           value={email}
           onChange={handleEmailChange}
-        />
-        <input
-          type="password"
-          name="password"
-          className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14"
-          placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
         />
         <select
           name="role"
@@ -94,7 +95,7 @@ export default function AddUserForm({setIsopen}) {
         <button
           type="button"
           className="bg-bgqueen-primary text-white w-1/2 h-12 rounded-full text-xl mb-3"
-          onClick={saveUser}
+          onClick={saveChanges}
           id='save-btn'>
           Save
         </button>

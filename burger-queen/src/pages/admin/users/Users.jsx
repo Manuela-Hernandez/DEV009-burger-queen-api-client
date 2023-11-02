@@ -9,10 +9,23 @@ export default function AllUsers() {
 
   const [usersList, setUsers] = useState([]);
 
+  const [action, setAction] = useState();
+
+  const [information, setUserInfo] = useState();
+
   function openModalAdmin() {
     setIsopen(true);
   } 
-
+  function addUser(){
+    setAction('AddUser');
+    openModalAdmin();
+  }
+  function editUser(user){
+    console.log(user);
+    setUserInfo(user);
+    setAction('EditUser');
+    openModalAdmin();
+  }
 
   useEffect(() => {
     getAllUsers(localStorage.getItem('token'))
@@ -28,7 +41,7 @@ export default function AllUsers() {
   return (
     <section className="w-full h-full">
       <h2 className="text-3xl text-center text-bgqueen-primary font-titles font-bold">Employees</h2>
-      <button className="text-bgqueen-primary rounded-lg text-xl m-2 border border-2 border-bgqueen-primary font-text-primary" onClick={openModalAdmin}>
+      <button className="text-bgqueen-primary rounded-lg text-xl m-2 border border-2 border-bgqueen-primary font-text-primary" onClick={addUser}>
         Add user
         <i className="fa-solid fa-user-plus"></i>
       </button>
@@ -50,13 +63,13 @@ export default function AllUsers() {
                 <td className="border">{user.name}</td>
                 <td className={`border`}>{user.email}</td>
                 <td className=" text-center border">{user.role}</td>
-                <td><i className="fa-solid fa-user-pen"></i> <i className="fa-solid fa-user-xmark"></i></td>
+                <td><i className="fa-solid fa-user-pen" onClick={() => { editUser(user) } }></i> <i className="fa-solid fa-user-xmark"></i></td>
               </tr>
             ))
           }
         </tbody>
       </table>
-      < ModalAdmin isopen={isopen} setIsopen={setIsopen} />
+      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information= {information}/>
     </section>
   );
 }

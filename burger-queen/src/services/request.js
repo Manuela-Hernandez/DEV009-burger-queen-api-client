@@ -40,7 +40,17 @@ export function addUser(token, userName, userEmail, userPassword, userRole) {
     }
   },)
 }
-
+export function editUser(token, userName, userEmail, userRole, userID) {
+  return axios.patch(`${baseUrl}/users/${userID}`, {
+      'name': userName,
+      'email': userEmail,
+      'role': userRole,
+  }, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  },)
+}
 export function getAllOrders(token) {
   return axios.get(baseUrl + '/orders', {
     headers: {

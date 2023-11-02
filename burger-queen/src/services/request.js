@@ -77,3 +77,11 @@ export function changeOrderStatus(token,orderId,newStatus) {
     }
   })
 }
+
+export function deleteUser(token, userID) {
+  return axios.delete(`${baseUrl}/users/${userID}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+}

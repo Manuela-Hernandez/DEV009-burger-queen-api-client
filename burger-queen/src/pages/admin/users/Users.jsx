@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { getAllUsers } from "../../../services/request";
-import { showAlertError } from "../../../alert/aler";
+import { deleteUser, getAllUsers } from "../../../services/request";
+import { questionDelete, showAlertError, completed } from "../../../alert/aler";
 import ModalAdmin from "../../../components/ModalAdmin/ModalAdmin";
 
 export default function AllUsers() {
@@ -15,12 +15,12 @@ export default function AllUsers() {
 
   function openModalAdmin() {
     setIsopen(true);
-  } 
-  function addUser(){
+  }
+  function addUser() {
     setAction('AddUser');
     openModalAdmin();
   }
-  function editUser(user){
+  function editUser(user) {
     console.log(user);
     setUserInfo(user);
     setAction('EditUser');
@@ -38,6 +38,22 @@ export default function AllUsers() {
         showAlertError("An error has occurred while obtaining list of product");
       });
   }, []);
+
+  async function deleteEmployee(id) {
+    const reultAlert = await questionDelete()
+    if (reultAlert.isConfirmed) {
+      deleteUser(localStorage.token, id)
+        .then(() => {
+          completed("The user has been deleted.")
+
+        })
+        .catch(() => {
+          showAlertError("An error has occurred deleting the user");
+        })
+    }
+  }
+
+
   return (
     <section className="w-full h-full">
       <h2 className="text-3xl text-center text-bgqueen-primary font-titles font-bold">Employees</h2>
@@ -63,13 +79,13 @@ export default function AllUsers() {
                 <td className="border">{user.name}</td>
                 <td className={`border`}>{user.email}</td>
                 <td className=" text-center border">{user.role}</td>
-                <td><i className="fa-solid fa-user-pen" onClick={() => { editUser(user) } }></i> <i className="fa-solid fa-user-xmark"></i></td>
+            <td><i className="fa-solid fa-user-pen" onClick={() => { editUser(user) }}></i> <i className="fa-solid fa-user-xmark" onClick={() => {deleteEmployee(user.id)}}></i></td>
               </tr>
             ))
           }
         </tbody>
       </table>
-      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information= {information}/>
+      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} />
     </section>
   );
 }

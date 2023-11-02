@@ -2,11 +2,11 @@ import { questionClose } from "../../alert/aler";
 import AddUserForm from "../AddUserForm/AddUserForm";
 
 export default function ModalAdmin({ isopen = false, setIsopen }) {
+
   async function closeOrderDetails(){
     const closeDetails = await questionClose();
     if(closeDetails.isConfirmed) {
       setIsopen(false);
-      
     }
   }
 

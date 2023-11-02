@@ -40,3 +40,11 @@ export function questionClose() {
     confirmButtonText: "Yes, close it!"
   })
 }
+
+export function warning(text) {
+  Swal.fire({
+    icon: "warning",
+    title: "Oops...",
+    text: text,
+  });
+}

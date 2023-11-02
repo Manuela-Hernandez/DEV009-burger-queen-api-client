@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addUser } from "../../services/request";
+import { completed, showAlertError, warning } from "../../alert/aler";
 
 export default function AddUserForm() {
 
@@ -26,17 +27,26 @@ export default function AddUserForm() {
   };
   function saveUser(){
     console.log(role);
-    if(role !== 'Role'){
+    if(role !== 'Role' && nameUser.length > 0){
       addUser(localStorage.token, nameUser, email, password, role)
       .then((response) => {
         console.log(response);
-        console.log('Usuario guardado');
+        completed('The user has been saved');
+
+        // console.log('Usuario guardado');
       })
       .catch((error)=>{
-        console.log(error.response.data);
+        // console.log(error.response.data);
+        showAlertError(error.response.data);
         console.log('Usuario NO guardado');
       })
     } else {
+      if(role === 'Role') {
+        warning('Selecciona un rol')
+      } else {
+        showAlertError('Please enter the employee name')
+      }
+      
       console.log('Selecciona un rol');
     }
   }

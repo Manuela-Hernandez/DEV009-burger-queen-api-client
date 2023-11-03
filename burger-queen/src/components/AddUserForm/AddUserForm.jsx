@@ -2,7 +2,7 @@ import { useState } from "react";
 import { addUser } from "../../services/request";
 import { completed, showAlertError, warning } from "../../alert/aler";
 
-export default function AddUserForm({setIsopen}) {
+export default function AddUserForm({setIsopen, usersList, setUsers}) {
 
   const [nameUser, setName] = useState(''); 
   const [email, setEmail] = useState(''); 
@@ -32,6 +32,7 @@ export default function AddUserForm({setIsopen}) {
         //console.log(response);
         setIsopen(false);
         completed('The user has been saved.');
+        // setUsers(usersList.push({name: nameUser, email: email, password: password, role: role}))
 
       })
       .catch((error)=>{

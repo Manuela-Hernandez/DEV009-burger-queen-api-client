@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { editUser } from "../../services/request";
 import { completed, showAlertError, warning } from "../../alert/aler";
 
-export default function AddUserForm({setIsopen, information = []}) {
+export default function AddUserForm({setIsopen, information = [], usersList, setUsers}) {
 
   const [nameUser, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,6 +34,14 @@ export default function AddUserForm({setIsopen, information = []}) {
       .then(() => {
         setIsopen(false);
         completed('The user information has been changed.');
+        setUsers(usersList.map((user) => {
+          if(user.id === information.id) {
+            user.name = nameUser;
+            user.email = email;
+            user.role = role;
+          }
+          return user
+        }))
 
       })
       .catch((error)=>{

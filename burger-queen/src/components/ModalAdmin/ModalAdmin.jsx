@@ -2,7 +2,7 @@ import { questionClose } from "../../alert/aler";
 import AddUserForm from "../AddUserForm/AddUserForm";
 import EditUser from "../EditUser/EditUser"
 
-export default function ModalAdmin({ isopen , setIsopen, action, information}) {
+export default function ModalAdmin({ isopen , setIsopen, action, information, usersList, setUsers}) {
 
   async function closeOrderDetails(){
     const closeDetails = await questionClose();
@@ -28,9 +28,9 @@ export default function ModalAdmin({ isopen , setIsopen, action, information}) {
             }
             {
               action === 'AddUser' ?
-                <AddUserForm setIsopen = {setIsopen}/>
+                <AddUserForm setIsopen = {setIsopen} usersList={usersList} setUsers={setUsers}/>
               :
-                <EditUser setIsopen = {setIsopen} information={information}/>
+                <EditUser setIsopen = {setIsopen} information={information} usersList={usersList} setUsers={setUsers}/>
             }
             
           </div>

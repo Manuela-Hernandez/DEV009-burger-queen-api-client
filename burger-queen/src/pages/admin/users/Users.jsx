@@ -44,7 +44,9 @@ export default function AllUsers() {
     if (reultAlert.isConfirmed) {
       deleteUser(localStorage.token, id)
         .then(() => {
-          completed("The user has been deleted.")
+          completed("The user has been deleted.");
+          setUsers(usersList.filter((user) => user.id !== id) )
+
 
         })
         .catch(() => {
@@ -85,7 +87,7 @@ export default function AllUsers() {
           }
         </tbody>
       </table>
-      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} />
+      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} usersList={usersList} setUsers={setUsers} />
     </section>
   );
 }

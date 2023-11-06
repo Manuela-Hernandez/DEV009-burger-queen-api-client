@@ -88,7 +88,7 @@ export default function ActiveOrders() {
           }
         </tbody>
       </table>
-      <Modal isopen={isopen} setIsopen={setIsopen} productsModal={productsModal} />
+      <Modal isopen={isopen} setIsopen={setIsopen} productsModal={productsModal} allOrders={allOrders} setOrders={setOrders} />
     </section>
   );
 }

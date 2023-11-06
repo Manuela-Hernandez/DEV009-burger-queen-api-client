@@ -2,7 +2,7 @@ import { changeOrderStatus } from "../../services/request"
 import { useState } from "react";
 import { completed, questionClose, showAlertError } from "../../alert/aler";
 
-export default function Modal({ isopen = false, setIsopen, productsModal = [] }) {
+export default function Modal({ isopen = false, setIsopen, productsModal = [], allOrders, setOrders}) {
 
   const [checked, setChecked] = useState(0); // Estado para el correo electrónico
 
@@ -11,9 +11,15 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [] })
       .then((response) => {
         setIsopen(false);
         completed("Your order status has been changed.");
-        setTimeout(function() {
-          location.reload();
-        }, 1600);
+        setOrders(allOrders.map((order) => {
+          if(productsModal.id === order.id) {
+            order.status = status;
+          }
+          return order
+        }));
+        // setTimeout(function() {
+        //   location.reload();
+        // }, 1600);
       })
       .catch(() => {
         showAlertError("An error has occurred while status was changing");

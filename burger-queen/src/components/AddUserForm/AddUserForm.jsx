@@ -32,8 +32,7 @@ export default function AddUserForm({setIsopen, usersList, setUsers}) {
         //console.log(response);
         setIsopen(false);
         completed('The user has been saved.');
-        // setUsers(usersList.push({name: nameUser, email: email, password: password, role: role}))
-
+        setUsers([...usersList,{name: nameUser, email: email, password: password, role: role}])
       })
       .catch((error)=>{
         showAlertError(error.response.data);

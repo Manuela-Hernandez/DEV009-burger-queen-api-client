@@ -7,10 +7,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    fontFamily: {
-      'text-primary': ['Nunito Sans', 'sans-serif'],
-      'titles': ['Lato', 'sans-serif'],
-    },
+    // fontFamily: {
+    //   'text-primary': ['Nunito Sans', 'sans-serif'],
+    //   'titles': ['Lato', 'sans-serif'],
+    // },
     colors: {
       "bgqueen-primary": "#781B14",
       "bgqueen-secondary": "#E4C485",

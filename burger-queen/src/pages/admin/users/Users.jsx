@@ -45,7 +45,7 @@ export default function AllUsers() {
       deleteUser(localStorage.token, id)
         .then(() => {
           completed("The user has been deleted.");
-          setUsers(usersList.filter((user) => user.id !== id) )
+          setUsers(usersList.filter((user) => user.id !== id))
 
 
         })
@@ -58,14 +58,17 @@ export default function AllUsers() {
 
   return (
     <section className="w-full h-full">
-      <h2 className="text-3xl text-center text-bgqueen-primary font-titles font-bold">Employees</h2>
-      <button className="text-bgqueen-primary rounded-lg text-xl m-2 border border-2 border-bgqueen-primary font-text-primary" onClick={addUser}>
-        Add user
-        <i className="fa-solid fa-user-plus"></i>
-      </button>
-      <table className="bg-white w-4/5 m-auto mt-6 border-separate border-spacing-2 border md:w-11/12 text-lg">
+      <section className="grid grid-cols-2 m-auto mt-8 md:w-11/12">
+        <h2 className="caption-top text-3xl text-center text-bgqueen-primary justify-self-start font-semibold">Employees</h2>
+        <button className="text-bgqueen-primary rounded-lg text-xl border border-2 border-bgqueen-primary font-text-primary p-2 justify-self-end w-40"
+          onClick={addUser}>
+          Add user
+          <i className="fa-solid fa-user-plus ml-2"></i>
+        </button>
+      </section>
+      <table className="bg-white m-auto mt-4 border-separate border-spacing-1 border md:w-11/12 text-lg">
         <thead className="text-left">
-          <tr className="bg-bgqueen-gray">
+          <tr className="bg-bgqueen-secondary text-bgqueen-primary font-black">
             <th>ID</th>
             <th>NAME</th>
             <th>EMAIL</th>
@@ -81,7 +84,10 @@ export default function AllUsers() {
                 <td className="border">{user.name}</td>
                 <td className={`border`}>{user.email}</td>
                 <td className=" text-center border">{user.role}</td>
-            <td><i className="fa-solid fa-user-pen" onClick={() => { editUser(user) }}></i> <i className="fa-solid fa-user-xmark" onClick={() => {deleteEmployee(user.id)}}></i></td>
+                <td className="border text-center grid grid-cols-2 justify-around content-center ">
+                  <i className="fa-solid fa-user-pen text-xl" onClick={() => { editUser(user) }}></i>
+                  <i className="fa-solid fa-user-xmark text-xl" onClick={() => { deleteEmployee(user.id) }}></i>
+                </td>
               </tr>
             ))
           }

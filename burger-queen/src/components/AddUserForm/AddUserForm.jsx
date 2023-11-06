@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { addUser } from "../../services/request";
+import { addUser, getAllUsers } from "../../services/request";
 import { completed, showAlertError, warning } from "../../alert/aler";
+
 
 export default function AddUserForm({setIsopen, usersList, setUsers}) {
 
@@ -32,7 +33,16 @@ export default function AddUserForm({setIsopen, usersList, setUsers}) {
         //console.log(response);
         setIsopen(false);
         completed('The user has been saved.');
-        setUsers([...usersList,{name: nameUser, email: email, password: password, role: role}])
+        // setUsers([...usersList,{name: nameUser, email: email, password: password, role: role}])
+        getAllUsers(localStorage.getItem('token'))
+        .then((response) => {
+          // Actualiza el estado con los productos obtenidos
+          setUsers(response.data);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          showAlertError("An error has occurred while obtaining list of product");
+        });
       })
       .catch((error)=>{
         showAlertError(error.response.data);

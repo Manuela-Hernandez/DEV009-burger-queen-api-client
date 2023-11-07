@@ -24,7 +24,7 @@ describe('users', () => {
     localStorage.setItem('token', '6543210');
     localStorage.setItem('id', '4321');
     localStorage.setItem('role', 'admin');
-
+    const mockFire = jest.spyOn(Swal, "fire");
     axios.get.mockResolvedValue({ data: dataUsers });
 
     axios.post.mockResolvedValue('Usuario guardado');
@@ -43,18 +43,20 @@ describe('users', () => {
       fireEvent.click(screen.getByText('Save'));  
     });
     
-    // await waitFor(() => {
-    // });
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(1);
+      expect(mockFire).toBeCalledWith({ "icon": "success", "text": "The user has been saved.", "title": "process successfully", "showConfirmButton": false, "timer": 1500 });
+    });
   });
 
   it('Deberia mostrar un mensaje de error cuando el usuario no se ha almacenado.', async () => {
     localStorage.setItem('token', '6543210');
     localStorage.setItem('id', '4321');
     localStorage.setItem('role', 'admin');
-
+    const mockFire = jest.spyOn(Swal, "fire");
     axios.get.mockResolvedValue({ data: dataUsers });
 
-    axios.post.mockRejectedValue({response:{ data:'No se ha almacenado el usuario'}});
+    axios.post.mockRejectedValue({response:{ data:'No se ha almacenado el usuario.'}});
     await act(async () => { 
       render(<AllUsers />);
     });
@@ -70,8 +72,10 @@ describe('users', () => {
       fireEvent.click(screen.getByText('Save'));  
     });
     
-    // await waitFor(() => {
-    // });
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(1);
+      expect(mockFire).toBeCalledWith({ "icon": "error", "text": "No se ha almacenado el usuario.", "title": "Oops..." });
+    });
   });
   it('Deberia llamar a la funcion de sweetalert con el mensaje -Please select a employee role.- Cuando no se proporciona el nombre', async () => {
     localStorage.setItem('token', '6543210');
@@ -129,7 +133,7 @@ describe('users', () => {
     localStorage.setItem('token', '6543210');
     localStorage.setItem('id', '4321');
     localStorage.setItem('role', 'admin');
-
+    const mockFire = jest.spyOn(Swal, "fire");
     axios.get.mockResolvedValue({ data: dataUsers });
 
     axios.post.mockResolvedValue('Usuario guardado');
@@ -150,7 +154,9 @@ describe('users', () => {
       fireEvent.click(screen.getByText('Save'));  
     });
     
-    // await waitFor(() => {
-    // });
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(2);
+      expect(axios.get).toBeCalledTimes(2);
+    });
   });
 })

@@ -35,7 +35,7 @@ export default function AllUsers() {
         console.log(response.data);
       })
       .catch((error) => {
-        showAlertError("An error has occurred while obtaining list of product");
+        showAlertError("An error has occurred while obtaining list of users.");
       });
   }, []);
 

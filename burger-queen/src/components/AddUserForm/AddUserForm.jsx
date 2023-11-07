@@ -35,7 +35,7 @@ export default function AddUserForm({setIsopen, usersList, setUsers}) {
           setUsers(response.data);
         })
         .catch((error) => {
-          showAlertError("An error has occurred while obtaining list of employees");
+          showAlertError("An error has occurred while obtaining list of employees.");
         });
       })
       .catch((error)=>{

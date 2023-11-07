@@ -14,16 +14,13 @@ const dataUsers = [
 
 describe('users', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  // it("should render users", () => {
-  //   render(<AllUsers />);
-  // });
-  it('Deberia almacenar al usuario', async () => {
     localStorage.setItem('token', '6543210');
     localStorage.setItem('id', '4321');
     localStorage.setItem('role', 'admin');
+    jest.clearAllMocks();
+  });
+
+  it('Deberia almacenar al usuario', async () => {
     const mockFire = jest.spyOn(Swal, "fire");
     axios.get.mockResolvedValue({ data: dataUsers });
 
@@ -50,9 +47,6 @@ describe('users', () => {
   });
 
   it('Deberia mostrar un mensaje de error cuando el usuario no se ha almacenado.', async () => {
-    localStorage.setItem('token', '6543210');
-    localStorage.setItem('id', '4321');
-    localStorage.setItem('role', 'admin');
     const mockFire = jest.spyOn(Swal, "fire");
     axios.get.mockResolvedValue({ data: dataUsers });
 
@@ -78,9 +72,6 @@ describe('users', () => {
     });
   });
   it('Deberia llamar a la funcion de sweetalert con el mensaje -Please select a employee role.- Cuando no se proporciona el nombre', async () => {
-    localStorage.setItem('token', '6543210');
-    localStorage.setItem('id', '4321');
-    localStorage.setItem('role', 'admin');
 
     axios.get.mockResolvedValue({ data: dataUsers });
 
@@ -104,9 +95,6 @@ describe('users', () => {
     });
   });
   it('Deberia llamar a la funcion de sweetalert con el mensaje -Please enter the employee name.- Cuando no se proporciona el nombre', async () => {
-    localStorage.setItem('token', '6543210');
-    localStorage.setItem('id', '4321');
-    localStorage.setItem('role', 'admin');
 
     axios.get.mockResolvedValue({ data: dataUsers });
 
@@ -130,9 +118,6 @@ describe('users', () => {
     });
   });
   it('Deberia almacenar al usuario pero no se carga correctamente la nueva lista', async () => {
-    localStorage.setItem('token', '6543210');
-    localStorage.setItem('id', '4321');
-    localStorage.setItem('role', 'admin');
     const mockFire = jest.spyOn(Swal, "fire");
     axios.get.mockResolvedValue({ data: dataUsers });
 
@@ -161,10 +146,7 @@ describe('users', () => {
   });
 
   it('Deberia guardar los cambios editados del usuario', async () => {
-    localStorage.setItem('token', '6543210');
-    localStorage.setItem('id', '4321');
-    localStorage.setItem('role', 'admin');
-
+    const mockFire = jest.spyOn(Swal, "fire");
     axios.get.mockResolvedValueOnce({ data: dataUsers });
     axios.patch.mockResolvedValueOnce('Cambios guadados');
 
@@ -174,31 +156,21 @@ describe('users', () => {
 
     fireEvent.click(screen.getByTestId('edit-users-1'));
 
-    // fireEvent.change(screen.getByText('Luis Juarez'), { target: { value: 'Testing Name' } });
     fireEvent.change(screen.getByPlaceholderText('Name'), { target: { value: 'Luis Juarez editado' } });
     fireEvent.change(screen.getByPlaceholderText('Email'), { target: { value: 'empleado10@systers.xyz' } });
     fireEvent.change(screen.getByDisplayValue('Chef'), { target: { value: 'waiter' } });
-    // fireEvent.change(screen.getByText('id'));
 
      await act(async () => { 
       fireEvent.click(screen.getByText('Save'));  
-    });
-
-    
-    // const mockFire = jest.spyOn(Swal, "fire");
-
-   
+    });   
 
     await waitFor(() => {
-      // expect(mockFire).toBeCalledTimes(1);
-      // expect(mockFire).toBeCalledWith({ "icon": "success", "text": "The user information has been changed.", "title": "process successfully" });
+      expect(mockFire).toBeCalledTimes(1);
+      expect(mockFire).toBeCalledWith({ "icon": "success", "text": "The user information has been changed.", "title": "process successfully", "showConfirmButton": false,"timer": 1500, });
     });
   });
 
   it('Deberia mostrar un mensaje de error al guardar los cambios editados del usuario', async () => {
-    localStorage.setItem('token', '6543210');
-    localStorage.setItem('id', '4321');
-    localStorage.setItem('role', 'admin');
 
     axios.get.mockResolvedValueOnce({ data: dataUsers });
     axios.patch.mockRejectedValueOnce({response: {data: 'Cambios no guardados'}});
@@ -226,10 +198,6 @@ describe('users', () => {
 
 
   it('Deberia mostrar un mensaje de error cuando el campo del nombre esta vacio', async () => {
-    localStorage.setItem('token', '6543210');
-    localStorage.setItem('id', '4321');
-    localStorage.setItem('role', 'admin');
-
     axios.get.mockResolvedValueOnce({ data: dataUsers });
     const mockFire = jest.spyOn(Swal, "fire");
 
@@ -251,10 +219,6 @@ describe('users', () => {
   });
 
   it('Deberia mostrar un mensaje de informacion cuando no se ha seleccionado un role', async () => {
-    localStorage.setItem('token', '6543210');
-    localStorage.setItem('id', '4321');
-    localStorage.setItem('role', 'admin');
-
     axios.get.mockResolvedValueOnce({ data: dataUsers });
     const mockFire = jest.spyOn(Swal, "fire");
 
@@ -275,5 +239,72 @@ describe('users', () => {
       expect(mockFire).toBeCalledWith({"icon": "warning", "text": "Please select a employee role.", "title": "Oops..." });
     });
   });
-  
+  it('Deberia eliminar al usuario 1', async () => {
+    const mockFire = jest.spyOn(Swal, "fire");
+    axios.get.mockResolvedValueOnce({ data: dataUsers });
+    Swal.fire.mockResolvedValue({ isConfirmed: true });
+    axios.delete.mockResolvedValueOnce('Cambios guardados');
+
+    await act(async () => {
+      render(<AllUsers />);
+    });
+
+    fireEvent.click(screen.getByTestId('delete-user-1'));  
+
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(2);
+      expect(mockFire).toBeCalledWith({ "icon": "success", "text": "The user has been deleted.", "title": "process successfully", "showConfirmButton": false,"timer": 1500, });
+    });
+  });
+  it("Debería poder abrir y cerrar la ventana modal cuando se da click en editar", async () => {
+    axios.get.mockResolvedValueOnce({ data: dataUsers });
+    Swal.fire.mockResolvedValue({ isConfirmed: true });
+    await act(async () => {
+      render(<AllUsers />);
+    });
+    fireEvent.click(screen.getByTestId('edit-users-1'));
+    fireEvent.click(screen.getByTestId('close-modal-admin'));
+    await waitFor(() => {
+      expect(Swal.fire).toBeCalledTimes(1);
+      expect(Swal.fire).toBeCalledWith({
+        "title": 'Are you sure?',
+        "text": "You won't be able to revert this, any changes made will be lost!",
+        "icon": "question",
+        "showCancelButton": true,
+        "confirmButtonColor": "#28a745",
+        "cancelButtonColor": '#d33',
+        "confirmButtonText": "Yes, close it!"
+      });
+    });
+  });
+  it('Deberia mostrar un mensaje cuando el usuario no se elimina', async () => {
+    const mockFire = jest.spyOn(Swal, "fire");
+    axios.get.mockResolvedValueOnce({ data: dataUsers });
+    Swal.fire.mockResolvedValue({ isConfirmed: true });
+    axios.delete.mockRejectedValueOnce('Cambios no guardados');
+
+    await act(async () => {
+      render(<AllUsers />);
+    });
+
+    fireEvent.click(screen.getByTestId('delete-user-1'));  
+
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(2);
+      expect(mockFire).toBeCalledWith({ "icon": "error", "text": "An error has occurred deleting the user", "title": "Oops..." });
+    });
+  });
+  it('Deberia mostrar un mensaje no se carga la lista de usuarios', async () => {
+    const mockFire = jest.spyOn(Swal, "fire");
+    axios.get.mockRejectedValueOnce('data error');
+    
+    await act(async () => {
+      render(<AllUsers />);
+    });
+
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(1);
+      expect(mockFire).toBeCalledWith({ "icon": "error", "text": "An error has occurred while obtaining list of users.", "title": "Oops..." });
+    });
+  });
 })

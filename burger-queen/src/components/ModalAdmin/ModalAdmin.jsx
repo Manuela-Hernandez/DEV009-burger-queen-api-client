@@ -18,7 +18,7 @@ export default function ModalAdmin({ isopen , setIsopen, action, information, us
           <div className=" bg-white p-1 rounded flex flex-col justify-center items-center gap-1 lg:w-2/4  md:w-2/3">
             <button className="w-12 h-12 rounded-lg text-xl border-solid border-bgqueen-black hover:border-2 self-end"
               onClick={closeOrderDetails}>
-              <i className="fa-solid fa-xmark" id='button-close-order'></i>
+              <i className="fa-solid fa-xmark" data-testid="close-modal-admin"></i>
             </button>
             {
               action === 'AddUser' ?

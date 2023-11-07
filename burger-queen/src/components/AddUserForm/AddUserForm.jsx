@@ -12,7 +12,6 @@ export default function AddUserForm({setIsopen, usersList, setUsers}) {
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-    console.log(nameUser);
   };
 
   const handleEmailChange = (e) => {
@@ -24,24 +23,19 @@ export default function AddUserForm({setIsopen, usersList, setUsers}) {
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
-    console.log( role);
   };
   function saveUser(){
     if(role !== 'Role' && nameUser.length > 0){
       addUser(localStorage.token, nameUser, email, password, role)
       .then((response) => {
-        //console.log(response);
         setIsopen(false);
         completed('The user has been saved.');
-        // setUsers([...usersList,{name: nameUser, email: email, password: password, role: role}])
         getAllUsers(localStorage.getItem('token'))
         .then((response) => {
-          // Actualiza el estado con los productos obtenidos
           setUsers(response.data);
-          console.log(response.data);
         })
         .catch((error) => {
-          showAlertError("An error has occurred while obtaining list of product");
+          showAlertError("An error has occurred while obtaining list of employees");
         });
       })
       .catch((error)=>{
@@ -62,7 +56,7 @@ export default function AddUserForm({setIsopen, usersList, setUsers}) {
           type="text"
           name="name"
           className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14"
-          placeholder="Name"
+          placeholder="Employee name"
           value={nameUser}
           onChange={handleNameChange}
         />
@@ -70,7 +64,7 @@ export default function AddUserForm({setIsopen, usersList, setUsers}) {
           type="email"
           name="email"
           className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14"
-          placeholder="Email"
+          placeholder="Employee email"
           value={email}
           onChange={handleEmailChange}
         />

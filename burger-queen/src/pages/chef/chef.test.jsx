@@ -59,7 +59,7 @@ describe('Chef', () => {
         await act(async () => { // Envuelve la renderización en act
             render(<Chef />);
         });
-        screen.debug();
+        //screen.debug();
         const btnDetails = document.querySelector('#details-1');
 
         fireEvent.click(btnDetails);
@@ -113,8 +113,8 @@ describe('Chef', () => {
         await act(async()=>{
             fireEvent.click(setReady);
         });      
-        console.log('se pone hora: ', new Date('2023-10-11T10:15:00.000Z'));
-        console.log('NO se pone hora: ', new Date());
+        //console.log('se pone hora: ', new Date('2023-10-11T10:15:00.000Z'));
+        //console.log('NO se pone hora: ', new Date());
         await waitFor(() => {
             expect(axios.patch).toBeCalledTimes(1);
             expect(axios.patch).toBeCalledWith("http://localhost:8080/orders/2", { "dateProcessed": new Date('2023-10-13T12:15:00.000Z'), "status": "ready", }, { "headers": { "Authorization": "Bearer 123456" } });

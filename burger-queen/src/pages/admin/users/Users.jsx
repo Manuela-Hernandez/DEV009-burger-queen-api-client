@@ -21,7 +21,7 @@ export default function AllUsers() {
     openModalAdmin();
   }
   function editUser(user) {
-    console.log(user);
+    //console.log(user);
     setUserInfo(user);
     setAction('EditUser');
     openModalAdmin();
@@ -46,8 +46,6 @@ export default function AllUsers() {
         .then(() => {
           completed("The user has been deleted.");
           setUsers(usersList.filter((user) => user.id !== id))
-
-
         })
         .catch(() => {
           showAlertError("An error has occurred deleting the user");

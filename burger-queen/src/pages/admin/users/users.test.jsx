@@ -159,4 +159,121 @@ describe('users', () => {
       expect(axios.get).toBeCalledTimes(2);
     });
   });
+
+  it('Deberia guardar los cambios editados del usuario', async () => {
+    localStorage.setItem('token', '6543210');
+    localStorage.setItem('id', '4321');
+    localStorage.setItem('role', 'admin');
+
+    axios.get.mockResolvedValueOnce({ data: dataUsers });
+    axios.patch.mockResolvedValueOnce('Cambios guadados');
+
+    await act(async () => {
+      render(<AllUsers />);
+    });
+
+    fireEvent.click(screen.getByTestId('edit-users-1'));
+
+    // fireEvent.change(screen.getByText('Luis Juarez'), { target: { value: 'Testing Name' } });
+    fireEvent.change(screen.getByPlaceholderText('Name'), { target: { value: 'Luis Juarez editado' } });
+    fireEvent.change(screen.getByPlaceholderText('Email'), { target: { value: 'empleado10@systers.xyz' } });
+    fireEvent.change(screen.getByDisplayValue('Chef'), { target: { value: 'waiter' } });
+    // fireEvent.change(screen.getByText('id'));
+
+     await act(async () => { 
+      fireEvent.click(screen.getByText('Save'));  
+    });
+
+    
+    // const mockFire = jest.spyOn(Swal, "fire");
+
+   
+
+    await waitFor(() => {
+      // expect(mockFire).toBeCalledTimes(1);
+      // expect(mockFire).toBeCalledWith({ "icon": "success", "text": "The user information has been changed.", "title": "process successfully" });
+    });
+  });
+
+  it('Deberia mostrar un mensaje de error al guardar los cambios editados del usuario', async () => {
+    localStorage.setItem('token', '6543210');
+    localStorage.setItem('id', '4321');
+    localStorage.setItem('role', 'admin');
+
+    axios.get.mockResolvedValueOnce({ data: dataUsers });
+    axios.patch.mockRejectedValueOnce({response: {data: 'Cambios no guardados'}});
+    const mockFire = jest.spyOn(Swal, "fire");
+
+    await act(async () => {
+      render(<AllUsers />);
+    });
+
+    fireEvent.click(screen.getByTestId('edit-users-1'));
+
+    fireEvent.change(screen.getByPlaceholderText('Name'), { target: { value: 'Luis Juarez editado' } });
+    fireEvent.change(screen.getByPlaceholderText('Email'), { target: { value: 'empleado10@systers.xyz' } });
+    fireEvent.change(screen.getByDisplayValue('Waiter'), { target: { value: 'admin' } });
+
+     await act(async () => { 
+      fireEvent.click(screen.getByText('Save'));  
+    });
+   
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(1);
+      expect(mockFire).toBeCalledWith({ "icon": "error", "text": "Cambios no guardados", "title": "Oops..." });
+    });
+  });
+
+
+  it('Deberia mostrar un mensaje de error cuando el campo del nombre esta vacio', async () => {
+    localStorage.setItem('token', '6543210');
+    localStorage.setItem('id', '4321');
+    localStorage.setItem('role', 'admin');
+
+    axios.get.mockResolvedValueOnce({ data: dataUsers });
+    const mockFire = jest.spyOn(Swal, "fire");
+
+    await act(async () => {
+      render(<AllUsers />);
+    });
+
+    fireEvent.click(screen.getByTestId('edit-users-1'));
+
+    fireEvent.change(screen.getByPlaceholderText('Name'), { target: { value: '' } });
+
+     await act(async () => { 
+      fireEvent.click(screen.getByText('Save'));  
+    });
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(1);
+      expect(mockFire).toBeCalledWith({ "icon": "error", "text": "Please enter the employee name.", "title": "Oops..." });
+    });
+  });
+
+  it('Deberia mostrar un mensaje de informacion cuando no se ha seleccionado un role', async () => {
+    localStorage.setItem('token', '6543210');
+    localStorage.setItem('id', '4321');
+    localStorage.setItem('role', 'admin');
+
+    axios.get.mockResolvedValueOnce({ data: dataUsers });
+    const mockFire = jest.spyOn(Swal, "fire");
+
+    await act(async () => {
+      render(<AllUsers />);
+    });
+
+    fireEvent.click(screen.getByTestId('edit-users-1'));
+    fireEvent.change(screen.getByDisplayValue('Waiter'), { target: { value: 'Role' } });
+
+     await act(async () => { 
+      fireEvent.click(screen.getByText('Save'));  
+    });
+   
+
+    await waitFor(() => {
+      expect(mockFire).toBeCalledTimes(1);
+      expect(mockFire).toBeCalledWith({"icon": "warning", "text": "Please select a employee role.", "title": "Oops..." });
+    });
+  });
+  
 })

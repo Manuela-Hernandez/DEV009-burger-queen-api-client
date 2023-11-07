@@ -35,7 +35,7 @@ export default function AllUsers() {
         console.log(response.data);
       })
       .catch((error) => {
-        showAlertError("An error has occurred while obtaining list of users.");
+        showAlertError("An error has occurred while obtaining list of product");
       });
   }, []);
 
@@ -83,7 +83,7 @@ export default function AllUsers() {
                 <td className={`border`}>{user.email}</td>
                 <td className=" text-center border">{user.role}</td>
                 <td className="border text-center grid grid-cols-2 justify-around content-center ">
-                  <i className="fa-solid fa-user-pen text-xl" onClick={() => { editUser(user) }}></i>
+                  <i className="fa-solid fa-user-pen text-xl" data-testid={`edit-users-${user.id}`} onClick={() => { editUser(user) }}></i>
                   <i className="fa-solid fa-user-xmark text-xl" onClick={() => { deleteEmployee(user.id) }}></i>
                 </td>
               </tr>

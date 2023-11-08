@@ -1,6 +1,7 @@
 import { questionClose } from "../../alert/aler";
 import AddUserForm from "../AddUserForm/AddUserForm";
 import EditUser from "../EditUser/EditUser"
+import AddProductForm from "../AddProductForm/AddProductForm";
 
 export default function ModalAdmin({ isopen , setIsopen, action, information, usersList, setUsers}) {
 
@@ -22,15 +23,11 @@ export default function ModalAdmin({ isopen , setIsopen, action, information, us
             </button>
             {
               action === 'AddUser' ?
-                <h2 className="text-4xl text-bgqueen-primary text-center font-bold">New user</h2>
-              :
-                <h2 className="text-4xl text-bgqueen-primary text-center font-bold">Edit user</h2>
-            }
-            {
-              action === 'AddUser' ?
                 <AddUserForm setIsopen = {setIsopen} usersList={usersList} setUsers={setUsers}/>
-              :
+              : action === 'EditUser' ?
                 <EditUser setIsopen = {setIsopen} information={information} usersList={usersList} setUsers={setUsers}/>
+                :
+                <AddProductForm setIsopen = {setIsopen} usersList={usersList} setUsers={setUsers}/>
             }
             
           </div>

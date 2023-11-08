@@ -51,6 +51,7 @@ export default function AddUserForm({setIsopen, usersList, setUsers}) {
   }
   return (
     <>
+      <h2 className="text-4xl text-bgqueen-primary text-center font-bold">New user</h2>
       <form className="w-4/5 mt-5 flex flex-col gap-y-4 items-center">
         <input
           type="text"

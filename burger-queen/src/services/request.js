@@ -93,3 +93,17 @@ export function deleteProduct(token, productID) {
     }
   })
 }
+
+export function addProduct(token, itemName, itemPrice, itemImg, itemType) {
+  return axios.post(baseUrl+ '/products', {
+    "name": itemName,
+    "price": itemPrice,
+    "image": itemImg,
+    "type": itemType,
+    //dataEntry: new Date(),
+  }, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  },)
+}

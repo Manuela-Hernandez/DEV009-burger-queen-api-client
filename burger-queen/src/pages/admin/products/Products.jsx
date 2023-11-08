@@ -56,7 +56,7 @@ export default function AllProducts() {
 
   return (
     <section className="w-full h-full">
-      <section className="grid grid-cols-2 m-auto mt-8 md:w-11/12">
+      <section className="grid grid-cols-2 m-auto mt-8 md:w-11/12 mb-4">
         <h2 className="caption-top text-3xl text-center text-bgqueen-primary justify-self-start font-semibold">Products</h2>
         <button className="text-bgqueen-primary rounded-lg text-xl border border-2 border-bgqueen-primary font-text-primary p-2 justify-self-end w-40"
           onClick={addProduct}>
@@ -64,38 +64,23 @@ export default function AllProducts() {
           <i className="fa-solid fa-plus ml-2"></i>
         </button>
       </section>
-      <table className="bg-white m-auto mt-4 border-separate border-spacing-1 border md:w-11/12 text-lg">
-        <thead className="text-left">
-          <tr className="bg-bgqueen-secondary text-bgqueen-primary font-black">
-            <th>ID</th>
-            <th>IMAGE</th>
-            <th>NAME</th>
-            <th>TYPE</th>
-            <th>PRICE</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            productsList !== undefined && productsList.map((product) => (
-              <tr key={product.id} >
-                <td className="border">{product.id}</td>
-                <td className="border w-1/12">
-                <img src={product.image} alt={product.name} className="w-1/2" />
-                </td>
-                <td className="border">{product.name}</td>
-                <td className={`border`}>{product.type}</td>
-                <td className={`border`}>{product.price}</td>
-                {/* <td className=" text-center border">{product.role}</td> */}
-                <td className="border text-center grid grid-cols-2 justify-around content-center ">
-                  <i className="fa-regular fa-pen-to-square text-xl" data-testid={`edit-products-${product.id}`} onClick={() => { editProduct(product) }}></i>
-                  <i className="fa-regular fa-trash-can text-xl" data-testid={`delete-product-${product.id}`} onClick={() => { deleteItem(product.id) }}></i>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+      <section className="flex flex-wrap gap-4 ml-4">
+        {
+          productsList !== undefined && productsList.map((product) => (
+    
+            <article key={product.id} className='w-1/5 border border-bgqueen-primary rounded p-3 bg-bgqueen-secondary flex flex-col '>
+              <h3 className="text-center font-bold mb-4 text-xl">{product.type}</h3>
+              <img src={product.image} alt={product.name} className="w-1/2 m-auto" />
+              <p className="text-xl">{product.name}</p>
+              <p className="italic font-bold">${product.price}</p>
+              <article className="text-end">
+                <i className="fa-regular fa-pen-to-square text-2xl mr-4" data-testid={`edit-product-${product.id}`} onClick={() => { editProduct(product) }}></i>
+                <i className="fa-regular fa-trash-can text-2xl" data-testid={`delete-product-${product.id}`} onClick={() => { deleteItem(product.id) }}></i>
+              </article>
+            </article>
+          ))
+        }
+      </section>
       < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} productsList={productsList} setProducts={setProducts} />
     </section>
   );

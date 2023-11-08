@@ -85,3 +85,11 @@ export function deleteUser(token, userID) {
     }
   })
 }
+
+export function deleteProduct(token, productID) {
+  return axios.delete(`${baseUrl}/products/${productID}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+}

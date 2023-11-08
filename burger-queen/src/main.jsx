@@ -14,6 +14,7 @@ import AllActiveOrders from './pages/waiter/AllActiveOrders/AllActiveOrders';
 import Users from './pages/admin/users/Users';
 import App from './pages/waiter/App';
 import { ProtectedRoute } from './components/loginForm/ProtectedRoute'
+import AllProducts from './pages/admin/products/Products';
 
 
 const router = createBrowserRouter([
@@ -64,14 +65,14 @@ const router = createBrowserRouter([
             <Users />
           </ProtectedRoute>,
       },
-      // {
-      //   path: "allOrders",
-      //   element:
-      //     <ProtectedRoute requiredRole="waiter">
-      //       <AllActiveOrders />
-      //     </ProtectedRoute>,
+      {
+        path: "products",
+        element:
+          <ProtectedRoute requiredRole="admin">
+            <AllProducts />
+          </ProtectedRoute>,
 
-      // },
+      },
     ]
   },
   {

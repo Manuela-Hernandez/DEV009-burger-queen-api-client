@@ -1,3 +1,25 @@
+## <Sprint 7> - <08/11/2023>
+
+### Sprint learnings
+
+* Lógica de programación.
+* Peticiones HTTP (post, patch y delete).
+* HTML (tablas y formularios).
+* Tailwind
+
+### Added
+
+* Tests de waiter como la navegacion de botones y cambio de estado a delivered.
+* Componente lista de usuario para el rol de admin.
+* Componente de modal para admin haciendo que se cierre cuando la operación finaliza. 
+* Componente de formulario para agregar usuarios dandole funcionalidad con POST y validaciones de campos.
+* Componente de formulario para editar la información de usuarios dandole funcionalidad con PATCH y validaciones de campos.
+* Se agrega la función para eliminar usuarios con DELETE utilizando la confirmación.
+* Tests del componente Users para corroborar el agregar, editar y eliminar usuarios.
+
+### Fixed
+
+* Tests en el componente Chef
 
 ## <Sprint 6> - <31/10/2023>
 

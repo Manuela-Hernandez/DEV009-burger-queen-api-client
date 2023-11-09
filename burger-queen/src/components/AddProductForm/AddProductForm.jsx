@@ -24,7 +24,7 @@ export default function AddProductForm({ setIsopen, setProducts/*usersList, setU
   const handleTypeChange = (e) => {
     setType(e.target.value);
   };
-  function clearURLinput(){
+  function clearURLinput() {
     setImg('');
   }
   function saveProduct() {
@@ -34,12 +34,12 @@ export default function AddProductForm({ setIsopen, setProducts/*usersList, setU
           setIsopen(false);
           completed('The product has been saved.');
           getProducts(localStorage.token)
-          .then((response) =>{
-            setProducts(response.data);
-          })
-          .catch((error) => {
-            showAlertError("An error has occurred while obtaining list of products.");
-          });
+            .then((response) => {
+              setProducts(response.data);
+            })
+            .catch((error) => {
+              showAlertError("An error has occurred while obtaining list of products.");
+            });
         })
         .catch((error) => {
           showAlertError(error.response.data);
@@ -77,7 +77,9 @@ export default function AddProductForm({ setIsopen, setProducts/*usersList, setU
             value={imgURL}
             onChange={handleImgChange}
           />
-          <i className="fa-solid fa-eraser text-bgqueen-primary  text-3xl m-1" onClick={clearURLinput}></i>
+          <i className="fa-solid fa-eraser text-bgqueen-primary  text-3xl m-1"
+            data-testid="clear-url"
+            onClick={clearURLinput}></i>
         </article>
         <select
           name="type"

@@ -59,13 +59,15 @@ export default function AllProducts() {
     <section className="w-full h-full">
       <button className="text-bgqueen-primary text-xl mt-2 font-bold ml-10 mt-4 px-4 justify-self-center w-auto h-12 "
         onClick={() => navigateTo('/admin')}>
-        <i className="fa-solid fa-circle-arrow-left"></i>
+        <i className="fa-solid fa-circle-arrow-left"
+          data-testid="go-to-dashborad"></i>
         Back to dashboard
       </button>
       <section className="grid grid-cols-2 m-auto md:w-11/12 mb-4 ">
         <h2 className="caption-top text-3xl text-center text-bgqueen-primary justify-self-start font-semibold self-end">Products</h2>
         <button className="text-bgqueen-primary rounded-lg text-xl border border-2 border-bgqueen-primary font-text-primary p-2 justify-self-end w-40"
-          onClick={addProduct}>
+          onClick={addProduct}
+          data-testid="add-product">
           Add product
           <i className="fa-solid fa-plus ml-2"></i>
         </button>
@@ -73,7 +75,7 @@ export default function AllProducts() {
       <section className="flex flex-wrap gap-4 mt-4 justify-center">
         {
           productsList !== undefined && productsList.map((product) => (
-    
+
             <article key={product.id} className='w-1/5 border border-bgqueen-primary rounded p-3 bg-bgqueen-secondary flex flex-col '>
               <h3 className="text-center font-bold mb-4 text-xl">{product.type}</h3>
               <img src={product.image} alt={product.name} className="w-1/2 m-auto" />

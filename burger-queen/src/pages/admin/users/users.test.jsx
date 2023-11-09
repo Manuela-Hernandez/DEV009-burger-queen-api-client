@@ -6,6 +6,12 @@ import Swal from "sweetalert2";
 jest.mock('sweetalert2');
 jest.mock('axios');
 
+const mockedUseNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'), // Mantiene las exportaciones originales
+  useNavigate: () => mockedUseNavigate, // Crea un mock de useNavigate que lo inspecciona
+}));
+
 const dataUsers = [
   { id: 1, name: 'Luis Juarez', email: 'empleado1@systers.xyz', password: '123456', role: 'chef' },
   { id: 2, name: 'Juan Perez', email: 'empleado2@systers.xyz', password: '123456', role: 'admin'  },
@@ -305,6 +311,20 @@ describe('users', () => {
     await waitFor(() => {
       expect(mockFire).toBeCalledTimes(1);
       expect(mockFire).toBeCalledWith({ "icon": "error", "text": "An error has occurred while obtaining list of users.", "title": "Oops..." });
+    });
+  });
+
+  it("Debería navegar a /admin al dar click en el boton -Back to dashboard-", async () => {
+    axios.get.mockResolvedValueOnce({ data: dataUsers });
+
+    await act(async () => {
+      render(<AllUsers />);
+    });
+    fireEvent.click(screen.getByText('Back to dashboard'));  
+
+    await waitFor(() => {
+      expect(mockedUseNavigate).toBeCalledTimes(1);
+      expect(mockedUseNavigate).toBeCalledWith('/admin');
     });
   });
 })

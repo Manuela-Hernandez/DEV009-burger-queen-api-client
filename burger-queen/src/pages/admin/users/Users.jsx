@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import { deleteUser, getAllUsers } from "../../../services/request";
 import { questionDelete, showAlertError, completed } from "../../../alert/aler";
 import ModalAdmin from "../../../components/ModalAdmin/ModalAdmin";
+import { useNavigate } from "react-router-dom";
 
 export default function AllUsers() {
-
+  const navigateTo = useNavigate();
   const [isopen, setIsopen] = useState(false);
 
   const [usersList, setUsers] = useState([]);
@@ -56,7 +57,12 @@ export default function AllUsers() {
 
   return (
     <section className="w-full h-full">
-      <section className="grid grid-cols-2 m-auto mt-8 md:w-11/12">
+      <button className="text-bgqueen-primary text-xl mt-2 font-bold ml-10 mt-4 px-4 justify-self-center w-auto h-12 "
+        onClick={() => navigateTo('/admin')}>
+        <i className="fa-solid fa-circle-arrow-left"></i>
+        Back to dashboard
+      </button>
+      <section className="grid grid-cols-2 m-auto md:w-11/12">
         <h2 className="caption-top text-3xl text-center text-bgqueen-primary justify-self-start font-semibold">Employees</h2>
         <button className="text-bgqueen-primary rounded-lg text-xl border border-2 border-bgqueen-primary font-text-primary p-2 justify-self-end w-40"
           onClick={addUser}>
@@ -91,7 +97,7 @@ export default function AllUsers() {
           }
         </tbody>
       </table>
-      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} usersList={usersList} setUsers={setUsers} />
+      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} itemsList={usersList} setList={setUsers} />
     </section>
   );
 }

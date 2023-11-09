@@ -4,7 +4,7 @@ import EditUser from "../EditUser/EditUser"
 import AddProductForm from "../AddProductForm/AddProductForm";
 import EditProductForm from "../EditProduct/EditProduct";
 
-export default function ModalAdmin({ isopen , setIsopen, action, information, usersList, setUsers}) {
+export default function ModalAdmin({ isopen , setIsopen, action, information, itemsList, setList}) {
 
   async function closeOrderDetails(){
     const closeDetails = await questionClose();
@@ -24,13 +24,13 @@ export default function ModalAdmin({ isopen , setIsopen, action, information, us
             </button>
             {
               action === 'AddUser' ?
-                <AddUserForm setIsopen = {setIsopen} usersList={usersList} setUsers={setUsers}/>
+                <AddUserForm setIsopen = {setIsopen} setUsers={setList}/>
               : action === 'EditUser' ?
-                <EditUser setIsopen = {setIsopen} information={information} usersList={usersList} setUsers={setUsers}/>
+                <EditUser setIsopen = {setIsopen} information={information} usersList={itemsList} setUsers={setList}/>
                 : action === 'AddProduct' ?
-                <AddProductForm setIsopen = {setIsopen} usersList={usersList} setUsers={setUsers}/> 
+                <AddProductForm setIsopen = {setIsopen} setProducts={setList}/> 
                 :
-                <EditProductForm setIsopen = {setIsopen} information={information} productsList={usersList} setProducts={setUsers}/>
+                <EditProductForm setIsopen = {setIsopen} information={information} productsList={itemsList} setProducts={setList}/>
             }
             
           </div>

@@ -10,7 +10,6 @@ export default function EditProductForm({ setIsopen, information = [],  products
   const [itemType, setType] = useState('type');
 
   useEffect(() => {
-    console.log(productsList);
     setName(information.name);
     setImg(information.image);
     setPrice(information.price);
@@ -31,10 +30,11 @@ export default function EditProductForm({ setIsopen, information = [],  products
   const handleTypeChange = (e) => {
     setType(e.target.value);
   };
-
+  function clearURLinput(){
+    setImg('');
+  }
   function saveChangesProduct() {
-    console.log(information);
-    if (itemType !== 'type' && itemName.length > 0 && price.length > 0 && imgURL.length > 0) {
+    if (itemType !== 'type' && itemName.length > 0 && parseInt(price) > 0 && imgURL.length > 0) {
       editProduct(localStorage.getItem('token'), itemName, price, imgURL, itemType, information.id)
         .then((response) => {
           setIsopen(false);
@@ -48,15 +48,12 @@ export default function EditProductForm({ setIsopen, information = [],  products
             }
             return product
           }))
-          console.log(response);
         })
         .catch((error) => {
           showAlertError(error.response.data);
         });
     } else {
-      console.log('faltan datos')
-      // Hacer alerts
-
+      parseInt(price) < 1 ? showAlertError('Enter a valid price') : showAlertError('Complete all the information.');  
     }
   }
   return (
@@ -74,19 +71,23 @@ export default function EditProductForm({ setIsopen, information = [],  products
         <input
           type="number"
           name="price"
-          className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14"
+          min="1"
+          className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14 invalid:border-bgqueen-red"
           placeholder="Price"
           value={price}
           onChange={handlePriceChange}
         />
-        <input
-          type="url"
-          name="imageUrl"
-          className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14"
-          placeholder="Image url"
-          value={imgURL}
-          onChange={handleImgChange}
-        />
+        <article className="w-full flex items-center">
+          <input
+            type="url"
+            name="imageUrl"
+            className="w-11/12 block rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14"
+            placeholder="Image url"
+            value={imgURL}
+            onChange={handleImgChange}
+          />
+          <i className="fa-solid fa-eraser text-bgqueen-primary  text-3xl m-1" onClick={clearURLinput}></i>
+        </article>
         <select
           name="type"
           className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl h-14"

@@ -15,6 +15,7 @@ import Users from './pages/admin/users/Users';
 import App from './pages/waiter/App';
 import { ProtectedRoute } from './components/loginForm/ProtectedRoute'
 import AllProducts from './pages/admin/products/Products';
+import Dashboard from './pages/admin/dashboard/AdminDashboard';
 
 
 const router = createBrowserRouter([
@@ -39,7 +40,6 @@ const router = createBrowserRouter([
           <ProtectedRoute requiredRole="waiter">
             <Waiter />
           </ProtectedRoute>,
-
       },
       {
         path: "allOrders",
@@ -60,6 +60,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
+        element:
+          <ProtectedRoute requiredRole="admin">
+            <Dashboard />
+          </ProtectedRoute>,
+      },
+      {
+        path: "employees",
         element:
           <ProtectedRoute requiredRole="admin">
             <Users />

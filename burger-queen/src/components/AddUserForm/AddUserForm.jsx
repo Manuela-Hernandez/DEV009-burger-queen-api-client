@@ -3,7 +3,7 @@ import { addUser, getAllUsers } from "../../services/request";
 import { completed, showAlertError, warning } from "../../alert/aler";
 
 
-export default function AddUserForm({setIsopen, usersList, setUsers}) {
+export default function AddUserForm({setIsopen, setUsers}) {
 
   const [nameUser, setName] = useState(''); 
   const [email, setEmail] = useState(''); 

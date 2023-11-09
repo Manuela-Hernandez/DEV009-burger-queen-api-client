@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import { deleteProduct, getProducts } from "../../../services/request";
 import { questionDelete, showAlertError, completed } from "../../../alert/aler";
 import ModalAdmin from "../../../components/ModalAdmin/ModalAdmin";
+import { useNavigate } from "react-router-dom";
 
 export default function AllProducts() {
-
+  const navigateTo = useNavigate();
   const [isopen, setIsopen] = useState(false);
 
   const [productsList, setProducts] = useState([]);
@@ -56,15 +57,20 @@ export default function AllProducts() {
 
   return (
     <section className="w-full h-full">
-      <section className="grid grid-cols-2 m-auto mt-8 md:w-11/12 mb-4">
-        <h2 className="caption-top text-3xl text-center text-bgqueen-primary justify-self-start font-semibold">Products</h2>
+      <button className="text-bgqueen-primary text-xl mt-2 font-bold ml-10 mt-4 px-4 justify-self-center w-auto h-12 "
+        onClick={() => navigateTo('/admin')}>
+        <i className="fa-solid fa-circle-arrow-left"></i>
+        Back to dashboard
+      </button>
+      <section className="grid grid-cols-2 m-auto md:w-11/12 mb-4 ">
+        <h2 className="caption-top text-3xl text-center text-bgqueen-primary justify-self-start font-semibold self-end">Products</h2>
         <button className="text-bgqueen-primary rounded-lg text-xl border border-2 border-bgqueen-primary font-text-primary p-2 justify-self-end w-40"
           onClick={addProduct}>
           Add product
           <i className="fa-solid fa-plus ml-2"></i>
         </button>
       </section>
-      <section className="flex flex-wrap gap-4 ml-4">
+      <section className="flex flex-wrap gap-4 mt-4 justify-center">
         {
           productsList !== undefined && productsList.map((product) => (
     
@@ -81,7 +87,7 @@ export default function AllProducts() {
           ))
         }
       </section>
-      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} usersList={productsList} setUsers={setProducts} />
+      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} itemsList={productsList} setList={setProducts} />
     </section>
   );
 }

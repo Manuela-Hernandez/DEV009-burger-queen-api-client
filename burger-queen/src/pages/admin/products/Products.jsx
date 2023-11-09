@@ -45,7 +45,7 @@ export default function AllProducts() {
       deleteProduct(localStorage.token, id)
         .then(() => {
           completed("The product has been deleted.");
-          //   setproducts(productsList.filter((product) => product.id !== id))
+          setProducts(productsList.filter((product) => product.id !== id))
         })
         .catch(() => {
           showAlertError("An error has occurred deleting the product");
@@ -81,7 +81,7 @@ export default function AllProducts() {
           ))
         }
       </section>
-      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} productsList={productsList} setProducts={setProducts} />
+      < ModalAdmin isopen={isopen} setIsopen={setIsopen} action={action} information={information} usersList={productsList} setUsers={setProducts} />
     </section>
   );
 }

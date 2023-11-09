@@ -78,10 +78,10 @@ export default function AddProductForm({ setIsopen, /*usersList, setUsers */}) {
               <option value='type'>
                 Select a type
               </option>
-              <option value="breakfast">
+              <option value="Breakfast">
                 Breakfast
               </option>
-              <option value="lunch">
+              <option value="Lunch">
                 Lunch
               </option>
               {/* <option value="dinner">

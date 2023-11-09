@@ -5,3 +5,32 @@
 /* *{
     font-family: 'Nunito Sans', sans-serif;
 } */
+/* Dashboard.css */
+
+.dashboard-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .dashboard-navigation {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-navigation button {
+    margin-right: 10px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dashboard-navigation button.active {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .dashboard-content {
+    border: 1px solid #ddd;
+    padding: 20px;
+  }
+  

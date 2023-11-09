@@ -363,19 +363,4 @@ describe('products', () => {
       expect(mockFire).toBeCalledWith({ "icon": "error", "text": "An error has occurred while obtaining list of products.", "title": "Oops..." });
     });
   });
-
-  it("Debería navegar a /admin al dar click en el boton -Back to dashboard-", async () => {
-    axios.get.mockResolvedValueOnce({ data: dataProducts });
-
-    await act(async () => {
-      render(<AllProducts />);
-    });
-    fireEvent.click(screen.getByText('Back to dashboard'));  
-
-    await waitFor(() => {
-      expect(mockedUseNavigate).toBeCalledTimes(1);
-      expect(mockedUseNavigate).toBeCalledWith('/admin');
-    });
-  });
-
 })

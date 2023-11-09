@@ -2,10 +2,8 @@ import { useEffect, useState } from "react"
 import { deleteProduct, getProducts } from "../../../services/request";
 import { questionDelete, showAlertError, completed } from "../../../alert/aler";
 import ModalAdmin from "../../../components/ModalAdmin/ModalAdmin";
-import { useNavigate } from "react-router-dom";
 
 export default function AllProducts() {
-  const navigateTo = useNavigate();
   const [isopen, setIsopen] = useState(false);
 
   const [productsList, setProducts] = useState([]);
@@ -22,7 +20,6 @@ export default function AllProducts() {
     openModalAdmin();
   }
   function editProduct(product) {
-    //console.log(product);
     setProductInfo(product);
     setAction('EditProduct');
     openModalAdmin();
@@ -33,7 +30,6 @@ export default function AllProducts() {
       .then((response) => {
         // Actualiza el estado con los productos obtenidos
         setProducts(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         showAlertError("An error has occurred while obtaining list of products.");
@@ -57,12 +53,6 @@ export default function AllProducts() {
 
   return (
     <section className="w-full h-full">
-      <button className="text-bgqueen-primary text-xl mt-2 font-bold ml-10 mt-4 px-4 justify-self-center w-auto h-12 "
-        onClick={() => navigateTo('/admin')}>
-        <i className="fa-solid fa-circle-arrow-left"
-          data-testid="go-to-dashborad"></i>
-        Back to dashboard
-      </button>
       <section className="grid grid-cols-2 m-auto md:w-11/12 mb-4 ">
         <h2 className="caption-top text-3xl text-center text-bgqueen-primary justify-self-start font-semibold self-end">Products</h2>
         <button className="text-bgqueen-primary rounded-lg text-xl border border-2 border-bgqueen-primary font-text-primary p-2 justify-self-end w-40"

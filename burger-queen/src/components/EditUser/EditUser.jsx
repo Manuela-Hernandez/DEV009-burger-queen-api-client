@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { editUser } from "../../services/request";
 import { completed, showAlertError, warning } from "../../alert/aler";
 
-export default function AddUserForm({setIsopen, information = [], usersList, setUsers}) {
+export default function EditUserForm({setIsopen, information = [], usersList, setUsers}) {
 
   const [nameUser, setName] = useState('');
   const [email, setEmail] = useState('');

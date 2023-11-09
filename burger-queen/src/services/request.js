@@ -97,7 +97,21 @@ export function deleteProduct(token, productID) {
 export function addProduct(token, itemName, itemPrice, itemImg, itemType) {
   return axios.post(baseUrl+ '/products', {
     "name": itemName,
-    "price": itemPrice,
+    "price": parseInt(itemPrice),
+    "image": itemImg,
+    "type": itemType,
+    //dataEntry: new Date(),
+  }, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  },)
+}
+
+export function editProduct(token, itemName, itemPrice, itemImg, itemType, productID) {
+  return axios.patch(`${baseUrl}/products/${productID}`, {
+    "name": itemName,
+    "price": parseInt(itemPrice),
     "image": itemImg,
     "type": itemType,
     //dataEntry: new Date(),

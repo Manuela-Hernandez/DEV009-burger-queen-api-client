@@ -32,8 +32,8 @@ export default function NewOrder() {
             id='customerName'
             onChange={handleCustomerNameChange}
             className='h-12 col-span-2 m-2 rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-xl' />
-          <button className={`m-2 p-2 rounded ${selectedProductType === 'Desayuno' ? 'bg-bgqueen-primary text-white' : 'bg-bgqueen-gray'}`} id='btn-breakfast' onClick={() => setSelectedProductType('Desayuno')}>Breakfast</button>
-          <button className={`m-2 p-2 rounded ${selectedProductType === 'Almuerzo' ? 'bg-bgqueen-primary text-white' : 'bg-bgqueen-gray'}`} id='btn-lunch' onClick={() => setSelectedProductType('Almuerzo')}>Lunch</button>
+          <button className={`m-2 p-2 rounded ${selectedProductType === 'Breakfast' ? 'bg-bgqueen-primary text-white' : 'bg-bgqueen-gray'}`} id='btn-breakfast' onClick={() => setSelectedProductType('Breakfast')}>Breakfast</button>
+          <button className={`m-2 p-2 rounded ${selectedProductType === 'Lunch' ? 'bg-bgqueen-primary text-white' : 'bg-bgqueen-gray'}`} id='btn-lunch' onClick={() => setSelectedProductType('Lunch')}>Lunch</button>
         </article>
 
         <article className='row-span-4'>

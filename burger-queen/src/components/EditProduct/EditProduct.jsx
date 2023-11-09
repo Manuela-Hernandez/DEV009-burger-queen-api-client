@@ -86,7 +86,7 @@ export default function EditProductForm({ setIsopen, information = [],  products
             value={imgURL}
             onChange={handleImgChange}
           />
-          <i className="fa-solid fa-eraser text-bgqueen-primary  text-3xl m-1" onClick={clearURLinput}></i>
+          <i className="fa-solid fa-eraser text-bgqueen-primary text-3xl m-1" data-testid= "clear-input-img" onClick={clearURLinput}></i>
         </article>
         <select
           name="type"

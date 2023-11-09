@@ -26,21 +26,21 @@ const productsMock = [
     name: 'Sandwich de jamón y queso',
     price: 1000,
     image: 'https://raw.githubusercontent.com/ssinuco/burger-queen-api-mock/main/resources/images/sandwich.png',
-    type: 'Desayuno',
+    type: 'Breakfast',
   },
   {
     id: 2,
     name: 'Café americano',
     price: 500,
     image: 'https://raw.githubusercontent.com/ssinuco/burger-queen-api-mock/main/resources/images/coffee.png',
-    type: 'Desayuno',
+    type: 'Breakfast',
   },
   {
     id: 3,
     name: 'Agua 500ml',
     price: 500,
     image: 'https://raw.githubusercontent.com/ssinuco/burger-queen-api-mock/main/resources/images/water.png',
-    type: 'Almuerzo',
+    type: 'Lunch',
   }
 ];
 

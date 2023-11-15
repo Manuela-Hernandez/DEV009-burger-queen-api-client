@@ -23,7 +23,7 @@ export default function NewOrder() {
   return (
     <>
 
-      <section className='grid grid-cols-2 grid-rows-3 m-8 border-2 border-bgqueen-secondary'>
+      <section className='grid grid-cols-2 grid-rows-3 m-8 border-2 border-stone'>
         <article className='grid grid-cols-2 grid-rows-2'>
           <button className="text-bgqueen-primary rounded-lg text-xl m-2 border border-2 border-bgqueen-primary font-text-primary"
             onClick={() => navigateTo('allOrders')}> See all orders <i className="fa-solid fa-burger text-2xl"></i></button>

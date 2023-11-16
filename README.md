@@ -74,15 +74,6 @@ Lo que debe ocurrir para que se satisfagan las necesidades del usuario.
   con la información ingresada.
 * Ingresar al sistema de pedidos si las crendenciales son correctas.
 
-##### Definición de terminado
-
-Lo acordado que debe ocurrir para decir que la historia está terminada.
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
 ***
 
 #### [Historia de usuario 2] Mesero/a debe poder tomar pedido de cliente/a
@@ -102,15 +93,6 @@ Lo que debe ocurrir para que se satisfagan las necesidades del usuario
 * Enviar pedido a cocina (guardar en alguna base de datos).
 * Se ve y funciona bien en una _tablet_
 
-##### Definición de terminado
-
-Lo acordado que debe ocurrir para decir que la historia está terminada.
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
 ***
 
 #### [Historia de usuario 3] Jefe de cocina debe ver los pedidos
@@ -126,13 +108,6 @@ que un pedido está listo para servirlo a un clientx.
 * Ver el tiempo que tomó prepara el pedido desde que llegó hasta que se
   marcó como completado.
 
-##### Definición de terminado
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
 ***
 
 #### [Historia de usuario 4] Meserx debe ver pedidos listos para servir
@@ -144,15 +119,6 @@ rápidamente a lxs clientxs que las hicieron.
 
 * Ver listado de pedido listos para servir.
 * Marcar pedidos que han sido entregados.
-
-##### Definición de terminado
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-* Los datos se deben mantener íntegros, incluso después de que un pedido ha
-  terminado. Todo esto para poder tener estadísticas en el futuro.
 
 ***
 
@@ -168,13 +134,6 @@ la plataforma para mantener actualizado la informacion de mis trabajadorxs.
 * Eliminar trabajadoxs.
 * Actualizar datos de trabajadorxs.
 
-##### Definición de terminado
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
 ***
 
 #### [Historia de usuario 6] Administrador(a) de tienda debe administrar a sus productos
@@ -189,16 +148,16 @@ para mantener actualizado el menú.
 * Eliminar productos.
 * Actualizar datos de productos.
 
-##### Definición de terminado
-
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-
 ***
 
+
 ## 4. Prototipos
+### Administrador
+![prototipo-admin](https://github.com/brenah00/DEV009-burger-queen-api-client/assets/77713869/18975ced-1a68-4fe4-9c2c-61afcdac1c9c)
+### Mesero
+![prototipo-waiter](https://github.com/brenah00/DEV009-burger-queen-api-client/assets/77713869/53789906-d478-4fc5-92ae-7382d27a40ed)
+### Cocinero
+![prototipo-chef](https://github.com/brenah00/DEV009-burger-queen-api-client/assets/77713869/eac69792-222f-4c3b-a3f6-a9eca33fc967)
 
 ## 5. Interfaz
 
@@ -211,14 +170,17 @@ Para ingresar use los siguientes usuarios:
 | Chef    | empleado2@systers.xyz     | 0123456789|
 | Admin   | grace.hopper@systers.xyz | 0123456789 |
 
+### Administrador
 https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/8b310a71-0f85-459d-93c1-ba8529bddbbe
 
 https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/75c157ad-c5f2-4181-a0ba-7671a5ca6e11
 
+### Mesero
 https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/b61ca8b2-0e12-43d9-bc50-aa9a256280d8
 
 https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/9dda9cac-9929-470e-b7e1-296b0d1faf5e
 
+### Cocinero
 https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/cb5ec790-cbb7-454c-a5e0-f1340ff1822d
 
 

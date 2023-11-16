@@ -202,7 +202,14 @@ para mantener actualizado el menú.
 
 ## 5. Interfaz
 
+Para ingresar use los siguientes usuarios:
 
+
+| Role    | Email                    | Contraseña |
+| :---:   |     :---:                |  :---:     |
+| Waiter  | empleado1@systers.xyz    | 0123456789 |
+| Chef    | empleado2@systers.xyz     | 0123456789|
+| Admin   | grace.hopper@systers.xyz | 0123456789 |
 
 https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/8b310a71-0f85-459d-93c1-ba8529bddbbe
 
@@ -210,10 +217,15 @@ https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/13516
 
 https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/b61ca8b2-0e12-43d9-bc50-aa9a256280d8
 
+https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/9dda9cac-9929-470e-b7e1-296b0d1faf5e
+
+https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/cb5ec790-cbb7-454c-a5e0-f1340ff1822d
+
+
 
 
 
 ## Desarrolladoras
 
-- [@brenah00](https://github.com/brenah00) 
-- [@Manuela-Hernandez](https://github.com/Manuela-Hernandez)
+- [Brenda Aguilar](https://github.com/brenah00) 
+- [Manuela Hernández](https://github.com/Manuela-Hernandez)

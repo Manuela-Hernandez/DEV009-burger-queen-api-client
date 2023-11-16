@@ -4,7 +4,7 @@ import { completed, questionClose, showAlertError } from "../../alert/aler";
 
 export default function Modal({ isopen = false, setIsopen, productsModal = [], allOrders, setOrders}) {
 
-  const [checked, setChecked] = useState(0); // Estado para el correo electrónico
+  const [checked, setChecked] = useState(0);
 
   function changeStatus(status) {
     changeOrderStatus(localStorage.getItem('token'), productsModal.id, status)
@@ -17,9 +17,7 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [], a
           }
           return order
         }));
-        // setTimeout(function() {
-        //   location.reload();
-        // }, 1600);
+        setChecked(0); 
       })
       .catch(() => {
         showAlertError("An error has occurred while status was changing");
@@ -33,7 +31,7 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [], a
   function validationToChangeStatus () {
     if (checked === productsModal.products.length) {
       if (localStorage.getItem("role") === "chef" ) {
-        changeStatus("ready");   
+        changeStatus("ready");  
       }else {
         changeStatus("delivered");
       }
@@ -66,15 +64,15 @@ export default function Modal({ isopen = false, setIsopen, productsModal = [], a
                     <section className="grid grid-cols-1 grid-row-auto gap-2 justify-center" key={product.product.id}>
                       <label className="flex items-center space-x-2">
                         <input type="checkbox" className="h-6 w-6 rounded-full checked:bg-bgqueen-primary" onChange={handleChecked} id={`product-${index}`}/>
-                        {/* <span className="text-xl">{product.qty} {product.product.name}</span> */}
-                        {product.qty} {product.product.name}
+                        <span className="text-xl">{product.qty} {product.product.name}</span>
+                        {/* {product.qty} {product.product.name} */}
                       </label>
                     </section>
                   ))
                 }
               </div>
               <div className=" w-full h-full flex justify-center">
-                <button className="w-1/4 h-12 bg-bgqueen-primary text-white rounded-lg text-xl m-4"
+                <button className="w-auto h-12 bg-bgqueen-primary text-white rounded-lg text-xl m-4 p-2"
                   id="button-set-ready"
                   onClick={validationToChangeStatus}> {localStorage.getItem('role') === 'chef' ? 'READY':'DELIVER ORDER'}
                 </button>

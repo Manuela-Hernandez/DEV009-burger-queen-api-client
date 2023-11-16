@@ -203,13 +203,13 @@ para mantener actualizado el menú.
 ## 5. Interfaz
 
 
-* Admin-users https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/5ef1d17a-4f4a-4bcb-b165-19b0a07e4b45
+https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/5ef1d17a-4f4a-4bcb-b165-19b0a07e4b45
 
 
-* Admin-products https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/75c157ad-c5f2-4181-a0ba-7671a5ca6e11
+https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/75c157ad-c5f2-4181-a0ba-7671a5ca6e11
 
 
-* Waiter-new-order https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/b61ca8b2-0e12-43d9-bc50-aa9a256280d8
+https://github.com/Manuela-Hernandez/DEV009-burger-queen-api-client/assets/135163093/b61ca8b2-0e12-43d9-bc50-aa9a256280d8
 
 
 

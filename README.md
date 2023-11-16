@@ -208,7 +208,7 @@ Para ingresar use los siguientes usuarios:
 | Role    | Email                    | Contraseña |
 | :---:   |     :---:                |  :---:     |
 | Waiter  | empleado1@systers.xyz    | 0123456789 |
-| Chef    | empleado2systers.xyz     | 0123456789 |
+| Chef    | empleado2@systers.xyz     | 0123456789 |
 | Admin   | grace.hopper@systers.xyz | 0123456789 |
 |
 
